@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+// Other
+$fa-font-path: "~font-awesome/fonts" !default;
+@import "~font-awesome/scss/font-awesome";
+
+@import "../node_modules/startbootstrap-sb-admin-2/vendor/bootstrap/scss/bootstrap";
+@import "../node_modules/startbootstrap-sb-admin-2/scss/sb-admin-2";
+
+.chart-area {
+ height: auto !important;
+}
+
+.btn-link{
+  cursor: pointer;
+}

@@ -1,0 +1,24 @@
+.hero {
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/background.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  .usps {
+    width: auto;
+    height: auto;
+    margin: 20% auto;
+    padding: 5%;
+    background: gray;
+    opacity: 0.8;
+    color: white;
+
+
+  }
+}
