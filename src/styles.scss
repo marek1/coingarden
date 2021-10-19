@@ -20,3 +20,10 @@ $fa-font-path: "~font-awesome/fonts" !default;
 .badge {
   cursor: pointer;
 }
+
+.card {
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

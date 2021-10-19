@@ -2,14 +2,16 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
-import { ListComponent } from './list/list.component';
-import { StartComponent } from './start/start.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { HomeComponent } from './components/home/home.component';
+import { ListComponent } from './components/list/list.component';
+import { StartComponent } from './components/start/start.component';
+import { SliderComponent } from './components/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { RouterModule } from '@angular/router';
     PageNotFoundComponent,
     HomeComponent,
     ListComponent,
-    StartComponent
+    StartComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     ChartsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    NgxSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

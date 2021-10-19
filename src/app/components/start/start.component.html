@@ -1,0 +1,75 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  
+  <!-- Page Heading -->
+  <div class="mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Deine Angebote</h1>
+  </div>
+  
+  
+  <div class="card mb-4">
+    <div class="row">
+  
+      <div class="col-6 text-white {{selectedCoin ? 'bg-primary' : 'bg-secondary'}}">
+        <span>1. Wähle den Coin
+          <span *ngIf="selectedCoin">: <b>{{selectedCoin}}</b>
+            <i class="fa fa-pencil" (click)="resetCoin()"></i>
+          </span>
+        </span>
+      </div>
+      <div class="col-6 text-white {{selectedRisk > -1 ? 'bg-primary' : 'bg-secondary'}}">
+        <span>2. Wähle das Risiko
+          <span *ngIf="selectedRisk > -1">: <b>{{risks[selectedRisk].name}}</b>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Content Row -->
+  <div class="card col-xs-12 col-md-12" *ngIf="currentStep === 1">
+    <div class="card-body">
+      <h5 class="card-title">Mit welchem Coin möchtest du verdienen?</h5>
+      <div class="card-text">
+        <span *ngFor="let coin of coins$ | async; let i = index;" class="mr-4" (click)="selectCoin(coin)">
+          <span *ngIf="i < coinCap"
+                class="badge
+                {{coin === selectedCoin ? 'badge-primary' : 'badge-light'}}
+                {{whiteList.indexOf(coin) > -1 ? 'badge-large' : ''}}">
+            {{coin}}
+          </span>
+        </span>
+        <ng-container *ngIf="(coins$|async)?.length as coinsLength">
+          <span class="float-right" *ngIf="coinCap < coinsLength">
+          <button class="btn btn-link" (click)="coinCap = coinsLength">Zeige alle Coins</button>
+        </span>
+        </ng-container>
+      
+      </div>
+    </div>
+    
+    <div class="col-xs-12 col-md-12 mt-4 mb-4" *ngIf="selectedCoin">
+      <button class="btn btn-primary btn-large float-right" (click)="goToStep(2)">Weiter</button>
+    </div>
+  </div>
+  
+  
+  <!-- Content Row -->
+  <div class="" *ngIf="currentStep === 2">
+    <div class="card col-xs-12 col-md-12">
+      <div class="card-body">
+        <h5 class="card-title">Welches Risiko möchtest du gehen?</h5>
+        <div class="card-text">
+          <app-slider [currentRisk]="selectedRisk" (newItemEvent)="setRisk($event)"></app-slider>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-xs-12 col-md-12 mt-4 mb-4">
+      <button class="btn btn-primary btn-large float-right" (click)="goToStep(3)">Zeig mir die Ergebnisse</button>
+    </div>
+  
+  </div>
+  
+</div>
