@@ -11,11 +11,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // connect
-    // const httpOptions = {
-    // };
-    // this.http.get('https://testnet.binance.vision/api/v3/exchangeInfo', httpOptions)
-    // .subscribe((result) => console.log('result: ', result));
+
   }
 
 }

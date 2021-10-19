@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
-import { DemoDashboardComponent } from './demo-dashboard/demo-dashboard.component';
+import { StartComponent } from './start/start.component';
 
 const routes: Routes = [
   {
-    path: 'demo-dashboard',
-    component: DemoDashboardComponent
+    path: 'start',
+    component: StartComponent
+  },
+  {
+    path: 'start/:id',
+    component: StartComponent
   },
   {
     path: '',
