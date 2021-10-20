@@ -5,14 +5,14 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class CoinService {
+export class ProviderService {
 
-  public coins$ = new Observable();
+  public prodivers$ = new Observable();
   constructor(public http: HttpClient) {
   }
 
   getAll() {
-    this.coins$ = this.http.get('/api/v1/coins');
+    this.prodivers$ = this.http.get('/api/v1/providers');
   }
 
 }

@@ -1,7 +1,7 @@
 export const Risks = [
   {
     riskId: 0,
-    name: 'Kein Risiko',
+    name: 'Kein Risiko'
   },
   {
     riskId: 1,
