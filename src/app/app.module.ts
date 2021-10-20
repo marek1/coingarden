@@ -9,18 +9,18 @@ import { RouterModule } from '@angular/router';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeComponent } from './components/home/home.component';
-import { ListComponent } from './components/list/list.component';
 import { StartComponent } from './components/start/start.component';
 import { SliderComponent } from './components/slider/slider.component';
+import { ResultsComponent } from './components/results/results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     HomeComponent,
-    ListComponent,
     StartComponent,
-    SliderComponent
+    SliderComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,

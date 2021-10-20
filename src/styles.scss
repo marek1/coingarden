@@ -5,6 +5,16 @@ $fa-font-path: "~font-awesome/fonts" !default;
 @import "../node_modules/startbootstrap-sb-admin-2/vendor/bootstrap/scss/bootstrap";
 @import "../node_modules/startbootstrap-sb-admin-2/scss/sb-admin-2";
 
+body {
+  font-family: Nunito;
+}
+
+.logo {
+  img {
+    max-width: 50px;
+  }
+}
+
 .chart-area {
  height: auto !important;
 }

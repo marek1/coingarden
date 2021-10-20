@@ -60,7 +60,6 @@ export class StartComponent implements OnInit {
 
   goToStep(x: number) {
     this.currentStep = x;
-
     if (x === 3 && this.selectedRisk === -1) {
       this.selectedRisk = 0;
     }

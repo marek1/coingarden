@@ -3,9 +3,8 @@
   
   <!-- Page Heading -->
   <div class="mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Deine Angebote</h1>
+    <h1 class="h3 mb-0 text-gray-800">Deine Auswahl</h1>
   </div>
-  
   
   <div class="card mb-4">
     <div class="row">
@@ -74,4 +73,13 @@
   
   </div>
   
+  <!-- Page Heading -->
+  <div class="mb-4" *ngIf="currentStep == 3">
+    <h1 class="h3 mb-0 text-gray-800">Deine Ergebnisse</h1>
+  </div>
+
+  <div *ngIf="currentStep == 3">
+    <app-results [coin]="selectedCoin" [risk]="selectedRisk"></app-results>
+  </div>
+
 </div>
