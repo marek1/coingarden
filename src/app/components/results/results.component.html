@@ -1,1 +1,15 @@
-<p>results works!</p>
+<div>
+  Für dich kommen folgende Strategien in Frage:
+  <a class="btn btn-link" [routerLink]="['/strategie', foundStrategy.int_url]" *ngFor="let foundStrategy of foundStrategies">
+    {{foundStrategy.de}}
+  </a>
+</div>
+<div>
+  Dafür haben wir folgende Produkte gefunden:
+</div>
+<ul>
+  <li *ngFor="let providerProduct of providerProducts$ | async">
+<!--    {{providerProduct|json}}-->
+    {{providerProduct.products.name}} von {{providerProduct.name}}
+  </li>
+</ul>

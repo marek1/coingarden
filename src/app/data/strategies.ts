@@ -5,7 +5,7 @@ export const Strategies = [
     id: 0,
     name: 'HODL',
     riskLevel: Risks.filter(x => x.riskId == 0)[0].riskId,
-    de: 'HODLE',
+    de: 'HODL',
     int_url: 'hodl',
     howTo: {
       text: '"Hodling" ist ein Modebegriff, der das Halten von Coins beschreibt. Durch das simple ' +
@@ -15,7 +15,7 @@ export const Strategies = [
         'so überzeugt sind, daß sie einfach nur einen Teil davon besitzen wollen ohne unbedingt ' +
         'auf eine Wertsteigerung zu setzen. \n' +
         'Es gibt 2 Möglichkeiten (und hybride Lösungen) seine Coins aufzubewahren (aka zu hodeln): \n' +
-        '1. In einer "Cold-Wallet", sprich auf einem Hardware-Wallet (wie z.B. dem Tezor). Sobald die Coins ' +
+        '1. In einer "Cold-Wallet", sprich auf einem Hardware-Wallet (wie z.B. dem Trezor). Sobald die Coins ' +
         'einmal dort sind, bleiben sie dort sicher verwahrt (vorausgesetzt das Hardware-Wallet ist "backdoor-free"). ' +
         'Die Nutzer*in muss sich lediglich 12 Wörter merken (oder diese sicher verwahren), um an die Coins ' +
         'zu gelangen.' +

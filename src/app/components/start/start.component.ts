@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { trigger, transition, animate, style } from '@angular/animations'
 import { CoinService } from '../../services/coin.service';
 import { Risks } from '../../data/risks';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-start',
@@ -14,7 +15,7 @@ import { Risks } from '../../data/risks';
   styleUrls: ['./start.component.scss']
 })
 export class StartComponent implements OnInit {
-  public coins$: Observable<any>;
+  public coins$: Observable<string[]>;
   public coinForm: FormGroup;
   public currentStep = 1;
   public selectedCoin = '';
@@ -41,17 +42,20 @@ export class StartComponent implements OnInit {
     })
   }
 
+  searchCoin(ev: any) {
+    this.coins$ = this.coinService.coins$
+    .pipe(
+      map(x => x.filter(coin => coin.toLowerCase().indexOf(ev.target.value) -1))
+    );
+  }
+
   selectCoin(coin: string) {
-
     this.selectedCoin = coin;
-
     // Generate the URL:
     let url = this.router.createUrlTree(['start/' + coin]).toString();
-
     // Change the URL without navigate:
     this.location.go(url);
   }
-
 
   setRisk(x: number) {
     console.log('got risk ; ', x);

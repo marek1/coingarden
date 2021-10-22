@@ -7,12 +7,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CoinService {
 
-  public coins$ = new Observable();
+  public coins$: Observable<string[]> = new Observable();
   constructor(public http: HttpClient) {
   }
 
   getAll() {
-    this.coins$ = this.http.get('/api/v1/coins');
+    this.coins$ = this.http.get<string[]>('/api/v1/coins');
   }
 
 }

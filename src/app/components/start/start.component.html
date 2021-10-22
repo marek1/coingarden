@@ -34,6 +34,12 @@
     <div class="card-body">
       <h5 class="card-title">Mit welchem Coin möchtest du verdienen?</h5>
       <div class="card-text">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Suche:</span>
+          </div>
+          <input (keyup)="searchCoin($event)" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        </div>
         <span *ngFor="let coin of coins$ | async; let i = index;" class="mr-4" (click)="selectCoin(coin)">
           <span *ngIf="i < coinCap"
                 class="badge
