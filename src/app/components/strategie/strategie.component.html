@@ -1,0 +1,33 @@
+<div *ngIf="selectedStrategy; else showError"
+   class="container-fluid">
+  <!-- Page Heading -->
+<!--  <div class="mb-4">-->
+<!--    <h1 class="h3 mb-0 text-gray-800">{{selectedStrategy.name}}</h1>-->
+<!--  </div>-->
+  <!-- Content Row -->
+  <div class="card col-xs-12 col-md-12">
+    <div class="card-body">
+      <h5 class="card-title">{{selectedStrategy.de}} (en: {{selectedStrategy.name}})</h5>
+      <div class="card-text">
+        <div class="mt-4">
+          {{selectedStrategy.howTo.text}}
+        </div>
+        <div class="mt-4" *ngIf="selectedStrategy.howTo.image">
+          <img src="{{selectedStrategy.howTo.image}}">
+        </div>
+        <div class="mt-4" *ngIf="selectedStrategy.howTo.video">
+          <i class="fa fa-video-camera"></i> Sie dir auch ruhig das
+          <a href="{{selectedStrategy.howTo.video}}" target="_blank">Video auf Youtube</a> an.
+        </div>
+        <div class="mt-4" *ngIf="selectedStrategy.howTo.blog">
+          <i class="fa fa-newspaper-o"></i> Oder lies dir diesen interessanten
+          <a href="{{selectedStrategy.howTo.blog}}" target="_blank">Blogpost</a> durch.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #showError>
+  Diese Strategie konnte leider nicht gefunden werden.
+</ng-template>
+

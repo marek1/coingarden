@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StartComponent } from './components/start/start.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { StrategieComponent } from './components/strategie/strategie.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,14 @@ const routes: Routes = [
   {
     path: 'start/:id',
     component: StartComponent
+  },
+  {
+    path: 'strategie',
+    component: StrategieComponent
+  },
+  {
+    path: 'strategie/:id',
+    component: StrategieComponent
   },
   {
     path: '',

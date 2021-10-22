@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { StartComponent } from './components/start/start.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { ResultsComponent } from './components/results/results.component';
+import { StrategieComponent } from './components/strategie/strategie.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ResultsComponent } from './components/results/results.component';
     HomeComponent,
     StartComponent,
     SliderComponent,
-    ResultsComponent
+    ResultsComponent,
+    StrategieComponent
   ],
   imports: [
     BrowserModule,

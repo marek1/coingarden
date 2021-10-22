@@ -23,7 +23,7 @@ export const Strategies = [
         'ob das Wallet von einem selbst gemanagt wird (Non-Custodial-Wallet) oder von einem Provider bzw. ' +
         'einer Börse wie Binance (Custodial-Wallet).',
       image: '',
-      video: '',
+      video: 'https://youtu.be/PAQedp0xlds',
       blog: 'https://block-builders.de/custodial-wallets/#:~:text=In%20einer%20Wallet%20werden%20deine,die%20Private%20Keys%20bei%20dir.'
     }
   },
@@ -32,7 +32,7 @@ export const Strategies = [
     name: 'Savings',
     riskLevel: Risks.filter(x => x.riskId == 1)[0].riskId,
     de: 'Sparprodukte',
-    int_url: 'flexible-savings',
+    int_url: 'sparprodukte',
     howTo: {
       text: 'Für die in deinem Wallet bei einer zentralen Börse (wie Binance) oder Bank (wie Nuri) bekommst' +
         'du Zinsen. Dabei gibt es zwei Arten von Produkten. \n' +
