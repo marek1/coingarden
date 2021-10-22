@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '../interfaces/product';
 import { Provider } from '../interfaces/provider';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProviderService {
-  public prodivers$: Observable<Provider[]> = new Observable();
+  private _providers = new BehaviorSubject<Provider[]>([]);
+  private dataStore: { providers: Provider[] } = { providers: [] };
+  readonly providers = this._providers.asObservable();
   constructor(public http: HttpClient) {
   }
 
   getAll() {
-    this.prodivers$ = this.http.get<Provider[]>('/api/v1/providers');
+    this.http.get<Provider[]>('/api/v1/providers').subscribe((data) => {
+      this.dataStore.providers = data;
+      this._providers.next(Object.assign({}, this.dataStore).providers);
+    });
   }
 
 }

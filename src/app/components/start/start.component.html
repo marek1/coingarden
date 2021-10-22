@@ -40,7 +40,7 @@
           </div>
           <input (keyup)="searchCoin($event)" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
         </div>
-        <span *ngFor="let coin of coins$ | async; let i = index;" class="mr-4" (click)="selectCoin(coin)">
+        <span *ngFor="let coin of selectedCoins$ | async; let i = index;" class="mr-4" (click)="selectCoin(coin)">
           <span *ngIf="i < coinCap"
                 class="badge
                 {{coin === selectedCoin ? 'badge-primary' : 'badge-light'}}
@@ -48,7 +48,7 @@
             {{coin}}
           </span>
         </span>
-        <ng-container *ngIf="(coins$|async)?.length as coinsLength">
+        <ng-container *ngIf="(selectedCoins$|async)?.length as coinsLength">
           <span class="float-right" *ngIf="coinCap < coinsLength">
             <button class="btn btn-link" (click)="coinCap = coinsLength">Zeige alle Coins</button>
           </span>

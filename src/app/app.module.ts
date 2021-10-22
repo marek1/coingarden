@@ -13,6 +13,8 @@ import { StartComponent } from './components/start/start.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { ResultsComponent } from './components/results/results.component';
 import { StrategieComponent } from './components/strategie/strategie.component';
+import { ProductComponent } from './components/product/product.component';
+import { ProviderProductComponent } from './components/provider-product/provider-product.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { StrategieComponent } from './components/strategie/strategie.component';
     StartComponent,
     SliderComponent,
     ResultsComponent,
-    StrategieComponent
+    StrategieComponent,
+    ProductComponent,
+    ProviderProductComponent
   ],
   imports: [
     BrowserModule,

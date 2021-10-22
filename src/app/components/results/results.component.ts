@@ -30,14 +30,14 @@ export class ResultsComponent implements OnInit {
       strategy => strategy.riskLevel <= this.risk
     ).map(strategy => strategy.id);
     this.foundStrategies = Strategies.filter(strategy => foundStrategies.indexOf(strategy.id) > -1);
-    this.providerProducts$ = this.providerService.prodivers$
+    this.providerProducts$ = this.providerService.providers
     .pipe(
       map(provider => provider.filter(prov => {
           let x = prov.products.filter(prod => foundStrategies.indexOf(prod.belongs_to_strategy_id) > -1)
           return x.length > 0
         }).map(prov => {
           // only use those products which are in question fo the found strategies:
-          prov.products = prov.products.filter(prod => foundStrategies.indexOf(prod.belongs_to_strategy_id) > -1)[0]
+          prov.products = [prov.products.filter(prod => foundStrategies.indexOf(prod.belongs_to_strategy_id) > -1)[0]]
           return prov;
         }).sort((a: any, b: any) => {
           if(a.belongs_to_strategy_id < b.belongs_to_strategy_id) { return -1; }

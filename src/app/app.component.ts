@@ -11,9 +11,6 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'CoinGarden';
-  sub1 = new Subscription();
-  sub2 = new Subscription();
-  sub3 = new Subscription();
   constructor(private coinService: CoinService,
               private productService: ProductService,
               private providerService: ProviderService) {
@@ -21,23 +18,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.coinService.getAll();
-    this.sub1 = this.coinService.coins$.subscribe(() => {
-      console.log('coins loaded');
-    });
     this.productService.getAll();
-    this.sub2 = this.productService.products$.subscribe(() => {
-      console.log('products loaded');
-    });
     this.providerService.getAll();
-    this.sub3 = this.providerService.prodivers$.subscribe(() => {
-      console.log('providers loaded');
-    })
   }
 
   ngOnDestroy() {
-    this.sub1.unsubscribe();
-    this.sub2.unsubscribe();
-    this.sub3.unsubscribe();
   }
 
 }

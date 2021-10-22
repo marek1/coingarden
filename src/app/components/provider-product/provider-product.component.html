@@ -1,0 +1,55 @@
+<div class="card" *ngIf="providerProduct; else showError">
+  <div class="card-header">
+    <h5 class="mb-0">
+      {{providerProduct.products[0].name}} von {{providerProduct.name}}
+      <button class="btn btn-link float-right" (click)="collapse = !collapse">
+        <span *ngIf="!collapse">Zeige mehr</span>
+        <span *ngIf="collapse">Zeige weniger</span>
+      </button>
+    </h5>
+  </div>
+  <div class="collapse {{collapse ? 'show' : ''}}" aria-labelledby="headingOne" data-parent="#accordion">
+    <div class="card-body">
+      <div>
+        Produkt:
+      </div>
+      <div class="mt-4">
+        {{providerProduct.products[0].howTo.text}}
+      </div>
+      <div class="mt-4" *ngIf="providerProduct.products[0].url">
+        <i class="fa fa-send"></i> Mehr Information auf der
+        <a href="{{providerProduct.products[0].url}}" target="_blank">Webseite von {{providerProduct.name}}</a>.
+      </div>
+      <div class="mt-4" *ngIf="providerProduct.products[0].howTo.image">
+        <img src="/assets/{{providerProduct.products[0].howTo.image}}">
+      </div>
+      <div class="mt-4" *ngIf="providerProduct.products[0].howTo.video">
+        <i class="fa fa-video-camera"></i> Sie dir auch ruhig das
+        <a href="{{providerProduct.products[0].howTo.video}}" target="_blank">Video auf Youtube</a> an.
+      </div>
+      <div class="mt-4" *ngIf="providerProduct.products[0].howTo.blog">
+        <i class="fa fa-newspaper-o"></i> Oder lies dir diesen interessanten
+        <a href="{{providerProduct.products[0].howTo.blog}}" target="_blank">Blogpost</a> durch.
+      </div>
+      <hr/>
+      <div class="mt-4">
+        Anbieter:
+      </div>
+      <div class="mt-4" *ngIf="providerProduct.logo_url">
+        <img src="{{providerProduct.logo_url}}">
+      </div>
+      <div>
+        {{providerProduct.description}}
+      </div>
+      <div class="mt-4" *ngIf="providerProduct.url">
+        <i class="fa fa-send"></i> Mehr Information zum Anbieter findest du auf der
+        <a href="{{providerProduct.url}}" target="_blank">der Webseite von {{providerProduct.name}}</a>.
+      </div>
+    </div>
+    
+  </div>
+</div>
+<ng-template #showError>
+  Dieses Produkt konnte leider nicht gefunden werden.
+</ng-template>
+

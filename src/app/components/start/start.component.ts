@@ -15,7 +15,8 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./start.component.scss']
 })
 export class StartComponent implements OnInit {
-  public coins$: Observable<string[]>;
+  // public coins$: Observable<string[]>;
+  public selectedCoins$: Observable<string[]> = new Observable();
   public coinForm: FormGroup;
   public currentStep = 1;
   public selectedCoin = '';
@@ -27,13 +28,17 @@ export class StartComponent implements OnInit {
               public router: Router,
               public route: ActivatedRoute,
               public location: Location) {
-    this.coins$ = this.coinService.coins$;
+    // this.coins$ = this.coinService.coins$;
+    // this.coins$.subscribe(x => console.log('yo : ', x));
     this.coinForm = new FormGroup({
-      selectedCoin: new FormControl('BTC'),
+      selectedCoin: new FormControl(''),
     });
   }
 
   ngOnInit(): void {
+    console.log('init');
+    this.selectedCoins$ = this.coinService.coins;
+    // this.selectedCoins$.subscribe(x => console.log(x));
     // connect
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.get('id')) {
@@ -43,9 +48,9 @@ export class StartComponent implements OnInit {
   }
 
   searchCoin(ev: any) {
-    this.coins$ = this.coinService.coins$
+    this.selectedCoins$ = this.coinService.coins
     .pipe(
-      map(x => x.filter(coin => coin.toLowerCase().indexOf(ev.target.value) -1))
+      map(x => x.filter(coin => coin.toLowerCase().indexOf(ev.target.value) > -1))
     );
   }
 
