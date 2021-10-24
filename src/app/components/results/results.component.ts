@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductService } from '../../services/product.service';
-import { combineAll, filter, map } from 'rxjs/operators';
+import { combineAll, concatAll, filter, map, mergeAll } from 'rxjs/operators';
 import { Strategies } from '../../data/strategies';
 import { Product } from '../../interfaces/product';
 import { Provider } from '../../interfaces/provider';
 import { ProviderService } from '../../services/provider.service';
+import { combineResolvers } from '@angular/compiler-cli/src/ngtsc/annotations/src/util';
+import { OffersService } from '../../services/offers.service';
 
 @Component({
   selector: 'app-results',
@@ -18,8 +19,8 @@ export class ResultsComponent implements OnInit {
   @Input() risk: number = -1;
   //products$: Observable<Product[]> = new Observable();
   foundStrategies: any[] = [];
-  providerProducts$: Observable<any[]> = new Observable();
-  constructor(private productService: ProductService,
+  providerProducts$: Observable<Provider[]> = new Observable();
+  constructor(private offersService: OffersService,
               private providerService: ProviderService) {
 
   }
@@ -38,6 +39,22 @@ export class ResultsComponent implements OnInit {
         }).map(prov => {
           // only use those products which are in question fo the found strategies:
           prov.products = [prov.products.filter(prod => foundStrategies.indexOf(prod.belongs_to_strategy_id) > -1)[0]]
+          prov.products[0].offers = this.offersService.offers
+          .pipe(
+            map(prod => {
+              // console.log('prod : ', prod);
+              return prod.filter((offer) => {
+                // console.log('offer ; ', offer.latestOffer.id);
+                // console.log('type : ', offer.latestOffer.type, prov.products[0].name);
+                // console.log('provider : ', offer.latestOffer.provider, prov.id);
+                return offer.latestOffer.type.toString().toLowerCase() === prov.products[0].name.toString().toLowerCase()
+                  && offer.latestOffer.provider.toString().toLowerCase() === prov.id.toString().toLowerCase()
+                  && offer.latestOffer.coins.indexOf(this.coin) > -1
+              })
+            }
+            )
+          );
+          console.log('prov.products[0] : ', prov.products[0]);
           return prov;
         }).sort((a: any, b: any) => {
           if(a.belongs_to_strategy_id < b.belongs_to_strategy_id) { return -1; }
@@ -46,6 +63,8 @@ export class ResultsComponent implements OnInit {
         })
       )
     );
+    this.providerProducts$.subscribe(y => console.log('yyyyyyyy : ', y));
+
   }
 
 }

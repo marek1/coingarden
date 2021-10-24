@@ -50,7 +50,9 @@ export class StartComponent implements OnInit {
   searchCoin(ev: any) {
     this.selectedCoins$ = this.coinService.coins
     .pipe(
-      map(x => x.filter(coin => coin.toLowerCase().indexOf(ev.target.value) > -1))
+      map(x => x.filter(coin => {
+        return coin.toLowerCase().indexOf(ev.target.value.toString().toLowerCase()) > -1;
+      }))
     );
   }
 

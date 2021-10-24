@@ -1,6 +1,16 @@
+import { LatestOffer } from './latestOffer';
+import { Observable } from 'rxjs';
+
 export interface Product {
-  id: string;
+  belongs_to_strategy_id: number;
+  de: string;
   name: string;
-  type: string;
-  provider: string;
+  url: string;
+  howTo: {
+    text: string;
+    image: string;
+    video: string;
+    blog: string;
+  };
+  offers?: Observable<LatestOffer[]>;
 }

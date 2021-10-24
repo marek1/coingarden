@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CoinService } from './services/coin.service';
-import { ProductService } from './services/product.service';
 import { ProviderService } from './services/provider.service';
 import { Subscription } from 'rxjs';
+import { OffersService } from './services/offers.service';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +12,13 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'CoinGarden';
   constructor(private coinService: CoinService,
-              private productService: ProductService,
+              private offersService: OffersService,
               private providerService: ProviderService) {
   }
 
   ngOnInit() {
     this.coinService.getAll();
-    this.productService.getAll();
+    this.offersService.getAll();
     this.providerService.getAll();
   }
 

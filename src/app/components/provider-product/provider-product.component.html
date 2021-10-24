@@ -3,10 +3,22 @@
     <h5 class="mb-0">
       {{providerProduct.products[0].name}} von {{providerProduct.name}}
       <button class="btn btn-link float-right" (click)="collapse = !collapse">
-        <span *ngIf="!collapse">Zeige mehr</span>
-        <span *ngIf="collapse">Zeige weniger</span>
+        <span *ngIf="!collapse">Mehr Info</span>
+        <span *ngIf="collapse">Weniger Info</span>
       </button>
     </h5>
+    <div>
+  
+      Aktuelle Angebote :
+  
+      <div class="mt-4" *ngIf="(providerProduct.products[0].offers|async) as offers">
+        <span *ngIf="offers[0].latestOffer as latestOffer">
+          <span *ngIf="latestOffer.avgAnnualInterestRate">
+            {{latestOffer.avgAnnualInterestRate}} TODO !!!
+          </span>
+        </span>
+      </div>
+    </div>
   </div>
   <div class="collapse {{collapse ? 'show' : ''}}" aria-labelledby="headingOne" data-parent="#accordion">
     <div class="card-body">
@@ -19,6 +31,9 @@
       <div class="mt-4" *ngIf="providerProduct.products[0].url">
         <i class="fa fa-send"></i> Mehr Information auf der
         <a href="{{providerProduct.products[0].url}}" target="_blank">Webseite von {{providerProduct.name}}</a>.
+      </div>
+      <div class="mt-4">
+        Aktuelle Angebote / Renditen:
       </div>
       <div class="mt-4" *ngIf="providerProduct.products[0].howTo.image">
         <img src="/assets/{{providerProduct.products[0].howTo.image}}">

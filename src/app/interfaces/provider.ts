@@ -1,9 +1,11 @@
+import { Product } from './product';
+
 export interface Provider {
   id: string;
   name: string;
   provider_type: string;
   description: string;
-  products: any[];
+  products: Product[];
   url:  string;
   logo_url: string;
   country: string;

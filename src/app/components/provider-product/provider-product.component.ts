@@ -1,4 +1,7 @@
-import { Component, Input, OnInit, Provider } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { LatestOffer } from '../../interfaces/latestOffer';
+import { Product } from '../../interfaces/product';
+import { Provider } from '../../interfaces/provider';
 
 @Component({
   selector: 'app-provider-product',
@@ -7,10 +10,24 @@ import { Component, Input, OnInit, Provider } from '@angular/core';
 })
 export class ProviderProductComponent implements OnInit {
   collapse = false;
-  @Input() providerProduct: any = new Object();
+  @Input() providerProduct: Provider = {
+    id: '',
+    name: '',
+    provider_type: '',
+    description: '',
+    products: [],
+    url: '',
+    logo_url: '',
+    country: '',
+    affiliate_id: ''
+  };
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  getDetails(x: LatestOffer) {
+    console.log('x : ', x);
+    return '';
+  }
 }
