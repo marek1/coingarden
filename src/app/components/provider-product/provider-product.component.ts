@@ -26,8 +26,4 @@ export class ProviderProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getDetails(x: LatestOffer) {
-    console.log('x : ', x);
-    return '';
-  }
 }

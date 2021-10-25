@@ -1,29 +1,52 @@
 <div class="card" *ngIf="providerProduct; else showError">
   <div class="card-header">
-    <h5 class="mb-0">
-      {{providerProduct.products[0].name}} von {{providerProduct.name}}
+    <h5 class="mb-4">
+      {{providerProduct.products[0].de}} von {{providerProduct.name}}
       <button class="btn btn-link float-right" (click)="collapse = !collapse">
         <span *ngIf="!collapse">Mehr Info</span>
         <span *ngIf="collapse">Weniger Info</span>
       </button>
     </h5>
     <div>
+      <div *ngIf="providerProduct.products[0].name === 'Hardware Wallet'">
+        <b><i class="fa fa-exclamation-triangle"></i> Hohe Sicherheit!</b>
+      </div>
+      <div *ngIf="(providerProduct.products[0].offers|async) as offers">
+        <div class="alert alert-primary" *ngIf="offers.length > 0
+        && offers[0].latestOffer
+        && offers[0].latestOffer.avgAnnualInterestRate > 0">
+          Aktuelle Angebote :
+          <div class="font-weight-bold" *ngIf="offers[0].latestOffer.avgAnnualInterestRate > 0">
+            <span *ngIf="providerProduct.name.toString().toLowerCase() === 'nexo'">
+              bis zu
+            </span>
+            {{offers[0].latestOffer.avgAnnualInterestRate * 100 | number}} %
   
-      Aktuelle Angebote :
-  
-      <div class="mt-4" *ngIf="(providerProduct.products[0].offers|async) as offers">
-        <span *ngIf="offers[0].latestOffer as latestOffer">
-          <span *ngIf="latestOffer.avgAnnualInterestRate">
-            {{latestOffer.avgAnnualInterestRate}} TODO !!!
-          </span>
-        </span>
+            <span *ngIf="offers[0].latestOffer.url">
+              &nbsp;<a href="{{offers[0].latestOffer.url}}">Direkt zum Angebot</a>
+            </span>
+          </div>
+          <div>
+            Details:
+            <span *ngIf="offers[0].latestOffer.duration">
+              &nbsp;Dauer: {{offers[0].latestOffer.duration}} Tage
+            </span>
+            <span *ngIf="offers[0].latestOffer.endDate">
+              &nbsp;Ende: {{offers[0].latestOffer.endDate | date:'dd.MM.YY'}}
+            </span>
+            <span *ngIf="offers[0].latestOffer.costsOfParticipation >= 0">
+              &nbsp;Gebühren: {{offers[0].latestOffer.costsOfParticipation | number}} EUR
+            </span>
+          </div>
+          
+        </div>
       </div>
     </div>
   </div>
   <div class="collapse {{collapse ? 'show' : ''}}" aria-labelledby="headingOne" data-parent="#accordion">
     <div class="card-body">
       <div>
-        Produkt:
+        Über das Produkt:
       </div>
       <div class="mt-4">
         {{providerProduct.products[0].howTo.text}}
@@ -48,7 +71,7 @@
       </div>
       <hr/>
       <div class="mt-4">
-        Anbieter:
+        Über den Anbieter:
       </div>
       <div class="mt-4" *ngIf="providerProduct.logo_url">
         <img src="{{providerProduct.logo_url}}">
@@ -61,7 +84,6 @@
         <a href="{{providerProduct.url}}" target="_blank">der Webseite von {{providerProduct.name}}</a>.
       </div>
     </div>
-    
   </div>
 </div>
 <ng-template #showError>

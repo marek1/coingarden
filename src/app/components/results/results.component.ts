@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { combineAll, concatAll, filter, map, mergeAll } from 'rxjs/operators';
 import { Strategies } from '../../data/strategies';
 import { Product } from '../../interfaces/product';
@@ -51,18 +51,19 @@ export class ResultsComponent implements OnInit {
                   && offer.latestOffer.provider.toString().toLowerCase() === prov.id.toString().toLowerCase()
                   && offer.latestOffer.coins.indexOf(this.coin) > -1
               })
-            }
-            )
+            })
           );
-          console.log('prov.products[0] : ', prov.products[0]);
           return prov;
-        }).sort((a: any, b: any) => {
+        })
+        .sort((a: any, b: any) => {
           if(a.belongs_to_strategy_id < b.belongs_to_strategy_id) { return -1; }
           if(a.belongs_to_strategy_id > b.belongs_to_strategy_id) { return 1; }
           return 0;
         })
       )
     );
+
+
     this.providerProducts$.subscribe(y => console.log('yyyyyyyy : ', y));
 
   }

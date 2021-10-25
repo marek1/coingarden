@@ -16,6 +16,11 @@
 </div>
 <ng-container *ngFor="let providerProduct of providerProducts$ | async">
   <div id="accordion">
-    <app-provider-product [providerProduct]="providerProduct"></app-provider-product>
+    <ng-container *ngIf="(providerProduct.products)
+    && (providerProduct.products)?.length == 1
+    && providerProduct.products[0].offers
+    && (providerProduct.products[0].offers | async) as offers">
+      <app-provider-product *ngIf="offers.length > 0" [providerProduct]="providerProduct"></app-provider-product>
+    </ng-container>
   </div>
 </ng-container>

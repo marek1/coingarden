@@ -12,5 +12,5 @@ export interface Product {
     video: string;
     blog: string;
   };
-  offers?: Observable<LatestOffer[]>;
+  offers: Observable<LatestOffer[]>;
 }
