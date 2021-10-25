@@ -43,6 +43,17 @@ export class StartComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.get('id')) {
         this.selectedCoin = params.get('id')?.toString() || '';
+        if (this.selectedCoin) {
+          this.currentStep = 2;
+        }
+      }
+      if (params.get('id1')) {
+        let foundRisk = this.risks.filter(x => params.get('id1')?.toString() === x.riskId.toString());
+        console.log('this.selectedRisk : ', this.selectedRisk);
+        if (foundRisk.length > 0 && foundRisk[0].riskId) {
+          this.selectedRisk = foundRisk[0].riskId;
+          this.currentStep = 3;
+        }
       }
     })
   }
@@ -58,26 +69,35 @@ export class StartComponent implements OnInit {
 
   selectCoin(coin: string) {
     this.selectedCoin = coin;
-    // Generate the URL:
-    let url = this.router.createUrlTree(['start/' + coin]).toString();
-    // Change the URL without navigate:
-    this.location.go(url);
+    this.setUrl();
   }
 
   setRisk(x: number) {
     console.log('got risk ; ', x);
     this.selectedRisk = x;
+    this.setUrl();
   }
 
   goToStep(x: number) {
     this.currentStep = x;
+
     if (x === 3 && this.selectedRisk === -1) {
       this.selectedRisk = 0;
+      this.setUrl();
     }
+  }
+
+  setUrl () {
+    let url = this.router.createUrlTree(['start/' + this.selectedCoin + '/' +
+    (this.selectedRisk > -1 ? this.selectedRisk : '')]).toString();
+    // Change the URL without navigate:
+    this.location.go(url);
   }
 
   resetCoin() {
     this.selectedCoin = '';
+    this.selectedRisk = -1;
     this.currentStep = 1;
+    this.setUrl();
   }
 }

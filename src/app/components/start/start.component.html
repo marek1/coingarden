@@ -7,8 +7,8 @@
   </div>
   
   <div class="card mb-4">
-    <div class="row">
-      <div class="cursor-pointer col-6 text-white {{selectedCoin ? 'bg-primary' : 'bg-secondary'}}"
+    <div class="row p-4">
+      <div class="cursor-pointer col-6"
            (click)="resetCoin()">
         <span>
           <span *ngIf="!selectedCoin">1. Wähle den Coin</span>
@@ -17,7 +17,7 @@
           </span>
         </span>
       </div>
-      <div class="cursor-pointer col-6 text-white {{selectedRisk > -1 ? 'bg-primary' : 'bg-secondary'}}"
+      <div class="cursor-pointer col-6"
            (click)="goToStep(2)">
         <span>
           <span *ngIf="selectedRisk == -1">2. Bestimme dein Risiko</span>
@@ -30,9 +30,15 @@
   </div>
   
   <!-- Content Row -->
+  
   <div class="card col-xs-12 col-md-12" *ngIf="currentStep === 1">
     <div class="card-body">
-      <h5 class="card-title">Mit welchem Coin möchtest du verdienen?</h5>
+      <h5 class="card-title mb-5">
+        <div class="float-left max-width-50">
+           Mit welchem Coin möchtest du verdienen?
+        </div>
+        <button *ngIf="selectedCoin" class="btn btn-primary btn-sm float-right" (click)="goToStep(2)">Weiter</button>
+      </h5>
       <div class="card-text">
         <div class="input-group input-group-sm mb-3">
           <div class="input-group-prepend">
@@ -56,9 +62,7 @@
       </div>
     </div>
     
-    <div class="col-xs-12 col-md-12 mt-4 mb-4" *ngIf="selectedCoin">
-      <button class="btn btn-primary btn-large float-right" (click)="goToStep(2)">Weiter</button>
-    </div>
+    
   </div>
   
   
@@ -66,16 +70,18 @@
   <div class="" *ngIf="currentStep === 2">
     <div class="card col-xs-12 col-md-12">
       <div class="card-body">
-        <h5 class="card-title">Welches Risiko möchtest du gehen?</h5>
+        <h5 class="card-title mb-5">
+          <div class="float-left max-width-50">
+            Welches Risiko möchtest du gehen?
+          </div>
+          <button class="btn btn-primary btn-sm float-right" (click)="goToStep(3)">Zeig mir die Ergebnisse</button>
+        </h5>
         <div class="card-text">
           <app-slider [currentRisk]="selectedRisk" (newItemEvent)="setRisk($event)"></app-slider>
         </div>
       </div>
     </div>
     
-    <div class="col-xs-12 col-md-12 mt-4 mb-4">
-      <button class="btn btn-primary btn-large float-right" (click)="goToStep(3)">Zeig mir die Ergebnisse</button>
-    </div>
   
   </div>
   

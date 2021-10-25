@@ -1,19 +1,28 @@
 <div>
-  <i class="fa fa-line-chart"></i>
-  &nbsp; Für dich kommen folgende Strategie(n) in Frage:
+  <div class="mb-4">
+    <i class="fa fa-line-chart"></i>
+    &nbsp; Für dich kommen folgende Strategie(n) in Frage:
+  </div>
   
-  <div class="alert alert-primary" role="alert">
-    <a class="btn btn-link" [routerLink]="['/strategie', foundStrategy.int_url]"
-       *ngFor="let foundStrategy of foundStrategies">
-      {{foundStrategy.de}}
-    </a>
+  <div class="p-2">
+    <ol>
+        <li *ngFor="let foundStrategy of foundStrategies">
+          <a class="btn btn-link" [routerLink]="['/strategie', foundStrategy.int_url]">
+            {{foundStrategy.de}}
+          </a>
+        </li>
+    </ol>
+    
   </div>
   
 </div>
-<div>
+<div class="mb-4">
   <i class="fa fa-shopping-bag"></i>
   &nbsp; Dazu haben wir folgende Produkte gefunden:
 </div>
+<ng-container *ngIf="(providerProducts$|async)?.length === 0">
+  L O A D I N G . . .
+</ng-container>
 <ng-container *ngFor="let providerProduct of providerProducts$ | async">
   <div id="accordion">
     <ng-container *ngIf="(providerProduct.products)

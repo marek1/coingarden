@@ -3,8 +3,8 @@
     <h5 class="mb-4">
       {{providerProduct.products[0].de}} von {{providerProduct.name}}
       <button class="btn btn-link float-right" (click)="collapse = !collapse">
-        <span *ngIf="!collapse">Mehr Info</span>
-        <span *ngIf="collapse">Weniger Info</span>
+        <span *ngIf="!collapse">Mehr Info <i class="fa fa-arrow-circle-down"></i></span>
+        <span *ngIf="collapse">Weniger Info <i class="fa fa-arrow-circle-up"></i></span>
       </button>
     </h5>
     <div>

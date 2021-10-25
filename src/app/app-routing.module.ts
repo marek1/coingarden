@@ -15,6 +15,10 @@ const routes: Routes = [
     component: StartComponent
   },
   {
+    path: 'start/:id/:id1',
+    component: StartComponent
+  },
+  {
     path: 'strategie',
     component: StrategieComponent
   },
