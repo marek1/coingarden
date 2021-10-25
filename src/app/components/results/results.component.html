@@ -23,13 +23,15 @@
 <ng-container *ngIf="(providerProducts$|async)?.length === 0">
   L O A D I N G . . .
 </ng-container>
-<ng-container *ngFor="let providerProduct of providerProducts$ | async">
+<ng-container *ngFor="let provider of providerProducts$ | async">
   <div id="accordion">
-    <ng-container *ngIf="(providerProduct.products)
-    && (providerProduct.products)?.length == 1
-    && providerProduct.products[0].offers
-    && (providerProduct.products[0].offers | async) as offers">
-      <app-provider-product *ngIf="offers.length > 0" [providerProduct]="providerProduct"></app-provider-product>
+    <ng-container *ngFor="let product of provider.products">
+<!--    && (providerProduct.products)?.length == 1-->
+<!--    && providerProduct.products[0].offers-->
+      <ng-container *ngIf="(product.offers | async) as offers">
+<!--      <app-provider-product *ngIf="offers.length > 0" [providerProduct]="providerProduct"></app-provider-product>-->
+        <app-provider-product *ngIf="offers.length > 0" [provider]="provider" [product]="product"></app-provider-product>
+      </ng-container>
     </ng-container>
   </div>
 </ng-container>

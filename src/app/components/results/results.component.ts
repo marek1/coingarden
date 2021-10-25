@@ -27,10 +27,17 @@ export class ResultsComponent implements OnInit {
 
   ngOnInit(): void {
     // find strategies
+    console.log('this.risk : ', this.risk);
     const foundStrategies = Strategies.filter(
-      strategy => strategy.riskLevel <= this.risk
+      strategy => {
+        return strategy.riskLevel <= this.risk
+        && (strategy.blackListCoins.length === 0
+        || strategy.blackListCoins.toString().toLowerCase().indexOf(this.coin.toString().toLowerCase()) < 0)
+      }
     ).map(strategy => strategy.id);
+    console.log('foundStrategies : ', foundStrategies);
     this.foundStrategies = Strategies.filter(strategy => foundStrategies.indexOf(strategy.id) > -1);
+    console.log('this.foundStrategies : ', this.foundStrategies);
     this.providerProducts$ = this.providerService.providers
     .pipe(
       map(provider => provider.filter(prov => {
@@ -38,21 +45,22 @@ export class ResultsComponent implements OnInit {
           return x.length > 0
         }).map(prov => {
           // only use those products which are in question fo the found strategies:
-          prov.products = [prov.products.filter(prod => foundStrategies.indexOf(prod.belongs_to_strategy_id) > -1)[0]]
-          prov.products[0].offers = this.offersService.offers
-          .pipe(
-            map(prod => {
-              // console.log('prod : ', prod);
-              return prod.filter((offer) => {
-                // console.log('offer ; ', offer.latestOffer.id);
-                // console.log('type : ', offer.latestOffer.type, prov.products[0].name);
-                // console.log('provider : ', offer.latestOffer.provider, prov.id);
-                return offer.latestOffer.type.toString().toLowerCase() === prov.products[0].name.toString().toLowerCase()
-                  && offer.latestOffer.provider.toString().toLowerCase() === prov.id.toString().toLowerCase()
-                  && offer.latestOffer.coins.indexOf(this.coin) > -1
-              })
-            })
-          );
+          prov.products = prov.products.filter(prod => foundStrategies.indexOf(prod.belongs_to_strategy_id) > -1);
+          prov.products.map((product) => {
+            product.offers = this.offersService.offers
+              .pipe(
+                map(latestOffers => {
+                  return latestOffers.filter((offer) => {
+                    // console.log('type : ', offer.latestOffer.type.toString().toLowerCase(), product.name.toString().toLowerCase());
+                    // console.log('provider : ', offer.latestOffer.provider.toString().toLowerCase(), prov.id.toString().toLowerCase());
+                    return offer.latestOffer.type.toString().toLowerCase() === product.name.toString().toLowerCase()
+                      && offer.latestOffer.provider.toString().toLowerCase() === prov.id.toString().toLowerCase()
+                      && offer.latestOffer.coins.map(x => x.toString().toLowerCase()).indexOf(this.coin.toString().toLowerCase()) > -1
+                  })
+                })
+              );
+          })
+
           return prov;
         })
         .sort((a: any, b: any) => {

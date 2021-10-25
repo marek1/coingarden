@@ -25,7 +25,8 @@ export const Strategies = [
       image: '',
       video: 'https://youtu.be/PAQedp0xlds',
       blog: 'https://block-builders.de/custodial-wallets/#:~:text=In%20einer%20Wallet%20werden%20deine,die%20Private%20Keys%20bei%20dir.'
-    }
+    },
+    blackListCoins: []
   },
   {
     id: 1,
@@ -45,7 +46,8 @@ export const Strategies = [
       image: 'https://stormgain.com/sites/default/files/news/BitcoinSavings.jpg',
       video: '',
       blog: ''
-    }
+    },
+    blackListCoins: []
   },
   {
     id: 3,
@@ -60,7 +62,8 @@ export const Strategies = [
       image: '',
       video: 'https://www.youtube.com/watch?v=l1uu9rbf-xw&ab_channel=Kryptokanal',
       blog: 'https://blockchainwelt.de/coin-staking/'
-    }
+    },
+    blackListCoins: ['BTC']
   },
   {
     id: 4,
@@ -79,12 +82,13 @@ export const Strategies = [
       image: 'liquidity_mining.png',
       video: 'https://www.youtube.com/watch?v=qeiXqmh4m18&ab_channel=CryptoExplained',
       blog: ''
-    }
+    },
+    blackListCoins: []
   },
   {
     id: 6,
     name: 'Spot Trading',
-    riskLevel: Risks.filter(x => x.riskId == 2)[0].riskId,
+    riskLevel: Risks.filter(x => x.riskId == 3)[0].riskId,
     de: 'Spot Handel',
     int_url: 'spot-handel',
     howTo: {
@@ -96,7 +100,8 @@ export const Strategies = [
       image: '',
       video: 'https://www.youtube.com/watch?v=-UhhSIZWAV8&ab_channel=MarcusSchulz',
       blog: ''
-    }
+    },
+    blackListCoins: []
   },
   {
     id: 7,
@@ -116,7 +121,8 @@ export const Strategies = [
       image: '',
       video: '',
       blog: 'https://de.cryptonews.com/leitfaden/was-ist-krypto-margin-trading.htm'
-    }
+    },
+    blackListCoins: []
   },
   {
     id: 8,
@@ -134,6 +140,7 @@ export const Strategies = [
       image: '',
       video: '',
       blog: 'https://de.cryptonews.com/leitfaden/was-ist-krypto-margin-trading.htm'
-    }
+    },
+    blackListCoins: []
   }
  ]

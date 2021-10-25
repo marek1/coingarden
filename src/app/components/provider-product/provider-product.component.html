@@ -1,42 +1,45 @@
-<div class="card" *ngIf="providerProduct; else showError">
+<div class="card" *ngIf="provider.name && product.name  else showError">
   <div class="card-header">
-    <h5 class="mb-4">
-      {{providerProduct.products[0].de}} von {{providerProduct.name}}
+    <h5 class="mb-4 overflow-auto">
+      {{product.de}} von {{provider.name}}
       <button class="btn btn-link float-right" (click)="collapse = !collapse">
         <span *ngIf="!collapse">Mehr Info <i class="fa fa-arrow-circle-down"></i></span>
         <span *ngIf="collapse">Weniger Info <i class="fa fa-arrow-circle-up"></i></span>
       </button>
     </h5>
     <div>
-      <div *ngIf="providerProduct.products[0].name === 'Hardware Wallet'">
+      <div *ngIf="product.name === 'Hardware Wallet'">
         <b><i class="fa fa-exclamation-triangle"></i> Hohe Sicherheit!</b>
       </div>
-      <div *ngIf="(providerProduct.products[0].offers|async) as offers">
+      <div *ngIf="(product.offers|async) as offers">
         <div class="alert alert-primary" *ngIf="offers.length > 0
         && offers[0].latestOffer
         && offers[0].latestOffer.avgAnnualInterestRate > 0">
           Aktuelle Angebote :
           <div class="font-weight-bold" *ngIf="offers[0].latestOffer.avgAnnualInterestRate > 0">
-            <span *ngIf="providerProduct.name.toString().toLowerCase() === 'nexo'">
+            <span *ngIf="provider.name.toString().toLowerCase() === 'nexo'">
               bis zu
             </span>
             {{offers[0].latestOffer.avgAnnualInterestRate * 100 | number}} %
-  
             <span *ngIf="offers[0].latestOffer.url">
-              &nbsp;<a href="{{offers[0].latestOffer.url}}">Direkt zum Angebot</a>
+              &nbsp;<a href="{{offers[0].latestOffer.url}}"><i class="fa fa-arrow-circle-o-right"></i> Direkt zum Angebot</a>
             </span>
           </div>
-          <div>
+          <div class="small">
             Details:
-            <span *ngIf="offers[0].latestOffer.duration">
-              &nbsp;Dauer: {{offers[0].latestOffer.duration}} Tage
-            </span>
-            <span *ngIf="offers[0].latestOffer.endDate">
-              &nbsp;Ende: {{offers[0].latestOffer.endDate | date:'dd.MM.YY'}}
-            </span>
-            <span *ngIf="offers[0].latestOffer.costsOfParticipation >= 0">
-              &nbsp;Gebühren: {{offers[0].latestOffer.costsOfParticipation | number}} EUR
-            </span>
+            <div>
+              <span *ngIf="offers[0].latestOffer.duration">
+                Laufzeit: {{offers[0].latestOffer.duration}} Tage
+              </span>
+              <span *ngIf="offers[0].latestOffer.endDate">
+                (Ende: {{offers[0].latestOffer.endDate | date:'dd.MM.YY'}})
+              </span>
+            </div>
+            <div>
+              <span *ngIf="offers[0].latestOffer.rewardToken">
+                Reward-Token: {{offers[0].latestOffer.rewardToken}}
+              </span>
+            </div>
           </div>
           
         </div>
@@ -49,39 +52,39 @@
         Über das Produkt:
       </div>
       <div class="mt-4">
-        {{providerProduct.products[0].howTo.text}}
+        {{product.howTo.text}}
       </div>
-      <div class="mt-4" *ngIf="providerProduct.products[0].url">
+      <div class="mt-4" *ngIf="product.url">
         <i class="fa fa-send"></i> Mehr Information auf der
-        <a href="{{providerProduct.products[0].url}}" target="_blank">Webseite von {{providerProduct.name}}</a>.
+        <a href="{{product.url}}" target="_blank">Webseite von {{provider.name}}</a>.
       </div>
       <div class="mt-4">
         Aktuelle Angebote / Renditen:
       </div>
-      <div class="mt-4" *ngIf="providerProduct.products[0].howTo.image">
-        <img src="/assets/{{providerProduct.products[0].howTo.image}}">
+      <div class="mt-4" *ngIf="product.howTo.image">
+        <img src="/assets/{{product.howTo.image}}">
       </div>
-      <div class="mt-4" *ngIf="providerProduct.products[0].howTo.video">
+      <div class="mt-4" *ngIf="product.howTo.video">
         <i class="fa fa-video-camera"></i> Sie dir auch ruhig das
-        <a href="{{providerProduct.products[0].howTo.video}}" target="_blank">Video auf Youtube</a> an.
+        <a href="{{product.howTo.video}}" target="_blank">Video auf Youtube</a> an.
       </div>
-      <div class="mt-4" *ngIf="providerProduct.products[0].howTo.blog">
+      <div class="mt-4" *ngIf="product.howTo.blog">
         <i class="fa fa-newspaper-o"></i> Oder lies dir diesen interessanten
-        <a href="{{providerProduct.products[0].howTo.blog}}" target="_blank">Blogpost</a> durch.
+        <a href="{{product.howTo.blog}}" target="_blank">Blogpost</a> durch.
       </div>
       <hr/>
       <div class="mt-4">
         Über den Anbieter:
       </div>
-      <div class="mt-4" *ngIf="providerProduct.logo_url">
-        <img src="{{providerProduct.logo_url}}">
+      <div class="mt-4" *ngIf="provider.logo_url">
+        <img src="{{provider.logo_url}}">
       </div>
       <div>
-        {{providerProduct.description}}
+        {{provider.description}}
       </div>
-      <div class="mt-4" *ngIf="providerProduct.url">
+      <div class="mt-4" *ngIf="provider.url">
         <i class="fa fa-send"></i> Mehr Information zum Anbieter findest du auf der
-        <a href="{{providerProduct.url}}" target="_blank">der Webseite von {{providerProduct.name}}</a>.
+        <a href="{{provider.url}}" target="_blank">der Webseite von {{provider.name}}</a>.
       </div>
     </div>
   </div>
