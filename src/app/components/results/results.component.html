@@ -1,19 +1,32 @@
 <div>
-  <div class="mb-4">
-    <i class="fa fa-line-chart"></i>
-    &nbsp; Für dich kommen folgende Strategie(n) in Frage
-    <span class="small">(Geordnet nach Risiko)</span> :
+  <div class="mb-4 overflow-auto">
+    <div class="float-left max-width-50">
+      <i class="fa fa-line-chart"></i>
+      &nbsp; Für dich kommen folgende Strategie(n) in Frage
+    </div>
+    <div class="float-right max-width-50">
+      Sortierung:
+      <select (change)="changeSort($event)">
+        <option *ngFor="let op of sortOptions"
+                [value]="op.id"
+                [selected]="op.id === selectedSortOption.id">
+          {{op.name}}
+        </option>
+      </select>
+    </div>
   </div>
   
-  <div class="p-2">
-    <ol>
-        <li *ngFor="let foundStrategy of foundStrategies">
-          <a class="btn btn-link" [routerLink]="['/strategie', foundStrategy.int_url]">
-            {{foundStrategy.de}}
-          </a>
-        </li>
-    </ol>
-    
+  <div id="accordion">
+    <div class="card" *ngFor="let foundStrategy of foundStrategies">
+      <div class="card-header">
+        <a class="btn btn-link" [routerLink]="['/strategie', foundStrategy.int_url]">
+          {{foundStrategy.de}}
+        </a>
+        <div class="card-body">
+        ... TODO : Results should go here !!!
+        </div>
+      </div>
+    </div>
   </div>
   
 </div>
@@ -24,8 +37,6 @@
 <ng-container *ngIf="(providerProducts$|async)?.length === 0">
   L O A D I N G . . .
 </ng-container>
-
-  TODO : SOOOOORT !!
 
 <ng-container *ngFor="let provider of providerProducts$ | async">
   

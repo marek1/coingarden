@@ -13,7 +13,17 @@ import { Strategy } from '../../interfaces/strategy';
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent implements OnInit {
-
+  sortOptions = [
+    {
+      id: 1,
+      name: 'Niedrigstes Risiko oben'
+    },
+    {
+      id: 2,
+      name: 'Höchstes Risiko oben'
+    }
+  ];
+  selectedSortOption = this.sortOptions[0];
   private _coin: string = '';
   private _risk: number = -1;
 
@@ -71,15 +81,6 @@ export class ResultsComponent implements OnInit {
             })
             return prov;
           })
-            .sort((a: any, b: any) => {
-              if (a.belongs_to_strategy_id < b.belongs_to_strategy_id) {
-                return -1;
-              }
-              if (a.belongs_to_strategy_id > b.belongs_to_strategy_id) {
-                return 1;
-              }
-              return 0;
-            })
         )
       );
     this.providerProducts$.subscribe(y => console.log('yyyyyyyy : ', y));
@@ -87,7 +88,6 @@ export class ResultsComponent implements OnInit {
   }
 
   updateStrategies() {
-    console.log('Strategies : ', Strategies);
     this.foundStrategyIds = Strategies.filter(
       strategy => {
         return strategy.riskLevel <= this.risk
@@ -95,10 +95,40 @@ export class ResultsComponent implements OnInit {
             || strategy.blackListCoins.toString().toLowerCase().indexOf(this.coin.toString().toLowerCase()) < 0)
       }
     ).map(strategy => strategy.id);
-    console.log('this.foundStrategyIds : ', this.foundStrategyIds);
     this.foundStrategies = Strategies.filter(
       strategy => this.foundStrategyIds.indexOf(strategy.id) > -1
     )
-    console.log('this.foundStrategies : ', this.foundStrategies);
+    this.sortStrategies();
+  }
+
+  changeSort(ev: any) {
+    console.log('sort ;: ', this.selectedSortOption)
+    console.log('sort ;: ', ev.target.value);
+    if (ev.target.value) {
+      this.selectedSortOption = this.sortOptions.find(x => x.id.toString() === ev.target.value) || this.sortOptions[0];
+    }
+    console.log('sort ;: ', this.selectedSortOption)
+    this.sortStrategies();
+  }
+
+  sortStrategies() {
+    this.foundStrategies = this.foundStrategies
+      .sort((a: any, b: any) => {
+        console.log(a,b)
+        if (a.riskLevel < b.riskLevel) {
+          if (this.selectedSortOption.id === 1) {
+            return -1;
+          }
+          return 1;
+        }
+        if (a.riskLevel > b.riskLevel) {
+          if (this.selectedSortOption.id === 1) {
+            return 1;
+          }
+          return -1;
+        }
+        return 0;
+      })
+
   }
 }
