@@ -12,4 +12,5 @@ export interface Offer {
   rewardToken: string;
   rewardTokenRatio: number;
   updated: string;
+  slippageFee: number;
 }

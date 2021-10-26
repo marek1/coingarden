@@ -11,7 +11,8 @@ import { Observable } from 'rxjs';
 })
 export class ProviderProductComponent implements OnInit {
   collapse = false;
-
+  showToolTip1 = false;
+  showToolTip2 = false;
   private _provider: Provider = {
     id: '',
     name: '',

@@ -2,7 +2,6 @@
   <div class="card-header">
     <h5 class="mb-4 overflow-auto">
       {{product.de}} von {{provider.name}}
-  
       <div class="small" *ngIf="provider.rewardForSignup">
         <span class="badge badge-primary">
           {{provider.rewardForSignup}} EURO
@@ -11,10 +10,6 @@
           ("{{provider.rewardCondition}}")
         </span>
       </div>
-      <button class="btn btn-link float-right" (click)="collapse = !collapse">
-        <span *ngIf="!collapse">Mehr zum Produkt <i class="fa fa-arrow-circle-down"></i></span>
-        <span *ngIf="collapse">Weniger <i class="fa fa-arrow-circle-up"></i></span>
-      </button>
     </h5>
     <div>
       <div *ngIf="product.name.indexOf('Wallet') > -1">
@@ -24,43 +19,71 @@
         <div class="alert alert-primary" *ngIf="offers.length > 0
         && offers[0].latestOffer
         && offers[0].latestOffer.avgAnnualInterestRate > 0">
-          Aktuelles Angebot :
-          <div class="font-weight-bold" *ngIf="offers[0].latestOffer.avgAnnualInterestRate > 0">
-            <span *ngIf="provider.name.toString().toLowerCase() === 'nexo'">
-              bis zu
-            </span>
-            {{offers[0].latestOffer.avgAnnualInterestRate * 100 | number}} % Zinsen
-            <span *ngIf="offers[0].latestOffer.url">
-              &nbsp;<a href="{{offers[0].latestOffer.url}}"><i class="fa fa-arrow-circle-o-right"></i> Direkt zum Angebot</a>
-            </span>
-          </div>
-          <div class="small">
-            <div>
-              <span *ngIf="offers[0].latestOffer.duration">
-                Laufzeit: {{offers[0].latestOffer.duration}} Tage
+          Aktuelle Angebote :
+          <ng-container *ngFor="let offer of offers">
+            <div class="font-weight-bold" *ngIf="offer.latestOffer.avgAnnualInterestRate > 0">
+              <span *ngIf="provider.name.toString().toLowerCase() === 'nexo'">
+                bis zu
               </span>
-              <span *ngIf="offers[0].latestOffer.endDate">
-                (Ende: {{offers[0].latestOffer.endDate | date:'dd.MM.YY'}})
+              <span *ngIf="offer.latestOffer.slippageFee">
+                Pool {{offer.latestOffer.name}} :
+              </span>
+              <span>
+                {{offer.latestOffer.avgAnnualInterestRate * 100 | number}} % Zinsen
+              </span>
+              <span *ngIf="offer.latestOffer.url">
+                &nbsp;<a href="{{offer.latestOffer.url}}"><i class="fa fa-arrow-circle-o-right"></i> Direkt zum Angebot</a>
               </span>
             </div>
-            <div>
-              <span *ngIf="offers[0].latestOffer.rewardToken">
-                Reward-Token: {{offers[0].latestOffer.rewardToken}}
+            <div class="small">
+              <div>
+                Kosten:
+                <span class="badge badge-small badge-warning">
+                  max. {{product.feesInPercentMax}} % Kaufkosten (beim Anbieter)
+                </span>
+                <span class="badge badge-small badge-warning">
+                  Netzwerkkosten (bei Übertrag)
+                  <i class="fa fa-question-circle" (click)="showToolTip2 = true">
+                  </i>
+                </span>
+                <span *ngIf="offer.latestOffer.slippageFee" class="badge badge-small badge-info">
+                  mögliche {{offer.latestOffer.slippageFee * 10}} % Slippage (beim Pool)
+                  <i class="fa fa-question-circle" (click)="showToolTip1 = true">
+                  </i>
+                </span>
+              </div>
+              <div>
+                <span *ngIf="offer.latestOffer.duration">
+                  Laufzeit: {{offer.latestOffer.duration}} Tage
+                </span>
+                <span *ngIf="offer.latestOffer.endDate">
+                  (Ende: {{offer.latestOffer.endDate | date:'dd.MM.YY'}})
+                </span>
+              </div>
+              <div>
+                <span *ngIf="offer.latestOffer.rewardToken">
+                  Reward-Token: {{offer.latestOffer.rewardToken}}
+                </span>
+<!--                <span *ngIf="offer.latestOffer.rewardTokenRatio">-->
+<!--                (Ratio: {{offer.latestOffer.rewardTokenRatio}} : 1)-->
+<!--              </span>-->
+              </div>
+              <div>
+              <span *ngIf="offer.latestOffer.updated">
+               (Stand: {{offer.latestOffer.updated | date:'dd.MM.YYYY'}})
               </span>
-              <span *ngIf="offers[0].latestOffer.rewardTokenRatio">
-                (Ratio: {{offers[0].latestOffer.rewardTokenRatio}} : 1)
-              </span>
+              </div>
             </div>
-            <div>
-              <span *ngIf="offers[0].latestOffer.updated">
-               (Stand: {{offers[0].latestOffer.updated | date:'dd.MM.YYYY'}})
-              </span>
-            </div>
-          </div>
+          </ng-container>
           
         </div>
       </div>
     </div>
+  
+    <button class="btn btn-link float-right" (click)="collapse = !collapse">
+      <span *ngIf="!collapse">Mehr zum Produkt <i class="fa fa-arrow-circle-down"></i></span>
+      <span *ngIf="collapse">Weniger <i class="fa fa-arrow-circle-up"></i></span>
+    </button>
   </div>
   <div class="collapse {{collapse ? 'show' : ''}}" aria-labelledby="headingOne" data-parent="#accordion">
     <div class="card-body">
@@ -109,3 +132,50 @@
   Dieses Produkt konnte leider nicht gefunden werden.
 </ng-template>
 
+<div class="modal" *ngIf="showToolTip1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Slippage</h5>
+        <button type="button" class="close" (click)="showToolTip1 = !showToolTip1">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        "Slippage ein Begriff, der sich auf die Differenz zwischen dem erwarteten Preis
+        eines Geschäfts und dem tatsächlich erzielten Preis bezieht, zu dem das Geschäft
+        ausgeführt wird."
+        Quelle:
+        <a href="https://www.avatrade.de/education/trading-for-beginners/what-is-slippage">
+          https://www.avatrade.de/education/trading-for-beginners/what-is-slippage
+        </a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+        (click)="showToolTip1 = !showToolTip1">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" *ngIf="showToolTip2">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Netzwerkkosten</h5>
+        <button type="button" class="close" (click)="showToolTip2 = !showToolTip2">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          Netzwerkkosten fallen an, wenn Coins bzw. Kryptowährungen von einer Adresse
+          an eine andere Adresse im Netzwerk bzw. in der Blockchain übertragen werden.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                (click)="showToolTip2 = !showToolTip2">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
