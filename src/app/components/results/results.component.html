@@ -1,7 +1,8 @@
 <div>
   <div class="mb-4">
     <i class="fa fa-line-chart"></i>
-    &nbsp; Für dich kommen folgende Strategie(n) in Frage:
+    &nbsp; Für dich kommen folgende Strategie(n) in Frage
+    <span class="small">(Geordnet nach Risiko)</span> :
   </div>
   
   <div class="p-2">
@@ -18,20 +19,29 @@
 </div>
 <div class="mb-4">
   <i class="fa fa-shopping-bag"></i>
-  &nbsp; Dazu haben wir folgende Produkte gefunden:
+  &nbsp; Dazu haben wir folgende Produkte und Angebote gefunden:
 </div>
 <ng-container *ngIf="(providerProducts$|async)?.length === 0">
   L O A D I N G . . .
 </ng-container>
+
+  TODO : SOOOOORT !!
+
 <ng-container *ngFor="let provider of providerProducts$ | async">
+  
   <div id="accordion">
     <ng-container *ngFor="let product of provider.products">
-<!--    && (providerProduct.products)?.length == 1-->
-<!--    && providerProduct.products[0].offers-->
+  
+<!--    <app-provider-product [provider]="provider" [product]="product"></app-provider-product>-->
+  
       <ng-container *ngIf="(product.offers | async) as offers">
-<!--      <app-provider-product *ngIf="offers.length > 0" [providerProduct]="providerProduct"></app-provider-product>-->
-        <app-provider-product *ngIf="offers.length > 0" [provider]="provider" [product]="product"></app-provider-product>
+        <app-provider-product
+        *ngIf="foundStrategyIds.indexOf(product.belongs_to_strategy_id) > -1 &&
+        (offers.length > 0 || product.name.toLowerCase().indexOf('trading'))> -1"
+        [provider]="provider" [product]="product"></app-provider-product>
       </ng-container>
+    
     </ng-container>
   </div>
 </ng-container>
+

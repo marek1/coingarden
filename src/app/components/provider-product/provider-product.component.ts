@@ -11,7 +11,8 @@ import { Observable } from 'rxjs';
 })
 export class ProviderProductComponent implements OnInit {
   collapse = false;
-  @Input() provider: Provider = {
+
+  private _provider: Provider = {
     id: '',
     name: '',
     provider_type: '',
@@ -20,9 +21,14 @@ export class ProviderProductComponent implements OnInit {
     url: '',
     logo_url: '',
     country: '',
-    affiliate_id: ''
+    affiliate_id: '',
+    costsOfWithdrawalOfAssets: 0,
+    costsOfDepositing: 0,
+    rewardForSignup: 0,
+    rewardCondition: ''
   };
-  @Input() product: Product = {
+
+  private _product: Product = {
     belongs_to_strategy_id: 0,
     de: '',
     name: '',
@@ -33,8 +39,29 @@ export class ProviderProductComponent implements OnInit {
       video: '',
       blog: ''
     },
+    feesInPercentMin: 0,
+    feesInPercentMax: 0,
     offers: new Observable()
+  };
+
+  @Input() set provider(value: Provider) {
+    this._provider = value;
   }
+
+  @Input() set product(value: Product) {
+    this._product = value;
+  }
+
+  get provider(): Provider {
+    // other logic
+    return this._provider;
+  }
+
+  get product(): Product {
+    // other logic
+    return this._product;
+  }
+
   constructor() { }
 
   ngOnInit(): void {

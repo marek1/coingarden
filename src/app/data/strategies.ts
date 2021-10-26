@@ -1,6 +1,7 @@
 import { Risks } from './risks';
+import { Strategy } from '../interfaces/strategy';
 
-export const Strategies = [
+export const Strategies: Strategy[] = [
   {
     id: 0,
     name: 'HODL',

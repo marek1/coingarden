@@ -8,8 +8,8 @@ export interface Offer {
   duration: number;
   startDate: Date;
   endDate: Date;
-  costsOfParticipation: number;
   url: string;
   rewardToken: string;
   rewardTokenRatio: number;
+  updated: string;
 }

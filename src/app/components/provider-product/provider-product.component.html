@@ -2,31 +2,39 @@
   <div class="card-header">
     <h5 class="mb-4 overflow-auto">
       {{product.de}} von {{provider.name}}
+  
+      <div class="small" *ngIf="provider.rewardForSignup">
+        <span class="badge badge-primary">
+          {{provider.rewardForSignup}} EURO
+        </span>
+        <span *ngIf="provider.rewardCondition">
+          ("{{provider.rewardCondition}}")
+        </span>
+      </div>
       <button class="btn btn-link float-right" (click)="collapse = !collapse">
-        <span *ngIf="!collapse">Mehr Info <i class="fa fa-arrow-circle-down"></i></span>
-        <span *ngIf="collapse">Weniger Info <i class="fa fa-arrow-circle-up"></i></span>
+        <span *ngIf="!collapse">Mehr zum Produkt <i class="fa fa-arrow-circle-down"></i></span>
+        <span *ngIf="collapse">Weniger <i class="fa fa-arrow-circle-up"></i></span>
       </button>
     </h5>
     <div>
-      <div *ngIf="product.name === 'Hardware Wallet'">
-        <b><i class="fa fa-exclamation-triangle"></i> Hohe Sicherheit!</b>
+      <div *ngIf="product.name.indexOf('Wallet') > -1">
+        <b>0 % Zinsen, aber hohe Sicherheit <i class="fa fa-exclamation-triangle"></i> </b>
       </div>
       <div *ngIf="(product.offers|async) as offers">
         <div class="alert alert-primary" *ngIf="offers.length > 0
         && offers[0].latestOffer
         && offers[0].latestOffer.avgAnnualInterestRate > 0">
-          Aktuelle Angebote :
+          Aktuelles Angebot :
           <div class="font-weight-bold" *ngIf="offers[0].latestOffer.avgAnnualInterestRate > 0">
             <span *ngIf="provider.name.toString().toLowerCase() === 'nexo'">
               bis zu
             </span>
-            {{offers[0].latestOffer.avgAnnualInterestRate * 100 | number}} %
+            {{offers[0].latestOffer.avgAnnualInterestRate * 100 | number}} % Zinsen
             <span *ngIf="offers[0].latestOffer.url">
               &nbsp;<a href="{{offers[0].latestOffer.url}}"><i class="fa fa-arrow-circle-o-right"></i> Direkt zum Angebot</a>
             </span>
           </div>
           <div class="small">
-            Details:
             <div>
               <span *ngIf="offers[0].latestOffer.duration">
                 Laufzeit: {{offers[0].latestOffer.duration}} Tage
@@ -38,6 +46,14 @@
             <div>
               <span *ngIf="offers[0].latestOffer.rewardToken">
                 Reward-Token: {{offers[0].latestOffer.rewardToken}}
+              </span>
+              <span *ngIf="offers[0].latestOffer.rewardTokenRatio">
+                (Ratio: {{offers[0].latestOffer.rewardTokenRatio}} : 1)
+              </span>
+            </div>
+            <div>
+              <span *ngIf="offers[0].latestOffer.updated">
+               (Stand: {{offers[0].latestOffer.updated | date:'dd.MM.YYYY'}})
               </span>
             </div>
           </div>

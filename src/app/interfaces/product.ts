@@ -12,5 +12,7 @@ export interface Product {
     video: string;
     blog: string;
   };
-  offers: Observable<LatestOffer[]>;
+  feesInPercentMin: number;
+  feesInPercentMax: number;
+  offers?: Observable<LatestOffer[]>;
 }
