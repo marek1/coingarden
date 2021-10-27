@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ChartsModule } from 'ng2-charts';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
@@ -30,7 +29,6 @@ import { ProviderProductComponent } from './components/provider-product/provider
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ChartsModule,
     ReactiveFormsModule,
     RouterModule,
     NgxSliderModule
