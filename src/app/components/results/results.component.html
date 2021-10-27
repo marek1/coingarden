@@ -16,43 +16,34 @@
     </div>
   </div>
   
-  <div id="accordion">
-    <div class="card" *ngFor="let foundStrategy of foundStrategies">
-      <div class="card-header">
-        <a class="btn btn-link" [routerLink]="['/strategie', foundStrategy.int_url]">
-          {{foundStrategy.de}}
-        </a>
-        <div class="card-body">
-        ... TODO : Results should go here !!!
+  <div *ngFor="let foundStrategy of foundStrategies">
+    <h3>
+      <a class="btn btn-link font-large" [routerLink]="['/strategie', foundStrategy.int_url]">
+        {{foundStrategy.de}}
+      </a>
+    </h3>
+    <div class="card-body">
+  
+  
+      <ng-container *ngIf="(providerProducts$|async)?.length === 0">
+        L O A D I N G . . .
+      </ng-container>
+  
+      <ng-container *ngFor="let provider of providerProducts$ | async">
+
+        <div id="accordion">
+          <ng-container *ngFor="let product of provider.products">
+            <ng-container *ngIf="(product.offers | async) as offers">
+              <app-provider-product
+              *ngIf="product.belongs_to_strategy_id === foundStrategy.id &&
+              (offers.length > 0 || product.name.toLowerCase().indexOf('trading'))> -1"
+              [provider]="provider" [product]="product"></app-provider-product>
+            </ng-container>
+          </ng-container>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
   
 </div>
-<div class="mb-4">
-  <i class="fa fa-shopping-bag"></i>
-  &nbsp; Dazu haben wir folgende Produkte und Angebote gefunden:
-</div>
-<ng-container *ngIf="(providerProducts$|async)?.length === 0">
-  L O A D I N G . . .
-</ng-container>
-
-<ng-container *ngFor="let provider of providerProducts$ | async">
-  
-  <div id="accordion">
-    <ng-container *ngFor="let product of provider.products">
-  
-<!--    <app-provider-product [provider]="provider" [product]="product"></app-provider-product>-->
-  
-      <ng-container *ngIf="(product.offers | async) as offers">
-        <app-provider-product
-        *ngIf="foundStrategyIds.indexOf(product.belongs_to_strategy_id) > -1 &&
-        (offers.length > 0 || product.name.toLowerCase().indexOf('trading'))> -1"
-        [provider]="provider" [product]="product"></app-provider-product>
-      </ng-container>
-    
-    </ng-container>
-  </div>
-</ng-container>
 
