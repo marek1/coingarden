@@ -3,6 +3,7 @@ import { LatestOffer } from '../../interfaces/latestOffer';
 import { Product } from '../../interfaces/product';
 import { Provider } from '../../interfaces/provider';
 import { Observable } from 'rxjs';
+import { EtherscanService } from '../../services/etherscan.service';
 
 @Component({
   selector: 'app-provider-product',
@@ -13,6 +14,7 @@ export class ProviderProductComponent implements OnInit {
   collapse = false;
   showToolTip1 = false;
   showToolTip2 = false;
+  networkFee = 0; // to be calculated
 
   calculateYield(offer: LatestOffer) {
     console.log('offer : ', offer);
@@ -22,6 +24,12 @@ export class ProviderProductComponent implements OnInit {
     let x  = (parseFloat(this.amountOfCoins) * offer.latestOffer.avgAnnualInterestRate)
     // reduce max. fees:
     x = x - (x * this.product.feesInPercentMax);
+    // if it is ETH, reduce network fees (=== etherscanService.gasfee)
+    if ( this.coin.toString().toLowerCase() === 'eth' ) {
+      this.etherscanService.gasfee.subscribe((x) => {
+        this.networkFee = x * 21000 * 0.000000001;
+      })
+    }
     return x;
   }
 
@@ -97,7 +105,7 @@ export class ProviderProductComponent implements OnInit {
     return this._coin;
   }
 
-  constructor() { }
+  constructor(private etherscanService: EtherscanService) { }
 
   ngOnInit(): void {
   }

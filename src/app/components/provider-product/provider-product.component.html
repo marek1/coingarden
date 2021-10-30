@@ -29,7 +29,7 @@
                 Pool {{offer.latestOffer.name}} :
               </span>
               <span>
-                {{offer.latestOffer.avgAnnualInterestRate * 100 | number}} % Zinsen
+                {{offer.latestOffer.avgAnnualInterestRate * 100 | number:'1.2-8':'de'}} % Zinsen
               </span>
               <span *ngIf="offer.latestOffer.url">
                 &nbsp;<a href="{{offer.latestOffer.url}}"><i class="fa fa-arrow-circle-o-right"></i> Direkt zum Angebot</a>
@@ -39,7 +39,7 @@
               <div>
                 Kosten:
                 <span class="badge badge-small badge-warning">
-                  max. {{product.feesInPercentMax * 100 | number}} %
+                  max. {{product.feesInPercentMax * 100 | number:'1.2-8':'de'}} %
                   {{product.name.toString().toLowerCase() === 'staking' ? 'Gebühren' : 'Kaufkosten'}}
                 </span>
                 <span class="badge badge-small badge-warning">
@@ -72,8 +72,19 @@
                 </span>
               </div>
               <div class="overflow-auto font-weight-bold" *ngIf="amountOfCoins">
-                <div class="float-right">
-                  Berechnete jährliche Rendite: {{calculateYield(offer)}} {{coin.toString().toUpperCase()}}
+                <div class="float-right text-right">
+                  <div class="font-text-underline">
+                    Berechnete jährliche Rendite (abzgl. Gebühren):
+                  </div>
+                  <div class="font-size-lg">
+                    {{calculateYield(offer) | number:'1.2-8':'de'}} {{coin.toString().toUpperCase()}}
+                  </div>
+                  <div class="small" *ngIf="networkFee > 0">
+                    Im Falle eines Übertrags fallen Netzwerkkosten von ca. {{networkFee | number:'1.2-8':'de'}} {{coin.toString().toUpperCase()}} an,
+                  </div>
+                  <div class="small" *ngIf="networkFee">
+                    so daß die Rendite nur noch bei ca. {{ (calculateYield(offer) - networkFee) | number:'1.2-8':'de'}} {{coin.toString().toUpperCase()}} liegt.
+                  </div>
                 </div>
               </div>
             </div>
