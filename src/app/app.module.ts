@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -31,7 +31,8 @@ import { ProviderProductComponent } from './components/provider-product/provider
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule,
-    NgxSliderModule
+    NgxSliderModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

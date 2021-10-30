@@ -13,6 +13,18 @@ export class ProviderProductComponent implements OnInit {
   collapse = false;
   showToolTip1 = false;
   showToolTip2 = false;
+
+  calculateYield(offer: LatestOffer) {
+    console.log('offer : ', offer);
+    console.log('amountOfCoins : ', this.amountOfCoins);
+    // make calculation:
+    // amountOfCoins * apr %
+    let x  = (parseFloat(this.amountOfCoins) * offer.latestOffer.avgAnnualInterestRate)
+    // reduce max. fees:
+    x = x - (x * this.product.feesInPercentMax);
+    return x;
+  }
+
   private _provider: Provider = {
     id: '',
     name: '',
@@ -45,12 +57,24 @@ export class ProviderProductComponent implements OnInit {
     offers: new Observable()
   };
 
+  private _amountOfCoins: string = '';
+
+  private _coin: string = '';
+
   @Input() set provider(value: Provider) {
     this._provider = value;
   }
 
   @Input() set product(value: Product) {
     this._product = value;
+  }
+
+  @Input() set amountOfCoins(value: string) {
+    this._amountOfCoins = value;
+  }
+
+  @Input() set coin (value: string) {
+    this._coin = value;
   }
 
   get provider(): Provider {
@@ -61,6 +85,16 @@ export class ProviderProductComponent implements OnInit {
   get product(): Product {
     // other logic
     return this._product;
+  }
+
+  get amountOfCoins(): string {
+    // other logic
+    return this._amountOfCoins;
+  }
+
+  get coin(): string {
+    // other logic
+    return this._coin;
   }
 
   constructor() { }

@@ -35,11 +35,12 @@
                 &nbsp;<a href="{{offer.latestOffer.url}}"><i class="fa fa-arrow-circle-o-right"></i> Direkt zum Angebot</a>
               </span>
             </div>
-            <div class="small">
+            <div class="small  mb-4">
               <div>
                 Kosten:
                 <span class="badge badge-small badge-warning">
-                  max. {{product.feesInPercentMax}} % Kaufkosten (beim Anbieter)
+                  max. {{product.feesInPercentMax * 100 | number}} %
+                  {{product.name.toString().toLowerCase() === 'staking' ? 'Gebühren' : 'Kaufkosten'}}
                 </span>
                 <span class="badge badge-small badge-warning">
                   Netzwerkkosten (bei Übertrag)
@@ -64,14 +65,16 @@
                 <span *ngIf="offer.latestOffer.rewardToken">
                   Reward-Token: {{offer.latestOffer.rewardToken}}
                 </span>
-<!--                <span *ngIf="offer.latestOffer.rewardTokenRatio">-->
-<!--                (Ratio: {{offer.latestOffer.rewardTokenRatio}} : 1)-->
-<!--              </span>-->
               </div>
               <div>
-              <span *ngIf="offer.latestOffer.updated">
-               (Stand: {{offer.latestOffer.updated | date:'dd.MM.YYYY'}})
-              </span>
+                <span *ngIf="offer.latestOffer.updated">
+                 (Stand: {{offer.latestOffer.updated | date:'dd.MM.YYYY'}})
+                </span>
+              </div>
+              <div class="overflow-auto font-weight-bold" *ngIf="amountOfCoins">
+                <div class="float-right">
+                  Berechnete jährliche Rendite: {{calculateYield(offer)}} {{coin.toString().toUpperCase()}}
+                </div>
               </div>
             </div>
           </ng-container>

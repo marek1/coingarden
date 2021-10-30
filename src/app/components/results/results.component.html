@@ -1,12 +1,21 @@
 <div>
-  <div class="mb-4 overflow-auto">
+  
+  
+  <div class="overflow-auto">
+  
+  </div>
+  
+  <div class="overflow-auto">
     <div class="float-left max-width-50">
-      <i class="fa fa-line-chart"></i>
-      &nbsp; Für dich kommen folgende Strategie(n) in Frage
+      Berechnungsgrundlage:
+      <input type="text" class="form-control"
+             [(ngModel)]="amountOfCoins"
+             (keyup)="setAmount()"
+             placeholder="Menge von {{coin.toString().toUpperCase()}}"/>
     </div>
     <div class="float-right max-width-50">
       Sortierung:
-      <select (change)="changeSort($event)">
+      <select class="form-control" (change)="changeSort($event)">
         <option *ngFor="let op of sortOptions"
                 [value]="op.id"
                 [selected]="op.id === selectedSortOption.id">
@@ -16,13 +25,18 @@
     </div>
   </div>
   
+  <div class="alert alert-success mt-4" *ngIf="showCalculationResult">
+    Die zu erwartende Rendite wurde für jedes einzelne Angebot berechnet. Das Resultat
+    befindet sich direkt jeweils beim Angebot.
+  </div>
+  
   <div *ngFor="let foundStrategy of foundStrategies">
     <h3>
-      <a class="btn btn-link font-large" [routerLink]="['/strategie', foundStrategy.int_url]">
+      <a class="btn btn-link font-large p-0" [routerLink]="['/strategie', foundStrategy.int_url]">
         {{foundStrategy.de}}
       </a>
     </h3>
-    <div class="card-body">
+    <div class="card-body p-0">
       
       <ng-container *ngIf="(providerProducts$|async)?.length === 0">
         L O A D I N G . . .
@@ -36,7 +50,10 @@
               <app-provider-product
               *ngIf="product.belongs_to_strategy_id === foundStrategy.id &&
               (offers.length > 0 || product.name.toLowerCase().indexOf('trading'))> -1"
-              [provider]="provider" [product]="product"></app-provider-product>
+              [provider]="provider"
+              [product]="product"
+              [amountOfCoins]="amountOfCoins"
+              [coin]="coin"></app-provider-product>
             </ng-container>
           </ng-container>
         </div>

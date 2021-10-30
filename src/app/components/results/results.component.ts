@@ -6,6 +6,7 @@ import { Provider } from '../../interfaces/provider';
 import { ProviderService } from '../../services/provider.service';
 import { OffersService } from '../../services/offers.service';
 import { Strategy } from '../../interfaces/strategy';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-results',
@@ -24,6 +25,8 @@ export class ResultsComponent implements OnInit {
     }
   ];
   selectedSortOption = this.sortOptions[0];
+  amountOfCoins: string = '';
+  showCalculationResult = false;
   private _coin: string = '';
   private _risk: number = -1;
 
@@ -99,6 +102,15 @@ export class ResultsComponent implements OnInit {
       strategy => this.foundStrategyIds.indexOf(strategy.id) > -1
     )
     this.sortStrategies();
+  }
+
+  setAmount() {
+    console.log('amountOfCoins : ', this.amountOfCoins);
+    // calculate!
+    this.showCalculationResult = true;
+    setTimeout(() => {
+        this.showCalculationResult = false;
+    }, 2000);
   }
 
   changeSort(ev: any) {
