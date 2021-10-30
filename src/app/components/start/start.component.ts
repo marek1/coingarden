@@ -48,10 +48,15 @@ export class StartComponent implements OnInit {
         }
       }
       if (params.get('id1')) {
-        let foundRisk = this.risks.filter(x => params.get('id1')?.toString() === x.riskId.toString());
+        // find by url
+        let foundRisk = this.risks.filter(x => params.get('id1')?.toString() === x.url.toString());
         console.log('this.selectedRisk : ', this.selectedRisk);
         if (foundRisk.length > 0 && foundRisk[0].riskId) {
           this.selectedRisk = foundRisk[0].riskId;
+          this.currentStep = 3;
+        } else {
+          // Fallback : get all !
+          this.selectedRisk = Risks[Risks.length - 1].riskId;
           this.currentStep = 3;
         }
       }
@@ -79,6 +84,10 @@ export class StartComponent implements OnInit {
   }
 
   goToStep(x: number) {
+    console.log('go to step : ', x);
+    if (!this.selectedCoin && x > 1) {
+      return;
+    }
     this.currentStep = x;
 
     if (x === 3 && this.selectedRisk === -1) {
@@ -89,7 +98,7 @@ export class StartComponent implements OnInit {
 
   setUrl () {
     let url = this.router.createUrlTree(['start/' + this.selectedCoin + '/' +
-    (this.selectedRisk > -1 ? this.selectedRisk : '')]).toString();
+    (this.selectedRisk > -1 ? Risks.find(x => this.selectedRisk === x.riskId)?.url : '')]).toString();
     // Change the URL without navigate:
     this.location.go(url);
   }
