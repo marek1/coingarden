@@ -16,6 +16,8 @@ import { ProviderProductComponent } from './components/provider-product/provider
 
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
+import { ImpressumComponent } from './components/impressum/impressum.component';
+import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
 
 registerLocaleData(localeDe);
 
@@ -28,7 +30,9 @@ registerLocaleData(localeDe);
     SliderComponent,
     ResultsComponent,
     StrategieComponent,
-    ProviderProductComponent
+    ProviderProductComponent,
+    ImpressumComponent,
+    DatenschutzComponent
   ],
   imports: [
     BrowserModule,

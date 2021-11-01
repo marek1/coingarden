@@ -91,8 +91,11 @@ export class ProviderProductComponent implements OnInit {
   }
 
   get product(): Product {
+
     // other logic
+
     return this._product;
+
   }
 
   get amountOfCoins(): string {

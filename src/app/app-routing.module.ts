@@ -4,6 +4,8 @@ import { StartComponent } from './components/start/start.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { StrategieComponent } from './components/strategie/strategie.component';
+import { ImpressumComponent } from './components/impressum/impressum.component';
+import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
 
 const routes: Routes = [
   {
@@ -13,6 +15,14 @@ const routes: Routes = [
   {
     path: 'start/:id',
     component: StartComponent
+  },
+  {
+    path: 'impressum',
+    component: ImpressumComponent
+  },
+  {
+    path: 'datenschutz',
+    component: DatenschutzComponent
   },
   {
     path: 'start/:id/:id1',

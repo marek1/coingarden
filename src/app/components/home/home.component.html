@@ -6,17 +6,68 @@
     <h1 class="h3 mb-0 text-gray-800">Verdienst du schon mit deinen Coins?</h1>
   </div>
   
-  <!-- Content Row -->
-  <div class="row">
-    
-    <div class="col-12 text-center">
-      HODLen ist gut. Aber HODLen und dabei Erträge generien ist noch besser.
-      Bei Coingarden versuchen wir unter den vielen Angeboten die zu deinem
-      Risikoappetit passenden Produkte und Angebote zu finden.
+  <h5 class="text-center mb-4 mt-4">
+    Neueste Angebote
+  </h5>
+  
+  <div class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner text-center">
+      <div class="carousel-item {{i === currentOffer ? 'active' : ''}}"
+           *ngFor="let offer of offers$ | async; let i = index">
+        <div>
+          {{offer.latestOffer.provider}}
+        </div>
+        <div *ngIf="offer.latestOffer.avgAnnualInterestRate > 0">
+          <ng-template #showCoinInfo>
+            <span>
+              {{offer.latestOffer.coins}}
+            </span>
+          </ng-template>
+          <span *ngIf="offer.latestOffer.slippageFee; else showCoinInfo">
+            Pool {{offer.latestOffer.name}} :
+          </span>
+          <span *ngIf="offer.latestOffer.provider.toString().toLowerCase() === 'nexo'">
+            bis zu
+          </span>
+          <span>
+            {{offer.latestOffer.avgAnnualInterestRate * 100 | number:'1.2-8':'de'}} % Zinsen
+          </span>
+        </div>
+        <div>
+          <span *ngIf="offer.latestOffer.url">
+            &nbsp;<a href="{{offer.latestOffer.url}}"><i class="fa fa-arrow-circle-o-right"></i> Direkt zum Angebot</a>
+          </span>
+        </div>
+      </div>
     </div>
+  
+    <a class="carousel-control-prev" (click)="setCurrentOffer(-1)">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" (click)="setCurrentOffer(1)">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  
+  <h5 class="text-center mb-4 mt-4">
+    Unsere Philosophie
+  </h5>
+  
+  <!-- Content Row -->
+  <div class="row mt-4">
+    
+    
     
     <div class="hero">
   
+      <div class="text-center">
+        HODLen ist gut. Aber HODLen und dabei Erträge generien ist noch besser.
+        Bei Coingarden versuchen wir unter den vielen Angeboten die zu deinem
+        Risikoappetit passenden Produkte und Angebote zu finden.
+      </div>
+      
       <div class="usps">
         Bei CoinGarden kannst du
         <h5 class="mb-2 mt-2">
