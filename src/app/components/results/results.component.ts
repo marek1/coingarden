@@ -25,7 +25,8 @@ export class ResultsComponent implements OnInit {
     }
   ];
   selectedSortOption = this.sortOptions[0];
-  amountOfCoins: string = '';
+  amountOfCoins: string = '1';
+  showInput = false;
   showCalculationResult = false;
   private _coin: string = '';
   private _risk: number = -1;
@@ -86,7 +87,7 @@ export class ResultsComponent implements OnInit {
           })
         )
       );
-    this.providerProducts$.subscribe(y => console.log('yyyyyyyy : ', y));
+    // this.providerProducts$.subscribe(y => console.log('yyyyyyyy : ', y));
 
   }
 
@@ -105,7 +106,7 @@ export class ResultsComponent implements OnInit {
   }
 
   setAmount() {
-    console.log('amountOfCoins : ', this.amountOfCoins);
+    // console.log('amountOfCoins : ', this.amountOfCoins);
     // calculate!
     this.showCalculationResult = true;
     setTimeout(() => {
@@ -114,12 +115,12 @@ export class ResultsComponent implements OnInit {
   }
 
   changeSort(ev: any) {
-    console.log('sort ;: ', this.selectedSortOption)
-    console.log('sort ;: ', ev.target.value);
+    // console.log('sort ;: ', this.selectedSortOption)
+    // console.log('sort ;: ', ev.target.value);
     if (ev.target.value) {
       this.selectedSortOption = this.sortOptions.find(x => x.id.toString() === ev.target.value) || this.sortOptions[0];
     }
-    console.log('sort ;: ', this.selectedSortOption)
+    // console.log('sort ;: ', this.selectedSortOption)
     this.sortStrategies();
   }
 

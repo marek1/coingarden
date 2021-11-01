@@ -8,10 +8,15 @@
   <div class="overflow-auto">
     <div class="float-left max-width-50">
       Berechnungsgrundlage:
-      <input type="text" class="form-control"
-             [(ngModel)]="amountOfCoins"
-             (keyup)="setAmount()"
-             placeholder="Menge von {{coin.toString().toUpperCase()}}"/>
+      <span class="btn-link" *ngIf="!showInput; else amountInput" (click)="showInput = true">
+        {{amountOfCoins}} {{coin.toString().toUpperCase()}} <i class="fa fa-pencil"></i>
+      </span>
+      <ng-template #amountInput>
+        <input type="text" class="form-control"
+               [(ngModel)]="amountOfCoins"
+               (keyup)="setAmount()"
+               placeholder="Menge von {{coin.toString().toUpperCase()}}"/>
+      </ng-template>
     </div>
     <div class="float-right max-width-50">
       Sortierung:

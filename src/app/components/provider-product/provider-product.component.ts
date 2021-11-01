@@ -17,11 +17,11 @@ export class ProviderProductComponent implements OnInit {
   networkFee = 0; // to be calculated
 
   calculateYield(offer: LatestOffer) {
-    console.log('offer : ', offer);
-    console.log('amountOfCoins : ', this.amountOfCoins);
+    // console.log('offer : ', offer);
+    // console.log('amountOfCoins : ', this.amountOfCoins);
     // make calculation:
     // amountOfCoins * apr %
-    let x  = (parseFloat(this.amountOfCoins) * offer.latestOffer.avgAnnualInterestRate)
+    let x  = (parseFloat(this.amountOfCoins.replace(',', '.')) * offer.latestOffer.avgAnnualInterestRate)
     // reduce max. fees:
     x = x - (x * this.product.feesInPercentMax);
     // if it is ETH, reduce network fees (=== etherscanService.gasfee)

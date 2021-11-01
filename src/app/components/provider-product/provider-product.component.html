@@ -74,7 +74,7 @@
               <div class="overflow-auto font-weight-bold" *ngIf="amountOfCoins">
                 <div class="float-right text-right">
                   <div class="font-text-underline">
-                    Berechnete jährliche Rendite (abzgl. Gebühren):
+                    Berechnete jährliche Rendite für {{amountOfCoins}} {{coin.toString().toUpperCase()}} (abzgl. Gebühren):
                   </div>
                   <div class="font-size-lg">
                     {{calculateYield(offer) | number:'1.2-8':'de'}} {{coin.toString().toUpperCase()}}
