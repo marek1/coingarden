@@ -4,10 +4,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { trigger, transition, animate, style } from '@angular/animations'
 import { CoinService } from '../../services/coin.service';
 import { Risks } from '../../data/risks';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-start',
@@ -15,7 +15,7 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./start.component.scss']
 })
 export class StartComponent implements OnInit {
-  // public coins$: Observable<string[]>;
+  title = 'Strategien für deine';
   public selectedCoins$: Observable<string[]> = new Observable();
   public coinForm: FormGroup;
   public currentStep = 1;
@@ -27,30 +27,35 @@ export class StartComponent implements OnInit {
   constructor(public coinService: CoinService,
               public router: Router,
               public route: ActivatedRoute,
-              public location: Location) {
-    // this.coins$ = this.coinService.coins$;
-    // this.coins$.subscribe(x => console.log('yo : ', x));
+              public location: Location,
+              private titleService: Title,
+              private metaTagService: Meta) {
     this.coinForm = new FormGroup({
       selectedCoin: new FormControl(''),
     });
   }
 
   ngOnInit(): void {
-    console.log('init');
+    this.titleService.setTitle(this.title + ' Coins');
+    this.metaTagService.updateTag(
+      { name: 'description', content: 'Siehe Möglichkeiten Rendite mit deinen Coins zu erzielen.' }
+    );
     this.selectedCoins$ = this.coinService.coins;
-    // this.selectedCoins$.subscribe(x => console.log(x));
     // connect
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.get('id')) {
         this.selectedCoin = params.get('id')?.toString() || '';
         if (this.selectedCoin) {
           this.currentStep = 2;
+          this.titleService.setTitle(this.title + ' ' + this.selectedCoin);
+          this.metaTagService.updateTag(
+            { name: 'description', content: 'Siehe Möglichkeiten Rendite mit deinen ' + this.selectedCoin + ' zu erzielen.' }
+          );
         }
       }
       if (params.get('id1')) {
         // find by url
         let foundRisk = this.risks.filter(x => params.get('id1')?.toString() === x.url.toString());
-        console.log('this.selectedRisk : ', this.selectedRisk);
         if (foundRisk.length > 0 && foundRisk[0].riskId) {
           this.selectedRisk = foundRisk[0].riskId;
           this.currentStep = 3;

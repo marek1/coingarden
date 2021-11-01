@@ -3,6 +3,8 @@ import { OffersService } from '../../services/offers.service';
 import { LatestOffer } from '../../interfaces/latestOffer';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Meta } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,7 +12,7 @@ import { tap } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
 
-  offers$: Observable<LatestOffer[]>;
+  offers$: Observable<LatestOffer[]> = new Observable();
   currentOffer: number = 0;
   constructor(private offersService: OffersService) {
     this.offers$ = this.offersService.offers
@@ -22,7 +24,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   setCurrentOffer(by: number) {

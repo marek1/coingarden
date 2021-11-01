@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CoinService } from './services/coin.service';
 import { ProviderService } from './services/provider.service';
-import { Subscription } from 'rxjs';
 import { OffersService } from './services/offers.service';
 import { EtherscanService } from './services/etherscan.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +11,28 @@ import { EtherscanService } from './services/etherscan.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'CoinGarden';
+  title = 'Aktuelle Angebote für deine Coins';
   constructor(private coinService: CoinService,
               private offersService: OffersService,
               private providerService: ProviderService,
-              private etherscanService: EtherscanService) {
+              private etherscanService: EtherscanService,
+              private metaTagService: Meta,
+              private titleService: Title) {
   }
 
   ngOnInit() {
+    this.titleService.setTitle(this.title);
     this.coinService.getAll();
     this.offersService.getAll();
     this.providerService.getAll();
     this.etherscanService.getGasFee();
+    this.metaTagService.addTags([
+      { name: 'keywords', content: 'Staking, Zinsen, BTC, ETH, Kryptowährungen, Coins, Sparen, Pools, Liquidity Mining' },
+      { name: 'robots', content: 'index, follow' },
+      { name: 'author', content: 'Marek Sonnabend' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { charset: 'UTF-8' }
+    ]);
   }
 
   ngOnDestroy() {
