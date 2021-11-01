@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OffersService } from '../../services/offers.service';
 import { LatestOffer } from '../../interfaces/latestOffer';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { Meta } from '@angular/platform-browser';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -17,9 +16,14 @@ export class HomeComponent implements OnInit {
   constructor(private offersService: OffersService) {
     this.offers$ = this.offersService.offers
     .pipe(
-      tap(results => {
-        results.sort((a, b) => a.id < b.id ? -1 : 1)
-      })
+      map((x: LatestOffer[]) => x
+        .filter(x => {
+          return x.latestOffer.avgAnnualInterestRate > 0 &&
+            (x.latestOffer.coins.indexOf('ETH') > -1 || x.latestOffer.coins.indexOf('BTC') > -1)
+        })
+        .sort(((a, b) => a.latestOffer.updated < b.latestOffer.updated ? -1 : 1))
+        .slice(0, 20)
+      )
     );
   }
 
