@@ -44,7 +44,7 @@ export const Strategies: Strategy[] = [
         'gewissen Zeitraum dann gelocked - sprich man kann in der Zeit nicht auf sie zugreifen. Daher gibt es auch ' +
         'den Begriff : Locked Savings. \n' +
         'Die Sparprodukte sind vergleichbar mit einem Sparbuch. ',
-      image: 'https://stormgain.com/sites/default/files/news/BitcoinSavings.jpg',
+      image: 'BitcoinSavings.jpg',
       video: '',
       blog: ''
     },
@@ -82,6 +82,25 @@ export const Strategies: Strategy[] = [
         'einen Reward-Token.',
       image: 'liquidity_mining.png',
       video: 'https://www.youtube.com/watch?v=qeiXqmh4m18&ab_channel=CryptoExplained',
+      blog: ''
+    },
+    blackListCoins: []
+  },
+  {
+    id: 5,
+    name: 'Lending',
+    riskLevel: Risks.filter(x => x.riskId == 3)[0].riskId,
+    de: 'Leihen',
+    int_url: 'lending',
+    howTo: {
+      text: 'Du kannst deine Kryptowährungen verleihen und bekommst dafür eine Belohnung in Form ' +
+        'von Zinsen. Plattformen wie AAVE oder Curve sind damit groß geworden, daß sie Vermittler ' +
+        'leihender und borgender Person sind. Einen Teil des Spreads geben sie als Belohnung an ' +
+        'Verleiher zurück. Der Zinssatz schwankt mit der Nachfrage. In dem u.g. Video wird ' +
+        'erklärt, wie AAVE funktioniert. Diese Funktionsweise ist stellvertretend für alle ' +
+        'Lending-Plattformen. ',
+      image: 'lending.png',
+      video: 'https://www.youtube.com/watch?v=yggIHxJS-cc&ab_channel=Block-Builders',
       blog: ''
     },
     blackListCoins: []

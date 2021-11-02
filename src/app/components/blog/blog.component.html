@@ -1,0 +1,41 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <ng-container *ngIf="selectedBlog.id; else showAllBlogs">
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-0 text-gray-800">{{selectedBlog.name}}</h1>
+    </div>
+    
+    <div *ngFor="let blogDataItem of selectedBlog.data">
+      <h5 *ngIf="blogDataItem.header">
+        {{blogDataItem.header}}
+      </h5>
+      <p *ngIf="blogDataItem.text && !blogDataItem.blog">
+        {{blogDataItem.text}}
+      </p>
+      <img *ngIf="blogDataItem.image" src="{{blogDataItem.image}}">
+      <p *ngIf="blogDataItem.blog">
+        <i class="fa fa-arrow-circle-right"></i>&nbsp;<a href="{{blogDataItem.blog}}">{{blogDataItem.text}}</a>
+      </p>
+    </div>
+  </ng-container>
+  
+  <ng-template #showAllBlogs>
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Unsere Blogposts</h1>
+    </div>
+  
+    <div>
+      <div class="card-body" *ngFor="let blog of blogPosts">
+        <div class="card-title">
+          <h5>
+            <a [routerLink]="['/blog', blog.url]">{{blog.name}}</a>
+          </h5>
+        </div>
+        <p class="card-text">
+          {{blog.data[0].text}} ... <a [routerLink]="['/blog', blog.url]">mehr</a>
+        </p>
+      </div>
+    </div>
+  </ng-template>
+  
+</div>
