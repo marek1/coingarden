@@ -80,10 +80,8 @@
                     {{calculateYield(offer) | number:'1.2-8':'de'}} {{coin.toString().toUpperCase()}}
                   </div>
                   <div class="small" *ngIf="networkFee > 0">
-                    Im Falle eines Übertrags fallen Netzwerkkosten von ca. {{networkFee | number:'1.2-8':'de'}} {{coin.toString().toUpperCase()}} an,
-                  </div>
-                  <div class="small" *ngIf="networkFee">
-                    so daß die Rendite nur noch bei ca. {{ (calculateYield(offer) - networkFee) | number:'1.2-8':'de'}} {{coin.toString().toUpperCase()}} liegt.
+                    <i class="fa fa-exclamation-triangle"></i> Im Falle eines Übertrags fallen Netzwerkkosten von ca. {{networkFee | number:'1.2-8':'de'}} {{coin.toString().toUpperCase()}} an,
+                    so daß die Rendite nur noch bei ca. {{ (calculateYield(offer) - networkFee) | number:'1.2-8':'de'}} {{coin.toString().toUpperCase()}} liegen würde.
                   </div>
                 </div>
               </div>

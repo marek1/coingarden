@@ -4,6 +4,7 @@ import { Product } from '../../interfaces/product';
 import { Provider } from '../../interfaces/provider';
 import { Observable } from 'rxjs';
 import { EtherscanService } from '../../services/etherscan.service';
+import { BitcoinService } from '../../services/bitcoin.service';
 
 @Component({
   selector: 'app-provider-product',
@@ -30,6 +31,12 @@ export class ProviderProductComponent implements OnInit {
         this.networkFee = x * 21000 * 0.000000001;
       })
     }
+    if ( this.coin.toString().toLowerCase() === 'btc' ) {
+      this.bitcoinService.txfee.subscribe((x) => {
+        this.networkFee = x;
+      })
+    }
+
     return x;
   }
 
@@ -108,7 +115,8 @@ export class ProviderProductComponent implements OnInit {
     return this._coin;
   }
 
-  constructor(private etherscanService: EtherscanService) { }
+  constructor(private etherscanService: EtherscanService,
+              private bitcoinService: BitcoinService) { }
 
   ngOnInit(): void {
   }

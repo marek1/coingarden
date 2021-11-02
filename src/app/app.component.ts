@@ -4,6 +4,7 @@ import { ProviderService } from './services/provider.service';
 import { OffersService } from './services/offers.service';
 import { EtherscanService } from './services/etherscan.service';
 import { Meta, Title } from '@angular/platform-browser';
+import { BitcoinService } from './services/bitcoin.service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
               private offersService: OffersService,
               private providerService: ProviderService,
               private etherscanService: EtherscanService,
+              private bitcoinService: BitcoinService,
               private metaTagService: Meta,
               private titleService: Title) {
   }
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.offersService.getAll();
     this.providerService.getAll();
     this.etherscanService.getGasFee();
+    this.bitcoinService.getTxFee();
     this.metaTagService.addTags([
       { name: 'keywords', content: 'Staking, Zinsen, BTC, ETH, Kryptowährungen, Coins, Sparen, Pools, Liquidity Mining' },
       { name: 'robots', content: 'index, follow' },
