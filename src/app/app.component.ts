@@ -13,6 +13,7 @@ import { BitcoinService } from './services/bitcoin.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'Aktuelle Angebote für deine Coins';
+  providers$ = this.providerService.providers;
   constructor(private coinService: CoinService,
               private offersService: OffersService,
               private providerService: ProviderService,

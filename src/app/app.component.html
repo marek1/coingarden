@@ -38,6 +38,30 @@
   
     <!-- Footer -->
     <footer class="sticky-footer bg-white">
+  
+      <div class="m-4 text-center">
+        <div class="mt-3">
+          <span class="mr-4">
+            Ausgewählte <a [routerLink]="['/anbieter']">Anbieter</a>:
+          </span>
+          <span class="mr-4" *ngFor="let x of providers$|async">
+            <a [routerLink]="['/anbieter', x.id.toString().toLowerCase()]">{{x.name}}</a>
+          </span>
+          
+        </div>
+      
+        <div class="mt-3">
+          
+          <span class="mr-4">
+            Ausgewählte Angebote:
+          </span>
+          <span class="mr-4" *ngFor="let x of providers$|async">
+            <a [routerLink]="['/angebote', x.id.toString().toLowerCase()]">{{x.name}}</a>
+          </span>
+        </div>
+        
+      </div>
+      
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
           <span>Copyright &copy; Marek Sonnabend. Version 0.2.0</span> |

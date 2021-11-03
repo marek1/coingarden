@@ -31,6 +31,9 @@
               <span>
                 {{offer.latestOffer.avgAnnualInterestRate * 100 | number:'1.2-8':'de'}} % Zinsen
               </span>
+              <span>
+                auf {{offer.latestOffer.coins}}
+              </span>
               <span *ngIf="offer.latestOffer.url">
                 &nbsp;<a href="{{offer.latestOffer.url}}"><i class="fa fa-arrow-circle-o-right"></i> Direkt zum Angebot</a>
               </span>

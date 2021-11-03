@@ -8,6 +8,7 @@ import { ImpressumComponent } from './components/impressum/impressum.component';
 import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { ProviderComponent } from './components/provider/provider.component';
+import { OffersComponent } from './components/offers/offers.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,14 @@ const routes: Routes = [
   {
     path: 'anbieter/:id',
     component: ProviderComponent
+  },
+  {
+    path: 'angebote',
+    component: OffersComponent
+  },
+  {
+    path: 'angebote/:id',
+    component: OffersComponent
   },
   {
     path: '',

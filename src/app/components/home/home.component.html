@@ -89,29 +89,4 @@
 
   </div>
   
-  <h5 class="text-center mb-4 mt-4">
-    Links
-  </h5>
-  
-  <!-- Content Row -->
-  <div class="row mt-4">
-    
-    <div class="col-6">
-      <div>
-        Ausgewählte <a [routerLink]="['/anbieter']">Anbieter</a>:
-      </div>
-      <div *ngFor="let x of provider$|async">
-        <a [routerLink]="['/anbieter', x.id.toString().toLowerCase()]">{{x.name}}</a>
-      </div>
-      
-    </div>
-  
-    <div class="col-6">
-      <div>
-        Ausgewählte Angebote:
-      </div>
-    </div>
-    
-  </div>
-  
 </div>

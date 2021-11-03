@@ -20,6 +20,7 @@ import { ImpressumComponent } from './components/impressum/impressum.component';
 import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { ProviderComponent } from './components/provider/provider.component';
+import { OffersComponent } from './components/offers/offers.component';
 
 registerLocaleData(localeDe);
 
@@ -36,7 +37,8 @@ registerLocaleData(localeDe);
     ImpressumComponent,
     DatenschutzComponent,
     BlogComponent,
-    ProviderComponent
+    ProviderComponent,
+    OffersComponent
   ],
   imports: [
     BrowserModule,

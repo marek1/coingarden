@@ -1,6 +1,6 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-  <ng-container *ngIf="(selectedProvider$|async) as selectedProvider; else showAllBlogs">
+  <ng-container *ngIf="(selectedProvider$|async) as selectedProvider; else showAllProvider">
     <div class="mb-4">
       <div *ngIf="selectedProvider.logo_url" class="logo float-left">
         <img src="{{selectedProvider.logo_url}}">
@@ -38,7 +38,7 @@
 <!--    </ng-container>-->
   </ng-container>
   
-  <ng-template #showAllBlogs>
+  <ng-template #showAllProvider>
     <div class="text-center mb-4">
       <h1 class="h3 mb-0 text-gray-800">Ausgewählte Anbieter</h1>
     </div>

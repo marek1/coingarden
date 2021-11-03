@@ -21,20 +21,22 @@ export class ProviderComponent implements OnInit {
               private providerService: ProviderService,
               private offersService: OffersService,
               private titleService: Title,
-              private metaTagService: Meta) { }
+              private metaTagService: Meta) {
+
+  }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
+    this.metaTagService.updateTag(
+      {name: 'description', content: 'Eine Übersicht der Anbieter und ihrer Krypto-Produkte'}
+    );
     this.route.paramMap.subscribe((params: ParamMap) => {
-      console.log('... ', params);
       if (params.get('id')) {
-
         this.selectedProvider$ = this.providerService
           .providers
           .pipe(
             map((providers: Provider[]) => {
               return providers.find((provider) => {
-                console.log('... ', provider.id.toString().toLowerCase(), params.get('id')?.toString().toLowerCase())
-                console.log('... ', provider.id.toString().toLowerCase() === params.get('id')?.toString().toLowerCase())
                 return provider.id.toString().toLowerCase() === params.get('id')?.toString().toLowerCase()
               })
             })

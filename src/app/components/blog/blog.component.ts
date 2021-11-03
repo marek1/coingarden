@@ -14,9 +14,15 @@ export class BlogComponent implements OnInit {
   selectedBlog: any = {};
   constructor(public route: ActivatedRoute,
               private titleService: Title,
-              private metaTagService: Meta) { }
+              private metaTagService: Meta) {
+  }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
+    this.metaTagService.updateTag(
+      {name: 'description', content: 'Eine Übersicht über die Blog-Beiträge'}
+    );
+
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.get('id')) {
 

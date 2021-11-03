@@ -1,0 +1,46 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <div class="text-center mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Ausgewählte Angebote</h1>
+  </div>
+  
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title" *ngIf="!selectedProvider">
+        <h5>Bitte wähle zunächst einen Anbieter:</h5>
+      </div>
+      <p>
+        <span *ngFor="let provider of provider$ | async; let i = index;" class="mr-4"
+            (click)="selectProvider(provider.name.toString().toLowerCase())">
+          <span class="badge badge-large
+                {{provider.name.toString().toLowerCase() === selectedProvider ? 'badge-primary' : 'badge-light'}}">
+            {{provider.name}}
+          </span>
+        </span>
+      </p>
+    </div>
+    
+  </div>
+  
+  <div class="mt-4" *ngIf="selectedProvider">
+     
+      <ng-container *ngFor="let provider of providerProducts$ | async">
+      
+        <div id="accordion">
+          <ng-container *ngFor="let product of provider.products">
+            <ng-container *ngIf="(product.offers | async) as offers">
+              <app-provider-product
+              *ngIf="(offers.length > 0 || product.name.toLowerCase().indexOf('trading'))> -1"
+              [provider]="provider"
+              [product]="product"
+              [amountOfCoins]="''"
+              [coin]="''"></app-provider-product>
+            </ng-container>
+          </ng-container>
+        </div>
+    
+      </ng-container>
+    
+  </div>
+
+</div>
