@@ -19,6 +19,7 @@ import localeDe from '@angular/common/locales/de';
 import { ImpressumComponent } from './components/impressum/impressum.component';
 import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
 import { BlogComponent } from './components/blog/blog.component';
+import { ProviderComponent } from './components/provider/provider.component';
 
 registerLocaleData(localeDe);
 
@@ -34,7 +35,8 @@ registerLocaleData(localeDe);
     ProviderProductComponent,
     ImpressumComponent,
     DatenschutzComponent,
-    BlogComponent
+    BlogComponent,
+    ProviderComponent
   ],
   imports: [
     BrowserModule,

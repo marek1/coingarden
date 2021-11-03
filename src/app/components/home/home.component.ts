@@ -3,6 +3,7 @@ import { OffersService } from '../../services/offers.service';
 import { LatestOffer } from '../../interfaces/latestOffer';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { ProviderService } from '../../services/provider.service';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,12 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  provider$: Observable<any> = new  Observable();
   offers$: Observable<LatestOffer[]> = new Observable();
   currentOffer: number = 0;
-  constructor(private offersService: OffersService) {
+  constructor(private offersService: OffersService,
+              private providerService: ProviderService) {
+    this.provider$ = this.providerService.providers;
     this.offers$ = this.offersService.offers
     .pipe(
       map((x: LatestOffer[]) => x

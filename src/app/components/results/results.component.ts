@@ -44,9 +44,7 @@ export class ResultsComponent implements OnInit {
 
   @Input() set risk(value: number) {
     this._risk = value;
-    console.log('this.risk : ', value);
     // this.updateProducts();
-    console.log('updating strategies');
     this.updateStrategies();
   }
 
@@ -87,8 +85,6 @@ export class ResultsComponent implements OnInit {
           })
         )
       );
-    // this.providerProducts$.subscribe(y => console.log('yyyyyyyy : ', y));
-
   }
 
   updateStrategies() {

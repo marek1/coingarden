@@ -7,6 +7,7 @@ import { StrategieComponent } from './components/strategie/strategie.component';
 import { ImpressumComponent } from './components/impressum/impressum.component';
 import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
 import { BlogComponent } from './components/blog/blog.component';
+import { ProviderComponent } from './components/provider/provider.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,14 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'anbieter',
+    component: ProviderComponent
+  },
+  {
+    path: 'anbieter/:id',
+    component: ProviderComponent
   },
   {
     path: '',

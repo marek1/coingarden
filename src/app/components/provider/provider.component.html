@@ -1,0 +1,64 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <ng-container *ngIf="(selectedProvider$|async) as selectedProvider; else showAllBlogs">
+    <div class="mb-4">
+      <div *ngIf="selectedProvider.logo_url" class="logo float-left">
+        <img src="{{selectedProvider.logo_url}}">
+      </div>
+      <h1 class="h3 mb-0 text-gray-800">{{selectedProvider.name}}</h1>
+    </div>
+    <div>
+      {{selectedProvider.description}}
+    </div>
+    <h5 class="mt-4 mb-4">
+      {{selectedProvider.name}} bietet folgende Produkte an:
+    </h5>
+    <div *ngFor="let product of selectedProvider.products">
+      <p>{{product.name}}</p>
+      <p>
+        {{product.howTo.text}}
+      </p>
+      <p *ngIf="product.url">
+        <i class="fa fa-arrow-circle-right"></i>&nbsp;<a href="{{product.url}}">{{product.url}}</a>
+      </p>
+    </div>
+<!--    <ng-container *ngFor="let provider of providerProducts$ | async">-->
+<!--      <div id="accordion">-->
+<!--        <ng-container *ngFor="let product of provider.products">-->
+<!--          <ng-container *ngIf="(product.offers | async) as offers">-->
+<!--            <app-provider-product-->
+<!--            *ngIf="(offers.length > 0 || product.name.toLowerCase().indexOf('trading'))> -1"-->
+<!--            [provider]="provider"-->
+<!--            [product]="product"-->
+<!--            [amountOfCoins]="amountOfCoins"-->
+<!--            [coin]="coin"></app-provider-product>-->
+<!--          </ng-container>-->
+<!--        </ng-container>-->
+<!--      </div>-->
+<!--    </ng-container>-->
+  </ng-container>
+  
+  <ng-template #showAllBlogs>
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Ausgewählte Anbieter</h1>
+    </div>
+    
+    <div>
+      <div class="card-body" *ngFor="let provider of provider$|async">
+        <div class="card-title">
+          <div *ngIf="provider.logo_url" class="logo float-left mr-1">
+            <img src="{{provider.logo_url}}">
+          </div>
+          <h5>
+            {{provider.name}}
+          </h5>
+        </div>
+        <p class="card-text">
+          {{provider.description}}
+          <a [routerLink]="['/anbieter', provider.id.toString().toLowerCase()]">mehr</a>
+        </p>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
