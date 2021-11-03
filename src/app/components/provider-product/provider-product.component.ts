@@ -5,6 +5,7 @@ import { Provider } from '../../interfaces/provider';
 import { Observable } from 'rxjs';
 import { EtherscanService } from '../../services/etherscan.service';
 import { BitcoinService } from '../../services/bitcoin.service';
+import { Strategies } from '../../data/strategies';
 
 @Component({
   selector: 'app-provider-product',
@@ -16,6 +17,8 @@ export class ProviderProductComponent implements OnInit {
   showToolTip1 = false;
   showToolTip2 = false;
   networkFee = 0; // to be calculated
+  strategieName = '';
+  strategieUrl = '';
 
   calculateYield(offer: LatestOffer) {
     // console.log('offer : ', offer);
@@ -82,6 +85,8 @@ export class ProviderProductComponent implements OnInit {
 
   @Input() set product(value: Product) {
     this._product = value;
+    this.strategieUrl = Strategies.find((x) => x.id === this._product?.belongs_to_strategy_id)?.int_url || '';
+    this.strategieName = Strategies.find((x) => x.id === this._product?.belongs_to_strategy_id)?.name || '';
   }
 
   @Input() set amountOfCoins(value: string) {
@@ -115,10 +120,15 @@ export class ProviderProductComponent implements OnInit {
     return this._coin;
   }
 
+
   constructor(private etherscanService: EtherscanService,
               private bitcoinService: BitcoinService) { }
 
   ngOnInit(): void {
   }
+
+
+  // (id) {
+  // belongs_to_strategy_id
 
 }

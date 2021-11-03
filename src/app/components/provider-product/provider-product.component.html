@@ -1,7 +1,11 @@
 <div class="card" *ngIf="provider.name && product.name  else showError">
   <div class="card-header">
     <h5 class="mb-4 overflow-auto">
+      
       {{product.de}} von {{provider.name}}
+      <div class="small">
+        (Teil der Strategie: <a [routerLink]="['/strategie', strategieUrl]">{{strategieName}}</a>)
+      </div>
       <div class="small" *ngIf="provider.rewardForSignup">
         <span class="badge badge-primary">
           {{provider.rewardForSignup}} EURO

@@ -10,7 +10,7 @@
         <h5>Bitte wähle zunächst einen Anbieter:</h5>
       </div>
       <p>
-        <span *ngFor="let provider of provider$ | async; let i = index;" class="mr-4"
+        <span *ngFor="let provider of provider$ | async; let i = index;"
             (click)="selectProvider(provider.name.toString().toLowerCase())">
           <span class="badge badge-large
                 {{provider.name.toString().toLowerCase() === selectedProvider ? 'badge-primary' : 'badge-light'}}">

@@ -31,11 +31,11 @@
   </div>
   
   <div *ngFor="let foundStrategy of foundStrategies">
-    <h3>
-      <a class="btn btn-link font-large p-0" [routerLink]="['/strategie', foundStrategy.int_url]">
-        {{foundStrategy.de}}
-      </a>
-    </h3>
+<!--    <h3>-->
+<!--      <a class="btn btn-link font-large p-0" [routerLink]="['/strategie', foundStrategy.int_url]">-->
+<!--        {{foundStrategy.de}}-->
+<!--      </a>-->
+<!--    </h3>-->
     <div class="card-body p-0">
       
       <ng-container *ngIf="(providerProducts$|async)?.length === 0">
@@ -53,7 +53,8 @@
               [provider]="provider"
               [product]="product"
               [amountOfCoins]="amountOfCoins"
-              [coin]="coin"></app-provider-product>
+              [coin]="coin">
+              </app-provider-product>
             </ng-container>
           </ng-container>
         </div>
