@@ -8,6 +8,7 @@ import { CoinService } from '../../services/coin.service';
 import { Risks } from '../../data/risks';
 import { map } from 'rxjs/operators';
 import { Meta, Title } from '@angular/platform-browser';
+import { PageviewService } from '../../services/pageview.service';
 
 @Component({
   selector: 'app-start',
@@ -25,6 +26,7 @@ export class StartComponent implements OnInit {
   public coinCap = 55;
   public risks = Risks;
   constructor(public coinService: CoinService,
+              public pageviewService: PageviewService,
               public router: Router,
               public route: ActivatedRoute,
               public location: Location,
@@ -102,8 +104,11 @@ export class StartComponent implements OnInit {
   }
 
   setUrl () {
-    let url = this.router.createUrlTree(['start/' + this.selectedCoin + '/' +
-    (this.selectedRisk > -1 ? Risks.find(x => this.selectedRisk === x.riskId)?.url : '')]).toString();
+    let urlString = 'start/' + this.selectedCoin + '/' +
+      (this.selectedRisk > -1 ? Risks.find(x => this.selectedRisk === x.riskId)?.url : '');
+    let url = this.router.createUrlTree([urlString]).toString();
+    // save pageview
+    this.pageviewService.setPageview(urlString);
     // Change the URL without navigate:
     this.location.go(url);
   }

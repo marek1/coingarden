@@ -8,6 +8,7 @@ import { Strategies } from '../../data/strategies';
 import { map } from 'rxjs/operators';
 import { ProviderService } from '../../services/provider.service';
 import { Location } from '@angular/common';
+import { PageviewService } from '../../services/pageview.service';
 
 @Component({
   selector: 'app-offers',
@@ -26,6 +27,7 @@ export class OffersComponent implements OnInit {
               public location: Location,
               private offersService: OffersService,
               private providerService: ProviderService,
+              private pageviewService: PageviewService,
               private titleService: Title,
               private metaTagService: Meta) {
   }
@@ -80,7 +82,10 @@ export class OffersComponent implements OnInit {
   selectProvider(providerName: string) {
     this.selectedProvider = providerName;
     this.setProviderProduct();
-    let url = this.router.createUrlTree(['angebote/' + this.selectedProvider]).toString();
+    let urlString = 'angebote/' + this.selectedProvider;
+    let url = this.router.createUrlTree([urlString]).toString();
+    // save pageview
+    this.pageviewService.setPageview(urlString);
     // Change the URL without navigate:
     this.location.go(url);
   }

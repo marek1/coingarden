@@ -22,13 +22,9 @@ export class BlogComponent implements OnInit {
     this.metaTagService.updateTag(
       {name: 'description', content: 'Eine Übersicht über die Blog-Beiträge'}
     );
-
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.get('id')) {
-
         this.selectedBlog = Blogs.find(blog => blog.url === params.get('id')?.toString());
-
-        console.log('... ', this.selectedBlog);
         if (this.selectedBlog) {
           this.titleService.setTitle(this.selectedBlog.name);
           this.metaTagService.updateTag(

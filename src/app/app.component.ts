@@ -5,6 +5,8 @@ import { OffersService } from './services/offers.service';
 import { EtherscanService } from './services/etherscan.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { BitcoinService } from './services/bitcoin.service';
+import { Event, NavigationStart, Router } from '@angular/router';
+import { PageviewService } from './services/pageview.service';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +21,10 @@ export class AppComponent implements OnInit, OnDestroy {
               private providerService: ProviderService,
               private etherscanService: EtherscanService,
               private bitcoinService: BitcoinService,
+              private pageviewService: PageviewService,
               private metaTagService: Meta,
-              private titleService: Title) {
+              private titleService: Title,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -37,6 +41,14 @@ export class AppComponent implements OnInit, OnDestroy {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { charset: 'UTF-8' }
     ]);
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        // Show loading indicator
+        console.log('url : ' ,event.url);
+        this.pageviewService.setPageview(event.url);
+      }
+
+    });
   }
 
   ngOnDestroy() {

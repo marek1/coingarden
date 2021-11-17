@@ -50,26 +50,6 @@ export class ProviderComponent implements OnInit {
             {name: 'description', content: selectedProvider.description}
           );
         });
-
-        // this.providerProducts$ = this.providerService.providers
-        //   .pipe(
-        //     map(provider => provider.map(prov => {
-        //         prov.products.map((product) => {
-        //           product.offers = this.offersService.offers
-        //             .pipe(
-        //               map(latestOffers => {
-        //                 return latestOffers.filter((offer) => {
-        //                   return offer.latestOffer.type.toString().toLowerCase() === product.name.toString().toLowerCase()
-        //                     && offer.latestOffer.provider.toString().toLowerCase() === prov.id.toString().toLowerCase()
-        //
-        //                 })
-        //               })
-        //             );
-        //         })
-        //         return prov;
-        //       })
-        //     )
-        //   );
       }
     });
   }
