@@ -4,6 +4,7 @@ import { BlogPost } from '../interfaces/blogPost';
 export const Blogs: BlogPost[] = [
   {
     id: 1,
+    date: new Date('2021-11-01'),
     name: 'So kannst du mit Bitcoin eine Rendite erzielen',
     meta: 'In diesem Blogpost lernst du, wie du mit deinen Bitcoin eine Rendite erzielen kannst.',
     url: 'mit-bitcoin-eine-rendite-erzielen',
@@ -149,7 +150,8 @@ export const Blogs: BlogPost[] = [
     ]
   },
   {
-    id: 1,
+    id: 2,
+    date: new Date('2021-11-05'),
     name: 'So kannst du mit Ether Zinsen verdienen',
     meta: 'In diesem Blogpost lernst du, wie du mit deinen Ether Zinsen verdienen. In der Ethereum Blockchain.',
     url: 'in-der-ethereum-blockchain-zinsen-erzielen',
@@ -320,6 +322,94 @@ export const Blogs: BlogPost[] = [
           'werden aus dem Krypto-Wallet heraus getätigt (sprich dein Kryptobestand reduziert sich) und Zinsen ' +
           'meist in Form von Token (bei Crypto.com ist das z.B. der CRO-Token) gutgeschrieben. Bitte schaue ' +
           'dir auch die Gebührenstruktur an, um böse Überraschungen zu vermeiden.',
+      }
+    ]
+  },
+  {
+    id: 3,
+    date: new Date('2021-11-20'),
+    name: 'Was ist eine CEX',
+    meta: 'In diesem Blogpost erklären wir, was eine CEX bzw. Centralised Exchange ist.',
+    url: 'was-ist-eine-cex',
+    data: [
+      {
+        text: 'Eine CEX ist eine Firma, die eine Börse betreibt, auf der Coins gehandelt werden können.',
+      },
+      {
+        text: 'Diese Firma bestimmt, wie die Börse funktioniert (die Funktionalität der Software ist meist ' +
+          'nicht öffentlich) und entscheidet, wer auf der Börse handeln darf. ' +
+          'Da es sich um ein zentralistisches Setup (eine Firma bestimmt die Regeln und hält allein die Daten) ' +
+          'handelt spricht man von \'Centralised\' Exchange. Theoretisch kann die Firma auch in das ' +
+          'Handelsgeschehen eingreifen und Kurse beeinflussen.',
+      },
+      {
+        youtube: 'JtsLn03R_cM',
+      },
+      {
+        text: 'Links zu den erwähnten zentralen Börsen / Brokern (CEXs) :',
+        links: [
+          'https://binance.com/',
+          'https://www.coinbase.com/',
+          'https://www.etoro.com/',
+          'https://traderepublic.com/de-de'
+        ]
+      },
+    ]
+  },
+  {
+    id: 4,
+    date: new Date('2021-11-22'),
+    name: 'Was ist eine DEX',
+    meta: 'In diesem Blogpost erklären wir, was eine DEX bzw. Decentralised Exchange ist.',
+    url: 'was-ist-eine-dex',
+    data: [
+      {
+        text: 'Eine DEX ist ebenfalls eine Börse, auf der Coins gekauft und verkauft werden können.',
+      },
+      {
+        text: 'Im Gegensatz zu einer CEX bestimmt bei einer DEX ein \'Smart Contract\' (SM) darüber, wie ' +
+          'die Börse funktioniert. Der Code des SM ist öffentlich und kann eingesehen werden. Ebenso sind ' +
+          'die Regeln öffentlich und gelten für jede Teilnehmer*in gleichermaßen. Ausgeschlossen ist ebenfalls ' +
+          'der Eingriff einer Institution oder einer Person in die Handelsabläufe.',
+      },
+      {
+        youtube: 'Em7dR-qruR4',
+      },
+      {
+        text: 'Links zu den erwähnten dezentralen Börsen (DEXs):',
+        links: [
+          'https://uniswap.org/',
+          'https://sushi.com/',
+          'https://pancakeswap.finance/'
+        ]
+      }
+    ]
+  },
+  {
+    id: 5,
+    date: new Date('2021-11-25'),
+    name: 'Wo kann ich Bitcoin kaufen : schnell und einfach',
+    meta: 'In diesem Blogpost erkläre ich, wo ich einfach Bitcoins kaufen kann.',
+    url: 'wo-kann-ich-bitcoin-kaufen-schnell-und-einfach',
+    data: [
+      {
+        text: 'Bitcoins kaufe ich auf Börsen oder bei Brokern, wie zum Beispiel ' +
+          'bei Trade Republic oder in der Bison App. Ich zeige dir im Video, wie ' +
+          'du dort relativ einfach Bitcoins kaufen kannst.',
+        youtube: 'IChuZNUkw9g',
+      },
+      {
+        text: 'Jetzt 15 EURO Startguthaben bei Trade Repulic sichern:',
+        links: [
+          'https://ref.trade.re/7n37rs9r'
+        ]
+      },
+      {
+        text: 'oder lieber Bison und 15 EURO Startguthaben in Form von Bitcoins? ' +
+          'Dann folge dem Link: ',
+        links: [
+          'https://join.bisonapp.com/2dyhp2'
+        ]
       }
     ]
   }

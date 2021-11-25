@@ -21,9 +21,12 @@ import { DatenschutzComponent } from './components/datenschutz/datenschutz.compo
 import { BlogComponent } from './components/blog/blog.component';
 import { ProviderComponent } from './components/provider/provider.component';
 import { OffersComponent } from './components/offers/offers.component';
+import { YoutubeComponent } from './components/youtube/youtube.component';
+import { NgxY2PlayerModule } from 'ngx-y2-player';
 
 registerLocaleData(localeDe);
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +41,8 @@ registerLocaleData(localeDe);
     DatenschutzComponent,
     BlogComponent,
     ProviderComponent,
-    OffersComponent
+    OffersComponent,
+    YoutubeComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,8 @@ registerLocaleData(localeDe);
     ReactiveFormsModule,
     RouterModule,
     NgxSliderModule,
-    FormsModule
+    FormsModule,
+    NgxY2PlayerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

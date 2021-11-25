@@ -14,7 +14,7 @@ import { PageviewService } from './services/pageview.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'Aktuelle Angebote für deine Coins';
+  title = 'Mit Coins eine Rendite erzielen';
   providers$ = this.providerService.providers;
   constructor(private coinService: CoinService,
               private offersService: OffersService,

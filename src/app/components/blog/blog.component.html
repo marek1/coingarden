@@ -3,6 +3,9 @@
   <ng-container *ngIf="selectedBlog.id; else showAllBlogs">
     <div class="text-center mb-4">
       <h1 class="h3 mb-0 text-gray-800">{{selectedBlog.name}}</h1>
+      <div class="small">
+        Vom {{selectedBlog.date | date:'dd.MM.YYYY'}}
+      </div>
     </div>
     
     <div *ngFor="let blogDataItem of selectedBlog.data">
@@ -14,8 +17,19 @@
       </p>
       <img *ngIf="blogDataItem.image" src="{{blogDataItem.image}}">
       <p *ngIf="blogDataItem.blog">
-        <i class="fa fa-arrow-circle-right"></i>&nbsp;<a href="{{blogDataItem.blog}}">{{blogDataItem.text}}</a>
+        <i class="fa fa-arrow-circle-right"></i>&nbsp;<a href="{{blogDataItem.blog}}">{{blogDataItem.blog}}</a>
       </p>
+      <p *ngIf="blogDataItem.video">
+        <i class="fa fa-arrow-circle-right"></i>&nbsp;<a href="{{blogDataItem.video}}">{{blogDataItem.video}}</a>
+      </p>
+      <p *ngIf="blogDataItem.youtube">
+        <app-youtube [videoId]="blogDataItem.youtube"></app-youtube>
+      </p>
+      <div *ngIf="blogDataItem.links">
+        <p *ngFor="let link of blogDataItem.links">
+          <a href="{{link}}" target="_blank">{{link}}</a>
+        </p>
+      </div>
     </div>
   </ng-container>
   
