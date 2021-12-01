@@ -412,5 +412,50 @@ export const Blogs: BlogPost[] = [
         ]
       }
     ]
+  },
+  {
+    id: 6,
+    date: new Date('2021-11-30'),
+    name: 'CEX vs DEX : schnell und einfach',
+    meta: 'In diesem Blogpost erkläre ich den Unterschied zwischen einer CEX und einer DEX.',
+    url: 'cex-vs-dex-einfach-und-schnell',
+    data: [
+      {
+        text: 'CEX'
+      },
+      {
+        text: '- betrieben von einem Unternehmen, was sich ihre Kund*innen aussucht',
+      },
+      {
+        text: '- Kund*innen können ohne eigenes Wallet handeln (CEX sprich stellt Wallet zur Verfügung)',
+      },
+      {
+        text: 'DEX'
+      },
+      {
+        text: '- betrieben von einem Smart-Contract, daß jeden teilnehmen lässt,',
+      },
+      {
+        text: '- der/die ein eigenes Wallet hat (welches mit der Blockchain kompatibel ist) ',
+      },
+      {
+        youtube: 'CXSrWUg7oOE',
+      },
+      {
+        text: 'Sowohl eine DEX als auch eine CEX sind Börsen, auf der Coins gekauft und verkauft werden können.'
+      },
+      {
+        text: 'Hinter einer zentralen Börse (CEX) steht ein Unternehmen, das entscheidet, wen sie auf die Platform ' +
+          'lassen. Coins, die auf einer DEX gekauft werden, werden zunächst von der CEX verwaltet; sprich das ' +
+          'Unternehmen hält die Coins (im Auftrag) und hat die privaten Schlüssel (private Keys).'
+      },
+      {
+        text: 'Eine DEX wird oft ebenfalls von einer Organisation zur Verfügung gestellt. Die Börse selbst wird ' +
+          'von einem Computerprogramm - einem Smart Contract - betrieben. Dieses Programm lässt jede Person teilnehmen. ' +
+          'Voraussetzung ist, daß die teilnehmende Person ein Wallet hat, und das dieses Wallet mit der Blockchain ' +
+          'kompatibel ist. Zum Beispiel erwarten UniSwap, PancakeSwap etc. eine Wallet, die auf dem Ethereum Network ' +
+          'funktioniert.'
+      }
+    ]
   }
 ]
