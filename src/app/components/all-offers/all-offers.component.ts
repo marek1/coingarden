@@ -5,6 +5,7 @@ import { OffersService } from '../../services/offers.service';
 import { ProviderService } from '../../services/provider.service';
 import { map } from 'rxjs/operators';
 import { Provider } from '../../interfaces/provider';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-all-offers',
@@ -12,7 +13,7 @@ import { Provider } from '../../interfaces/provider';
   styleUrls: ['./all-offers.component.scss']
 })
 export class AllOffersComponent implements OnInit {
-
+  title = 'Alle Renditemöglichkeiten';
   provider$: Observable<any> = new  Observable();
   offers$: Observable<LatestOffer[]> = new Observable();
   excludedProviders = ['MetaMask', 'Trezor'];
@@ -20,7 +21,9 @@ export class AllOffersComponent implements OnInit {
   sortDirection: string|null = null;
 
   constructor(private offersService: OffersService,
-              private providerService: ProviderService) {
+              private providerService: ProviderService,
+              private titleService: Title,
+              private metaTagService: Meta) {
     this.provider$ = this.providerService.providers
       .pipe(
         map((x: Provider[]) => x.filter(x => this.excludedProviders.indexOf(x.name) === -1))
@@ -46,6 +49,10 @@ export class AllOffersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
+    this.metaTagService.updateTag(
+      {name: 'description', content: 'Mögliche Rendite pro Coin und Anbieter in einer Tabelle dargestellt.'}
+    );
   }
 
   setPlaceholder(event: any): void {
