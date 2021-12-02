@@ -9,6 +9,7 @@ import { DatenschutzComponent } from './components/datenschutz/datenschutz.compo
 import { BlogComponent } from './components/blog/blog.component';
 import { ProviderComponent } from './components/provider/provider.component';
 import { OffersComponent } from './components/offers/offers.component';
+import { AllOffersComponent } from './components/all-offers/all-offers.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,10 @@ const routes: Routes = [
   {
     path: 'anbieter/:id',
     component: ProviderComponent
+  },
+  {
+    path: 'alle-angebote',
+    component: AllOffersComponent
   },
   {
     path: 'angebote',

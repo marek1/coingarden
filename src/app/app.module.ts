@@ -23,6 +23,7 @@ import { ProviderComponent } from './components/provider/provider.component';
 import { OffersComponent } from './components/offers/offers.component';
 import { YoutubeComponent } from './components/youtube/youtube.component';
 import { NgxY2PlayerModule } from 'ngx-y2-player';
+import { AllOffersComponent } from './components/all-offers/all-offers.component';
 
 registerLocaleData(localeDe);
 
@@ -42,7 +43,8 @@ registerLocaleData(localeDe);
     BlogComponent,
     ProviderComponent,
     OffersComponent,
-    YoutubeComponent
+    YoutubeComponent,
+    AllOffersComponent
   ],
   imports: [
     BrowserModule,

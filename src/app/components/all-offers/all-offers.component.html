@@ -1,0 +1,51 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  
+  <div class="text-center mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Alle Angebote</h1>
+  </div>
+  
+  <div class="table-responsive" *ngIf="(offers$ | async) as offers">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th (click)="sortCoins()" class="cursor-pointer">
+          <span class="mr-1">Coin</span>
+          <span *ngIf="!sortDirection"><i class="fa fa-sort"></i></span>
+          <span *ngIf="sortDirection==='ASC'"><i class="fa fa-sort-desc"></i></span>
+          <span *ngIf="sortDirection==='DESC'"><i class="fa fa-sort-asc"></i></span>
+        </th>
+        <th *ngFor="let provider of provider$ | async">
+          {{provider.name}}
+        </th>
+      </tr>
+      <tr *ngFor="let coin of coins">
+        <td>
+<!--          <img src="./assets/logos/{{coin}}.png" class="logo"-->
+<!--          (error)="setPlaceholder($event)">-->
+          {{coin}}
+        </td>
+        <td *ngFor="let provider of provider$ | async">
+          <ng-container *ngFor="let offer of offers">
+              <div *ngIf="offer.latestOffer.provider === provider.name
+                          && offer.latestOffer.coins.indexOf(coin) > -1">
+                <span>
+                  <a href="{{offer.latestOffer.url}}" target="_blank">
+                     {{offer.latestOffer.avgAnnualInterestRate * 100 | number:'1.2-2':'de'}} %
+                  </a>
+                </span>
+                <span class="badge"
+                [ngClass]="{'badge-secondary': offer.latestOffer.type.indexOf('Savings') > -1,
+                'badge-info': offer.latestOffer.type === 'Staking',
+                'badge-warning': (offer.latestOffer.type.indexOf('Savings') === -1 && offer.latestOffer.type !== 'Staking')}">
+                  {{offer.latestOffer.type}}
+                </span>
+              </div>
+          </ng-container>
+        </td>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  
+</div>
