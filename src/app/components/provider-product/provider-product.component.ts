@@ -48,6 +48,7 @@ export class ProviderProductComponent implements OnInit {
     name: '',
     provider_type: '',
     description: '',
+    functionality: '',
     products: [],
     url: '',
     logo_url: '',

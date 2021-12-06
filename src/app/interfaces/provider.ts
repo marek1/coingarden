@@ -5,6 +5,7 @@ export interface Provider {
   name: string;
   provider_type: string;
   description: string;
+  functionality: string;
   products: Product[];
   url:  string;
   logo_url: string;
