@@ -457,5 +457,42 @@ export const Blogs: BlogPost[] = [
           'funktioniert.'
       }
     ]
+  },
+  {
+    id: 7,
+    date: new Date('2021-12-07'),
+    name: 'Was ist eine Wallet : schnell und einfach',
+    meta: 'In diesem Blogpost erkläre ich, was eine Wallet ist.',
+    url: 'was-ist-eine-wallet-einfach-erklaert',
+    data: [
+      {
+        text: 'Ein Wallet ist etwas, worin du deine Coins aufbewahrst. Du kaufst also z.B. Bitcoin und diese müssen ' +
+          'dann irgendwo aufbewahrt werden, so daß sie auch wirklich dir gehören.'
+      },
+      {
+        youtube: 'zjO_aqJD8ac',
+      },
+      {
+        text: 'Man unterscheidet 2 Arten von Wallets: Software - Wallet und Hardware - Wallet.'
+      },
+      {
+        text: 'Hardware Wallet'
+      },
+      {
+        text: 'Bei einem Hardware-Wallet werden die Coins auf einem physikalischen Gerät gespeichert.  Das ' +
+          'Speichergerät ist oft nicht größer als ein USB-Stick und kann einfach aufbewahrt, versteckt und/oder ' +
+          'transportiert werden. Anbieter sind hier z.B. Trezor oder Ledger, die beide im Handel gekauft werden können.'
+      },
+      {
+        text: 'Software Wallet'
+      },
+      {
+        text: 'Bei einem Software-Wallet werden die Coins mit Hilfe einer Softwarelösung verwahrt. Die meisten Wallets ' +
+          'werden als App auf einem iPhone oder Android-Handy genutzt. Sie können aber auch als Browser-Plugin ' +
+          'installiert werden, oder laufen als Software auf dem Rechner (Desktop-Wallet genannt). Beispiele sind ' +
+          'MetaMask, auf dem ETH und Ethereum-basierende Tokens verwahrt werden können. Ein berühmtes Beispiel für ' +
+          'eine Bitcoin Wallet ist Chivo, daß in El Salvador eingesetzt wird.'
+      }
+    ]
   }
 ]
