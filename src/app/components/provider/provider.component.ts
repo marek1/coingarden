@@ -47,7 +47,7 @@ export class ProviderComponent implements OnInit {
           if (!selectedProvider) {
             return
           }
-          this.titleService.setTitle('Was oder wer ist ' + selectedProvider.name);
+          this.titleService.setTitle('Wer oder was ist ' + selectedProvider.name);
           this.metaTagService.updateTag(
             {name: 'description', content: selectedProvider.description}
           );
