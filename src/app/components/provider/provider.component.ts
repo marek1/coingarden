@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { Provider } from '../../interfaces/provider';
 import { filter, map } from 'rxjs/operators';
 import { OffersService } from '../../services/offers.service';
+import { Strategies } from '../../data/strategies';
+import { Product } from '../../interfaces/product';
 
 @Component({
   selector: 'app-provider',
@@ -45,13 +47,17 @@ export class ProviderComponent implements OnInit {
           if (!selectedProvider) {
             return
           }
-          this.titleService.setTitle('Wer ist ' + selectedProvider.name);
+          this.titleService.setTitle('Was oder wer ist ' + selectedProvider.name);
           this.metaTagService.updateTag(
             {name: 'description', content: selectedProvider.description}
           );
         });
       }
     });
+  }
+
+  public getStrategyUrl(product: Product) {
+    return Strategies.find((x) => x.id === product?.belongs_to_strategy_id)?.int_url || ''
   }
 
 }

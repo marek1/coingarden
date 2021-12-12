@@ -10,35 +10,43 @@
     <div>
       {{selectedProvider.description}}
     </div>
+    <div class="mt-2 mb-2 alert alert-info" *ngIf="selectedProvider.affiliate_id && selectedProvider.affiliate_text">
+      {{selectedProvider.affiliate_text}}
+      <i class="fa fa-arrow-circle-right"></i>&nbsp;<a href="{{selectedProvider.affiliate_id}}" target="_blank">{{selectedProvider.affiliate_id}}</a>
+    </div>
     <div class="mt-4">
       {{selectedProvider.functionality}}
     </div>
     <h5 class="mt-4 mb-4">
-      {{selectedProvider.name}} bietet folgende Produkte an:
+      Produkte
     </h5>
     <div *ngFor="let product of selectedProvider.products">
-      <p>{{product.name}}</p>
+      <p>
+       {{product.name}}
+        <span class="small">
+          (<a [routerLink]="['/strategie', getStrategyUrl(product)]">Mehr zu {{product.name}}</a>)
+        </span>
+      </p>
       <p>
         {{product.howTo.text}}
       </p>
       <p *ngIf="product.url">
-        <i class="fa fa-arrow-circle-right"></i>&nbsp;<a href="{{product.url}}">{{product.url}}</a>
+        <i class="fa fa-arrow-circle-right"></i>&nbsp;<a href="{{product.url}}" target="_blank">{{product.url}}</a>
       </p>
     </div>
-<!--    <ng-container *ngFor="let provider of providerProducts$ | async">-->
-<!--      <div id="accordion">-->
-<!--        <ng-container *ngFor="let product of provider.products">-->
-<!--          <ng-container *ngIf="(product.offers | async) as offers">-->
-<!--            <app-provider-product-->
-<!--            *ngIf="(offers.length > 0 || product.name.toLowerCase().indexOf('trading'))> -1"-->
-<!--            [provider]="provider"-->
-<!--            [product]="product"-->
-<!--            [amountOfCoins]="amountOfCoins"-->
-<!--            [coin]="coin"></app-provider-product>-->
-<!--          </ng-container>-->
-<!--        </ng-container>-->
-<!--      </div>-->
-<!--    </ng-container>-->
+    <h5 class="mt-4 mb-4">
+      Angebote
+    </h5>
+    <div>
+      <i class="fa fa-arrow-circle-right"></i>&nbsp;<a [routerLink]="'/angebote/'+selectedProvider.name.toString().toLowerCase()">Aktuelle Angebote</a>
+    </div>
+    <h5 class="mt-4 mb-4">
+      Unser Test
+    </h5>
+    <div>
+      Kommt bald
+    </div>
+    
   </ng-container>
   
   <ng-template #showAllProvider>

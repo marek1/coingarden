@@ -26,16 +26,31 @@
         </tr>
         <tr *ngFor="let featuredCoin of featuredCoins">
           <td>
-            <img src="assets/logos/{{featuredCoin}}.png" class="logo">
-            {{featuredCoin}}
+            <div>
+              <img src="assets/logos/{{featuredCoin}}.png" class="logo">
+              <span>
+                {{featuredCoin}}
+              </span>
+            </div>
+            <div class="small">
+              <a [routerLink]="'start/'+featuredCoin+'/wenig-risiko'">mehr Angebote</a>
+            </div>
+            
           </td>
           <td *ngFor="let provider of provider$ | async">
             <ng-container *ngFor="let offer of offers">
-              <span *ngIf="offer.latestOffer.provider === provider.name
+              <div *ngIf="offer.latestOffer.provider === provider.name
                           && offer.latestOffer.coins.indexOf(featuredCoin) > -1
                           && offer.latestOffer.type.toLowerCase().indexOf('saving') > -1">
-                {{offer.latestOffer.avgAnnualInterestRate * 100 | number:'1.2-2':'de'}} %
-              </span>
+              
+                <a href="{{offer.latestOffer.url}}" target="_blank">
+                  {{offer.latestOffer.avgAnnualInterestRate * 100 | number:'1.2-2':'de'}} %
+                </a>
+                <div class="small">
+                  (von {{offer.latestOffer.updated | date:'dd.MM.YY'}})
+                </div>
+              </div>
+              
             </ng-container>
           </td>
         </tr>

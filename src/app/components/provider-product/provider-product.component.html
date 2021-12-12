@@ -1,7 +1,6 @@
 <div class="card" *ngIf="provider.name && product.name  else showError">
   <div class="card-header">
     <h5 class="mb-4 overflow-auto">
-      
       {{product.de}} von {{provider.name}}
       <div class="small">
         (Teil der Strategie: <a [routerLink]="['/strategie', strategieUrl]">{{strategieName}}</a>)
@@ -39,7 +38,7 @@
                 auf {{offer.latestOffer.coins}}
               </span>
               <span *ngIf="offer.latestOffer.url">
-                &nbsp;<a href="{{offer.latestOffer.url}}"><i class="fa fa-arrow-circle-o-right"></i> Direkt zum Angebot</a>
+                &nbsp;<a href="{{offer.latestOffer.url}}" target="_blank"><i class="fa fa-arrow-circle-o-right"></i> Direkt zum Angebot</a>
               </span>
             </div>
             <div class="small  mb-4">
@@ -165,7 +164,7 @@
         eines Geschäfts und dem tatsächlich erzielten Preis bezieht, zu dem das Geschäft
         ausgeführt wird."
         Quelle:
-        <a href="https://www.avatrade.de/education/trading-for-beginners/what-is-slippage">
+        <a href="https://www.avatrade.de/education/trading-for-beginners/what-is-slippage" target="_blank">
           https://www.avatrade.de/education/trading-for-beginners/what-is-slippage
         </a>
       </div>
