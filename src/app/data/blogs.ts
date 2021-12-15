@@ -494,5 +494,56 @@ export const Blogs: BlogPost[] = [
           'eine Bitcoin Wallet ist Chivo, daß in El Salvador eingesetzt wird.'
       }
     ]
+  },
+  {
+    id: 8,
+    date: new Date('2021-12-15'),
+    name: 'Was ist der Unterschied zwischen Custodial und Non-Custodial Wallet (Infografik)',
+    meta: 'In diesem Blogpost erkläre ich, was der Unterschied zwischen Custodial und Non-Custodial Wallet ist.',
+    url: 'unterschied-custodial-non-custodial-wallet',
+    data: [
+      {
+        text: 'Ein Wallet ist etwas, worin du deine digitalen Assets aufbewahrst, wie Coins und NFTs. Die Frage ist ,' +
+          'wo werden die Schlüssel dafür aufbewahrt. Daraus ergibt sich der Unterschied.'
+      },
+      {
+        header: 'Custodial Wallet',
+        text: 'Eine andere Person oder Institution verwahrt die digitalen Assets für dich. Dementsprechend werden die ' +
+          'privaten Schlüssel von dieser Person oder Instituion verwahrt.'
+      },
+      {
+        text: 'Vorteile:'
+      },
+      {
+        text: '- Du musst dich nicht um die Verwahrung der Schlüssel kümmern'
+      },
+      {
+        text: 'Nachteile:'
+      },
+      {
+        text: '- Die Person oder Institution könnte mit einen digitalen Assets verschwinden'
+      },
+      {
+        header: 'Non-Custodial Wallet',
+        text: 'Du selbst verwahrt die digitalen Assets auf einem Software- oder Hardware-Wallet. ' +
+          'Dementsprechend hast du die privaten Schlüssel.'
+      },
+      {
+        text: 'Vorteile:'
+      },
+      {
+        text: '- Wenn du die Schlüssel nicht rausgibst, sind die Coins schwer zu stehlen'
+      },
+      {
+        text: 'Nachteile:'
+      },
+      {
+        text: '- Verlierst du die Schlüssel, verlierst du den Zugang zu den Coins'
+      },
+      {
+        header: 'Infografik: ',
+        image: 'assets/custodial-vs-non.jpg',
+      }
+    ]
   }
 ]

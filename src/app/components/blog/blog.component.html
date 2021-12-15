@@ -9,7 +9,7 @@
     </div>
     
     <div *ngFor="let blogDataItem of selectedBlog.data">
-      <h5 *ngIf="blogDataItem.header">
+      <h5 class="mb-3" *ngIf="blogDataItem.header">
         {{blogDataItem.header}}
       </h5>
       <p *ngIf="blogDataItem.text && !blogDataItem.blog">
