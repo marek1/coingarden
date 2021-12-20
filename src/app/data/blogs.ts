@@ -442,7 +442,7 @@ export const Blogs: BlogPost[] = [
         youtube: 'CXSrWUg7oOE',
       },
       {
-        text: 'Sowohl eine DEX als auch eine CEX sind Börsen, auf der Coins gekauft und verkauft werden können.'
+        text: 'Eine DEX und eine CEX ist eine Börse, auf der Coins gekauft und verkauft werden können.'
       },
       {
         text: 'Hinter einer zentralen Börse (CEX) steht ein Unternehmen, das entscheidet, wen sie auf die Platform ' +
@@ -455,6 +455,10 @@ export const Blogs: BlogPost[] = [
           'Voraussetzung ist, daß die teilnehmende Person ein Wallet hat, und das dieses Wallet mit der Blockchain ' +
           'kompatibel ist. Zum Beispiel erwarten UniSwap, PancakeSwap etc. eine Wallet, die auf dem Ethereum Network ' +
           'funktioniert.'
+      },
+      {
+        header: 'Infografik: ',
+        image: 'assets/CEXvsDEX.jpg',
       }
     ]
   },
