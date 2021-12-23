@@ -10,10 +10,12 @@ export const Blogs: BlogPost[] = [
     url: 'mit-bitcoin-eine-rendite-erzielen',
     data: [
       {
+        image: '/assets/background.png',
+      },
+      {
         text: 'Du kannst deine BTC "hodlen" - oder du kannst sie für dich arbeiten lassen. ' +
           'Es gibt viele Möglichkeiten, mit deinen Bitcoin eine Rendite zu erzielen. In diesem ' +
-          'Blogpost wollen wir auf einige davon eingehen.',
-        image: '/assets/background.png',
+          'Blogpost wollen wir auf einige davon eingehen.'
       },
       {
         header: '1. Sparprodukte',
@@ -157,11 +159,13 @@ export const Blogs: BlogPost[] = [
     url: 'in-der-ethereum-blockchain-zinsen-erzielen',
     data: [
       {
+        image: '/assets/background.png',
+      },
+      {
         text: 'Du kannst deine ETH "hodlen" - oder du kannst sie für dich arbeiten lassen. ' +
           'Es gibt viele Möglichkeiten, mit deinen Ether eine Rendite zu erzielen. Besonders ' +
           'in der Ethereum Blockchain gibt es viele DeFi-Anwendungen, die es bei Bitcoin nicht' +
           'gibt. In diesem Blogpost wollen wir auf einige davon eingehen.',
-        image: '/assets/background.png',
       },
       {
         header: '1. Sparprodukte',
@@ -458,7 +462,7 @@ export const Blogs: BlogPost[] = [
       },
       {
         header: 'Infografik: ',
-        image: 'assets/CEXvsDEX.jpg',
+        image: '/assets/CEXvsDEX.jpg',
       }
     ]
   },
@@ -547,6 +551,50 @@ export const Blogs: BlogPost[] = [
       {
         header: 'Infografik: ',
         image: 'assets/custodial-vs-non.jpg',
+      }
+    ]
+  },
+  {
+    id: 9,
+    date: new Date('2021-12-23'),
+    name: 'Privater Schlüssel - not your keys, not your coins',
+    meta: 'In diesem Blogpost erkläre ich, was ein privater Schlüssel ist.',
+    url: 'privater-schluessel-not-your-keys-not-your-coins',
+    data: [
+      {
+        image: '/assets/not_your_keys.jpg'
+      },
+      {
+        text: 'Kurz: Der private Schlüssel ist der Code, der gebraucht wird, um an die Coins in deinem Wallet zu kommen.'
+      },
+      {
+        text: 'Es gibt den schlauen Satz in der Krypto-Community: “Not your keys, not your coins”.  Im Prinzip ist das ' +
+          'ultima ratio in Sachen Aufbewahrung von Coins: du solltest die privaten Schlüssel haben, damit es auch ' +
+          'wirklich deine Coins sind. '
+      },
+      {
+        text: 'Bewahrt jemand anderes (z.B. eine CEX) für dich die Coins auf, dann haben diese die privaten Schlüssel ' +
+          'und bewahren diese hoffentlich gut auf. Sollten diese damit nicht verantwortungsvoll umgehen, dann besteht ' +
+          'die Gefahr, daß deine Coins gestohlen werden. Solange du aber selbst die privaten Schlüssel hast, und diese ' +
+          'nicht rausgibst (was du auf gar keinen Fall jemals machen solltest !!!), dann sind deine Coins sicher in ' +
+          'der Wallet (zum Thema Hardware - und Software-Wallet, lies bitte unseren anderen Blogpost).'
+      },
+      {
+        text: 'Ein Tipp: Wenn du “hodlest”, also langfristig deine Coins halten möchtest, dann macht es auf jeden Fall ' +
+          'Sinn, diese auf einem selbst verwahrten Wallet aufzubewahren, wo du selbst die privaten Schlüssel hälst. '
+      },
+      {
+        header: 'Klingt kompliziert ?',
+        text: 'Keine Sorge. Es ist sehr einfach: denn die Anbieter der Wallets werden dich gut durch den Prozess leiten. ' +
+          'In den meisten Fällen wirst du den privaten Schlüssel gar nicht selbst sehen oder irgendwo hinterlegen müssen. ' +
+          'Du wirst lediglich ein Passwort vergeben müssen, mit dem du das Wallet schützt und an den privaten Schlüssel ' +
+          'kommst (solltest du ihn brauchen). Und du wirst dir 12 Wörter aufschreiben müssen, mit denen du im Fall der ' +
+          'Fälle (z.B. beim Verlust des Handies, auf dem das Wallet gespeichert ist), das Wallet “reaktivieren” kannst.'
+      },
+      {
+        header: 'Noch Fragen ?',
+        text: 'Vielleicht hilft ja dieses tolle Video vom Blocktrainer:',
+        youtube: 'TC50HTRDx7Q'
       }
     ]
   }

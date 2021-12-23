@@ -10,7 +10,7 @@ import { Blogs } from '../../data/blogs';
 })
 export class BlogComponent implements OnInit {
   title = 'Unsere Blog Posts';
-  blogPosts = Blogs;
+  blogPosts = Blogs.sort((a, b) => a.date > b.date ? -1 : 1);
   selectedBlog: any = {};
   constructor(public route: ActivatedRoute,
               private titleService: Title,

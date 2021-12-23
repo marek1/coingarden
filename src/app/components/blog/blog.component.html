@@ -44,6 +44,9 @@
           <h5>
             <a [routerLink]="['/blog', blog.url]">{{blog.name}}</a>
           </h5>
+          <div class="small">
+            Vom {{blog.date | date:'dd.MM.YYYY'}}
+          </div>
         </div>
         <p class="card-text">
           {{blog.data[0].text}} ... <a [routerLink]="['/blog', blog.url]">mehr</a>
