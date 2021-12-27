@@ -8,6 +8,7 @@ export interface Product {
   url: string;
   howTo: {
     text: string;
+    steps: string;
     image: string;
     video: string;
     blog: string;

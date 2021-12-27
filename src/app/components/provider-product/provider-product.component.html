@@ -99,8 +99,8 @@
     </div>
   
     <button class="btn btn-link float-right" (click)="collapse = !collapse">
-      <span *ngIf="!collapse">Mehr zum Produkt <i class="fa fa-arrow-circle-down"></i></span>
-      <span *ngIf="collapse">Weniger <i class="fa fa-arrow-circle-up"></i></span>
+      <span *ngIf="!collapse">So geht's<i class="fa fa-arrow-circle-down"></i></span>
+      <span *ngIf="collapse">So geht's<i class="fa fa-arrow-circle-up"></i></span>
     </button>
   </div>
   <div class="collapse {{collapse ? 'show' : ''}}" aria-labelledby="headingOne" data-parent="#accordion">
@@ -111,13 +111,20 @@
       <div class="mt-4">
         {{product.howTo.text}}
       </div>
+      <div class="mt-4 mb-4">
+        So gehts:
+      </div>
+      <div>
+        <div [innerHTML]="getHtml(provider.join)"></div>
+        <div [innerHTML]="getHtml(product.howTo.steps)"></div>
+      </div>
       <div class="mt-4" *ngIf="product.url">
-        <i class="fa fa-send"></i> Mehr Information auf der
+        <i class="fa fa-send"></i> Mehr Informationen auf der
         <a href="{{product.url}}" target="_blank">Webseite von {{provider.name}}</a>.
       </div>
-      <div class="mt-4">
-        Aktuelle Angebote / Renditen:
-      </div>
+<!--      <div class="mt-4">-->
+<!--        Aktuelle Angebote / Renditen:-->
+<!--      </div>-->
       <div class="mt-4" *ngIf="product.howTo.image">
         <img src="/assets/{{product.howTo.image}}">
       </div>
@@ -134,7 +141,7 @@
         Über den Anbieter:
       </div>
       <div class="mt-4" *ngIf="provider.logo_url">
-        <img src="{{provider.logo_url}}">
+        <img src="{{provider.logo_url}}" class="logo">
       </div>
       <div>
         {{provider.description}}

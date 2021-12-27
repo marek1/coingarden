@@ -5,6 +5,7 @@ export interface Provider {
   name: string;
   provider_type: string;
   description: string;
+  join: string;
   functionality: string;
   products: Product[];
   url:  string;

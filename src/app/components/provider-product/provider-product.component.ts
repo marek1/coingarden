@@ -47,6 +47,7 @@ export class ProviderProductComponent implements OnInit {
     id: '',
     name: '',
     provider_type: '',
+    join: '',
     description: '',
     functionality: '',
     products: [],
@@ -67,6 +68,7 @@ export class ProviderProductComponent implements OnInit {
     url: '',
     howTo: {
       text: '',
+      steps: '',
       image: '',
       video: '',
       blog: ''
@@ -128,8 +130,8 @@ export class ProviderProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-  // (id) {
-  // belongs_to_strategy_id
+  getHtml(x: string) {
+    return x.replace(/(?:\r\n|\r|\n)/g, '<br>');
+  }
 
 }
