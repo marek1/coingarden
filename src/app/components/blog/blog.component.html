@@ -12,7 +12,7 @@
       <h5 class="mb-3" *ngIf="blogDataItem.header">
         {{blogDataItem.header}}
       </h5>
-      <p *ngIf="blogDataItem.text && !blogDataItem.blog">
+      <p *ngIf="blogDataItem.text">
         {{blogDataItem.text}}
       </p>
       <img *ngIf="blogDataItem.image" src="{{blogDataItem.image}}">

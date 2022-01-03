@@ -597,5 +597,53 @@ export const Blogs: BlogPost[] = [
         youtube: 'TC50HTRDx7Q'
       }
     ]
+  },
+  {
+    id: 10,
+    date: new Date('2022-01-03'),
+    name: 'Proof-of-Work (POW) vs Proof-of-Stake (POS)',
+    meta: 'In diesem Blogpost erkläre ich, was Proof of Work und Proof of Stake ist.',
+    url: 'proof-of-work-pow-vs-proof-of-stake-pos',
+    data: [
+      {
+        text: 'Kurz: Es handelt sich um die zwei Konzepte, wie Coins erstellt (gemined) werden und ' +
+          'Transaktionen verifiziert werden.'
+      },
+      {
+        text: 'Damit eine Blockchain funktioniert, müssen die zu speichernden Transaktionen von jemanden ' +
+          '(einem Computer - in welcher Form auch immer) erstellt und von anderen (ebenfalls einem oder mehrere ' +
+          'Computer - je nach Blockchain) validiert werden, damit sie endgültig in der Blockchain “landen”.'
+      },
+      {
+        image: '/assets/pow-vs-pos.jpg'
+      },
+      {
+        header: 'Proof-of-Work',
+        text: 'Proof-of-Work ist den meisten Menschen eigentlich schon bekannt, denn die Bitcoin - Blockchain ' +
+          'baut auf diesem Konzept auf. Neue Transaktionen werden zu einem Block hinzugefügt. Dieser Block wird im ' +
+          'Netzwerk von Verifizierer-Knotenpunkten (engl. “Validator Nodes”, also jeder Rechner, der validiert, ist ' +
+          'ein solcher Knotenpunkt). Diese Validator Nodes  versuchen gleichzeitig, ein dazugehöriges mathematisches ' +
+          'Problem zu lösen. Wer es als erstes löst, der bekommt die Belohnung (engl. “Reward”) und darf den nächsten ' +
+          'Block “schreiben”. Sprich, hier gewinnen nur “leistungsstarke” Rechner, die entsprechend viel Energie ' +
+          'verbrauchen.'
+      },
+      {
+        header: 'Proof-of-Stake',
+        text: 'Proof-of-Stake wiederum ist eine andere Konzept, welches aber das gleiche Ziel verfolgt: Transaktionen ' +
+          'zu validieren und in die Blockchain zu schreiben. Es gibt verschiedene Ausprägungen von diesem Konzept, ' +
+          'aber am Ende ähneln sich alle im folgenden Punkt: Validator Nodes, werden zufällig ausgewählt. Um eine ' +
+          'Validator-Node zu betreiben, müssen einige Voraussetzungen erfüllt sein. Eine davon ist oftmals die Einlage ' +
+          'eines größeren Betrages in der Kryptowährung, die zu validieren ist. Die Validator Node, die gewählt wurde, ' +
+          'und erfolgreich die Transaktion oder den Block validiert, erhält einen Reward (jedes Mal, wenn sie validiert).'
+      },
+      {
+        header: 'Staking',
+        text: 'Personen, die selbst keine Validator-Node betreiben können oder wollen, können oftmals aber über ' +
+          'Staking-Pools am Validieren teilnehmen, und erhalten dementsprechend nur einen Teil der Rewards (ihren ' +
+          'Anteil am Pool). Das Teilnehmen am Proof-of-Stake, ohne dafür selbst eine Validator-Node zu betreiben, ' +
+          'nennt man “Staking”. Dieses wird mittlerweile von sehr vielen DEXs und Services angeboten. Mehr dazu auf',
+        blog: 'https://coingarden.de/strategie/staking'
+      }
+    ]
   }
 ]
