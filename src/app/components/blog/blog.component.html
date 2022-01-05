@@ -22,7 +22,7 @@
       <p *ngIf="blogDataItem.video">
         <i class="fa fa-arrow-circle-right"></i>&nbsp;<a href="{{blogDataItem.video}}" target="_blank">{{blogDataItem.video}}</a>
       </p>
-      <p *ngIf="blogDataItem.youtube">
+      <p *ngIf="blogDataItem.youtube" class="youtube">
         <app-youtube [videoId]="blogDataItem.youtube"></app-youtube>
       </p>
       <div *ngIf="blogDataItem.links">

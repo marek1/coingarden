@@ -425,6 +425,9 @@ export const Blogs: BlogPost[] = [
     url: 'cex-vs-dex-einfach-und-schnell',
     data: [
       {
+        image: '/assets/CEXvsDEX.jpg',
+      },
+      {
         text: 'CEX'
       },
       {
@@ -443,9 +446,6 @@ export const Blogs: BlogPost[] = [
         text: '- der/die ein eigenes Wallet hat (welches mit der Blockchain kompatibel ist) ',
       },
       {
-        youtube: 'CXSrWUg7oOE',
-      },
-      {
         text: 'Eine DEX und eine CEX ist eine Börse, auf der Coins gekauft und verkauft werden können.'
       },
       {
@@ -461,8 +461,8 @@ export const Blogs: BlogPost[] = [
           'funktioniert.'
       },
       {
-        header: 'Infografik: ',
-        image: '/assets/CEXvsDEX.jpg',
+        text: 'Schaue dir gern auch dieses Video an:',
+        youtube: 'CXSrWUg7oOE',
       }
     ]
   },
@@ -511,6 +511,9 @@ export const Blogs: BlogPost[] = [
     url: 'unterschied-custodial-non-custodial-wallet',
     data: [
       {
+        image: 'assets/custodial-vs-non.jpg',
+      },
+      {
         text: 'Ein Wallet ist etwas, worin du deine digitalen Assets aufbewahrst, wie Coins und NFTs. Die Frage ist ,' +
           'wo werden die Schlüssel dafür aufbewahrt. Daraus ergibt sich der Unterschied.'
       },
@@ -549,8 +552,8 @@ export const Blogs: BlogPost[] = [
         text: '- Verlierst du die Schlüssel, verlierst du den Zugang zu den Coins'
       },
       {
-        header: 'Infografik: ',
-        image: 'assets/custodial-vs-non.jpg',
+        text: 'Schaue dir gern auch dieses Video an:',
+        youtube: 'pbdEMMklfMg',
       }
     ]
   },
