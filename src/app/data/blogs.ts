@@ -397,24 +397,59 @@ export const Blogs: BlogPost[] = [
     url: 'wo-kann-ich-bitcoin-kaufen-schnell-und-einfach',
     data: [
       {
-        text: 'Bitcoins kaufe ich auf Börsen oder bei Brokern, wie zum Beispiel ' +
-          'bei Trade Republic oder in der Bison App. Ich zeige dir im Video, wie ' +
-          'du dort relativ einfach Bitcoins kaufen kannst.',
-        youtube: 'IChuZNUkw9g',
+        image: '/assets/bitcoin_kaufen.png'
       },
       {
-        text: 'Jetzt 15 EURO Startguthaben bei Trade Repulic sichern:',
-        links: [
-          'https://ref.trade.re/7n37rs9r'
-        ]
+        text: 'Kurz: Bitcoin kann man bei Kryptobörsen, (Neo)-Brokern, (Neo)-Banken, P2P-Plattformen und ' +
+          'an BTC-Automaten kaufen.',
       },
       {
-        text: 'oder lieber Bison und 15 EURO Startguthaben in Form von Bitcoins? ' +
-          'Dann folge dem Link: ',
+        header: 'Kryptobörsen',
+        text: 'Dabei handelt es sich um Firmen, die einen Service (z.B. eine App oder Webseite) zur Verfügung stellen, die es Kund*innen ' +
+          'ermöglicht, Kryptowährungen auf einfache Art zu kaufen oder zu verkaufen. Zu diesen Kryptobörsen gehören z.B. Coinbase, ' +
+          'BSDEX, Bison oder auch Binance. Bei all diesen Kryptobörsen handelt es sich um sogenannte zentralisierten Börsen (CEX), ' +
+          'da sie von einer Firma kontrolliert werden, die die Regeln vorgibt.' +
+          'Diese Firmen verdienen ihr Geld über den Spread und ggf. auch noch über Gebühren (wie z.B. bei Coinbase). Mehr zu CEXs:',
+        blog: 'https://coingarden.de/blog/was-ist-eine-cex',
+      },
+      {
+        youtube: 'ci1AlO9j8Q8'
+      },
+      {
+        header: '(Neo)-Broker',
+        text: 'Dabei handelt es sich um Firmen, die einen Service (z.B. eine App oder Webseite) zur Verfügung stellen, die es Kund*innen ' +
+          'ermöglicht, Finanzprodukte, insbesondere Aktien, ETFs und Fonds auf einfache Art zu kaufen oder zu verkaufen. Viele dieser ' +
+          'Broker bieten nun auch den Handel von Kryptowährungen an, wie z.B. Trade Republic, Scalable Capital und eToro. Auch diese ' +
+          'gehören zur Kategorie CEX und verdienen ihr Geld über einen Spread (und ggf. auch noch über Gebühren).'
+      },
+      {
+        header: '(Neo)-Banken',
+        text: 'Dabei handelt es sich um Banken, die ein Girokonto zur Verfügung stellen und die Möglichkeit anbieten, Kryptowährungen ' +
+          'zu kaufen oder zu verkaufen. Ein Beispiel hierfür ist Nuri, bei denen ein Sparplan auf den Bitcoin erstellt werden kann.'
+      },
+      {
+        youtube: 'GIO7FpISNS8'
+      },
+      {
+        header: 'P2P-Plattformen',
+        text: 'Dabei handelt es sich um einen Service, bei denen private Personen ihre Kryptowährungen zu einem Preis ihrer Wahl verkaufen ' +
+          'können, während andere private Personen diese zum aufgerufenen Preis kaufen können. Bekanntestes Beispiel ist bitcoin.de.' +
+          'Auch diese Plattformen verdienen ihr Geld mit Gebühren, die sowohl für Käufer*in als auch Verkäufer*in anfällt.'
+      },
+      {
+        header: 'BTC-Automaten',
+        text: 'Dabei handelt es sich um Geldautomaten-ähnliche Apparate, die an (wenigen) ausgewählten Orten in Deutschland stehen. ' +
+          'Um Bitcoin zu kaufen, muss hier zunächst eine Fiat-Währung (meist EURO) eingeführt werden. Aber wir raten zu absoluter ' +
+          'Vorsicht, denn diese Maschinen sind unreguliert und werden oftmals von Firmen betrieben, die ihren Sitz im Ausland ' +
+          'haben.  '
+      },
+      {
+        header: 'So kannst du loslegen:',
+        text: 'Bei Bison bekommst du jetzt 15 EURO Startguthaben in Form von Bitcoins. Folge dazu dem Link :',
         links: [
           'https://join.bisonapp.com/2dyhp2'
         ]
-      }
+      },
     ]
   },
   {
