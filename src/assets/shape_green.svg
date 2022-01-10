@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="792px" height="389px" viewBox="0 0 792 389" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>shape_orange_tablet</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="92.5459352%" y1="39.1762322%" x2="-0.819394191%" y2="61.2706959%" id="linearGradient-1">
+            <stop stop-color="#B8FF5A" offset="0%"></stop>
+            <stop stop-color="#1FD2FF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="shape_orange_tablet" transform="translate(0.000000, -1.000000)" fill="url(#linearGradient-1)" fill-rule="nonzero">
+            <path d="M43.2194,51.1802 C46.1933,32.0617 62.425,17.8125 81.7678,17.3403 L751.024,1.00043 C773.491,0.451904 792,18.5148 792,40.9885 L792,349.81 C792,372.361 773.369,390.454 750.828,389.793 L39.3212,368.93 C15.2613,368.224 -2.73068,346.583 0.968968,322.799 L43.2194,51.1802 Z" id="Path"></path>
+        </g>
+    </g>
+</svg>

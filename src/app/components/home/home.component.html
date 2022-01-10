@@ -42,7 +42,7 @@
               <div *ngIf="offer.latestOffer.provider === provider.name
                           && offer.latestOffer.coins.indexOf(featuredCoin) > -1
                           && offer.latestOffer.type.toLowerCase().indexOf('saving') > -1">
-              
+                <span *ngIf="provider.name.toLowerCase() === 'nexo'">max. </span>
                 <a href="{{offer.latestOffer.url}}" target="_blank">
                   {{offer.latestOffer.avgAnnualInterestRate * 100 | number:'1.2-2':'de'}} %
                 </a>
@@ -69,29 +69,34 @@
   <!-- Content Row -->
   <div class="row mt-4">
     
-    <div class="hero">
-  
-      <div class="text-center">
+    <div class="col-md-6">
+      <div>
         HODLen ist gut. Aber HODLen und dabei eine Rendite zu erzielen ist noch besser.
         Bei Coingarden versuchen wir unter den vielen Angeboten die zu deinem
         Risikoappetit passenden Produkte und Angebote zu finden.
       </div>
-      
-      <div class="usps">
-        Bei CoinGarden kannst du
-        <h5 class="mb-2 mt-2">
-          <i class="fa fa-check-circle"> dich informieren und </i>
-        </h5>
-        <h5 class="mb-2 mt-2">
-          <i class="fa fa-check-circle"> mehr als 300 Angebote vergleichen. </i>
-        </h5>
-        <div class="text-center">
-          <a [routerLink]="'start'" class="btn btn-primary">
-            Suche starten
-          </a>
-        </div>
+      <div>
+        Dabei konzentrieren wir uns aber hauptsächlich auf die risikoarmen Anlageformen.
+        In unseren diversen <a routerLink="/blog">Blogposts</a> erklären wir die Basics,
+        die wir mit Youtube-Videos (zu unserem
+        <a href="https://www.youtube.com/channel/UCyaPOLa4XFHy1_W4dR5TKsw" target="_blank">Youtube Kanal</a>
+        und Infografiken anreichern.
       </div>
-      
+    </div>
+    
+    <div class="col-md-6 text-center usps">
+      Bei CoinGarden kannst du
+      <div class="mb-2 mt-2">
+        <i class="fa fa-check-circle"></i> dich informieren und
+      </div>
+      <div class="mb-2 mt-2">
+        <i class="fa fa-check-circle"></i> mehr als 300 Angebote vergleichen.
+      </div>
+      <div class="text-center">
+        <a [routerLink]="'start'" class="btn btn-primary">
+          Suche starten
+        </a>
+      </div>
     </div>
 
   </div>
