@@ -10,7 +10,7 @@
         </linearGradient>
     </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="shape_green" transform="translate(0.000000, -1.000000)" fill="url(#linearGradient-1)" fill-rule="nonzero">
+        <g id="shape_green" transform="translate(407.500000, 195.000000) scale(-1, -1) translate(-407.500000, -195.000000) " fill="url(#linearGradient-1)" fill-rule="nonzero">
             <path d="M66.2194,51.1802 C69.1933,32.0617 85.425,17.8125 104.7678,17.3403 L774.024,1.00043 C796.491,0.451904 815,18.5148 815,40.9885 L815,349.81 C815,372.361 796.369,390.454 773.828,389.793 L66,390 C33.8053753,390 2.5,390 1.5,390 C0.5,390 0.5,390 4,374.5 L66.2194,51.1802 Z" id="Path"></path>
         </g>
     </g>

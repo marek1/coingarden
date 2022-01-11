@@ -1,8 +1,20 @@
-.usps {
-  background: url('/assets/shape_green.svg');
+.usps,
+.usps-1 {
+  background-image: url('/assets/shape_green.svg');
   color: #333;
+  background-size: cover;
   background-repeat: no-repeat;
   padding: 5%;
+}
+.usps-1 {
+  background-image: url('/assets/shape_green_inverted.svg');
+}
+
+@media only screen and (max-width: 768px) {
+  .usps-1 {
+    background-image: none;
+
+  }
 }
 
 .logo{
