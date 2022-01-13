@@ -44,7 +44,7 @@ export const Strategies: Strategy[] = [
         'gewissen Zeitraum dann gelocked - sprich man kann in der Zeit nicht auf sie zugreifen. Daher gibt es auch ' +
         'den Begriff : Locked Savings. \n' +
         'Die Sparprodukte sind vergleichbar mit einem Sparbuch. ',
-      image: 'BitcoinSavings.jpg',
+      image: 'BitcoinSavings.jpeg',
       video: '',
       blog: ''
     },

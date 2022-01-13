@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { ProviderService } from '../../services/provider.service';
 import { Provider } from '../../interfaces/provider';
+import { Offer } from '../../interfaces/offer';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { Provider } from '../../interfaces/provider';
 export class HomeComponent implements OnInit {
   provider$: Observable<any> = new  Observable();
   offers$: Observable<LatestOffer[]> = new Observable();
-  featuredProvider = ['Binance', 'Nuri', 'Nexo'];
+  featuredProvider = ['Binance', 'Crypto.com', 'Nexo'];
   featuredCoins = ['BTC', 'ETH', 'DOT', 'SOL', 'ADA'];
   currentOffer: number = 0;
   constructor(private offersService: OffersService,
@@ -36,6 +37,13 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  filteredOffer(offers: any, provider: Provider, featuredCoin: string) {
+    let _offers = offers.filter((offer: any) => offer.latestOffer.provider === provider.name
+      && offer.latestOffer.coins.indexOf(featuredCoin) > -1
+      && offer.latestOffer.type.toLowerCase().indexOf('saving') > -1)
+    return _offers.length > 0 ? _offers[0] : [];
   }
 
   setCurrentOffer(by: number) {

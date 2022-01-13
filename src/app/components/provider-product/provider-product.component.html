@@ -60,7 +60,10 @@
                 </span>
               </div>
               <div>
-                <span *ngIf="offer.latestOffer.duration">
+                <span *ngIf="offer.latestOffer.duration != 0">
+                  Laufzeit: {{offer.latestOffer.duration ? offer.latestOffer.duration + ' Tage' : 'Flexibel'}}
+                </span>
+                <span *ngIf="offer.latestOffer.duration != 0">
                   Laufzeit: {{offer.latestOffer.duration}} Tage
                 </span>
                 <span *ngIf="offer.latestOffer.endDate">
