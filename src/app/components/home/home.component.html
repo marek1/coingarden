@@ -37,17 +37,22 @@
             </div>
             
           </td>
+          
           <td *ngFor="let provider of provider$ | async">
             <ng-container *ngFor="let offer of offers">
               <div *ngIf="offer.latestOffer.provider === provider.name
                           && offer.latestOffer.coins.indexOf(featuredCoin) > -1
-                          && offer.latestOffer.type.toLowerCase().indexOf('saving') > -1">
-                <span *ngIf="provider.name.toLowerCase() === 'nexo'">max. </span>
+                          && offer.latestOffer.type.toLowerCase().indexOf('saving') > -1
+                          && offer.latestOffer.duration === 0">
+                <span *ngIf="provider.name.toLowerCase() === 'nexo'; else otherProvider">max. </span>
+                <ng-template #otherProvider>
+                  <span>min. </span>
+                </ng-template>
                 <a href="{{offer.latestOffer.url}}" target="_blank">
                   {{offer.latestOffer.avgAnnualInterestRate * 100 | number:'1.2-2':'de'}} %
                 </a>
                 <div class="small">
-                  (Laufzeit {{offer.latestOffer.duration ? offer.latestOffer.duration + ' Tage' : 'Flexibel'}}; updated {{offer.latestOffer.updated | date:'dd.MM.YY'}})
+                  (Laufzeit: {{offer.latestOffer.duration ? offer.latestOffer.duration + ' Tage' : 'Flexibel'}}; updated {{offer.latestOffer.updated | date:'dd.MM.YY'}})
                 </div>
               </div>
             </ng-container>
