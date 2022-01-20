@@ -14,7 +14,7 @@ import { PageviewService } from './services/pageview.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'Mit Coins eine Rendite erzielen';
+  title = 'Kryptozinsen: Mit Coins eine Rendite erzielen';
   providers$ = this.providerService.providers;
   constructor(private coinService: CoinService,
               private offersService: OffersService,
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.etherscanService.getGasFee();
     this.bitcoinService.getTxFee();
     this.metaTagService.addTags([
-      { name: 'keywords', content: 'Staking, Zinsen, BTC, ETH, Kryptowährungen, Coins, Sparen, Pools, Liquidity Mining' },
+      { name: 'keywords', content: 'Staking, Zinsen, BTC, ETH, Kryptowährungen, Coins, Kryptozinsen, Pools, Liquidity Mining' },
       { name: 'robots', content: 'index, follow' },
       { name: 'author', content: 'Marek Sonnabend' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
