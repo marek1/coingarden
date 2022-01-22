@@ -2,7 +2,7 @@
   
   <div class="overflow-auto">
     <div class="float-left max-width-50">
-      Berechnungsgrundlage:
+      <i class="fa fa-calculator"></i> Berechnungsgrundlage:
       <span class="btn-link" *ngIf="!showInput; else amountInput" (click)="showInput = true">
         {{amountOfCoins}} {{coin.toString().toUpperCase()}} <i class="fa fa-pencil"></i>
       </span>

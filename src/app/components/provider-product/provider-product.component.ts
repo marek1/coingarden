@@ -20,6 +20,13 @@ export class ProviderProductComponent implements OnInit {
   strategieName = '';
   strategieUrl = '';
 
+  sortOffers(offers: LatestOffer[]) {
+      console.log('...', offers);
+
+      return offers.sort((a: LatestOffer, b) => {
+        return a.latestOffer.avgAnnualInterestRate > b.latestOffer.avgAnnualInterestRate ? 1 : -1;
+      });
+  }
   calculateYield(offer: LatestOffer) {
     // console.log('offer : ', offer);
     // console.log('amountOfCoins : ', this.amountOfCoins);

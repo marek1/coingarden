@@ -19,11 +19,12 @@
         <b>0 % Zinsen, aber hohe Sicherheit <i class="fa fa-exclamation-triangle"></i> </b>
       </div>
       <div *ngIf="(product.offers|async) as offers">
+  
         <div class="alert alert-primary" *ngIf="offers.length > 0
         && offers[0].latestOffer
         && offers[0].latestOffer.avgAnnualInterestRate > 0">
           Aktuelle Angebote :
-          <ng-container *ngFor="let offer of offers">
+          <ng-container *ngFor="let offer of sortOffers(offers)">
             <div class="font-weight-bold" *ngIf="offer.latestOffer.avgAnnualInterestRate > 0">
               <span *ngIf="provider.name.toString().toLowerCase() === 'nexo'">
                 bis zu
@@ -85,9 +86,9 @@
                   <div class="font-size-lg">
                     {{calculateYield(offer) | number:'1.2-8':'de'}} {{coin.toString().toUpperCase()}}
                   </div>
+                  
                   <div class="small" *ngIf="networkFee > 0">
-                    <i class="fa fa-exclamation-triangle"></i> Im Falle eines Übertrags fallen Netzwerkkosten von ca. {{networkFee | number:'1.2-8':'de'}} {{coin.toString().toUpperCase()}} an,
-                    so daß die Rendite nur noch bei ca. {{ (calculateYield(offer) - networkFee) | number:'1.2-8':'de'}} {{coin.toString().toUpperCase()}} liegen würde.
+                    <span><i class="fa fa-exclamation-triangle mr-1"></i>Netzwerkkosten mindern Rendite</span>
                   </div>
                 </div>
               </div>
@@ -99,8 +100,8 @@
     </div>
   
     <button class="btn btn-link float-right" (click)="collapse = !collapse">
-      <span *ngIf="!collapse">So geht's<i class="fa fa-arrow-circle-down"></i></span>
-      <span *ngIf="collapse">So geht's<i class="fa fa-arrow-circle-up"></i></span>
+      <span *ngIf="!collapse">So geht's<i class="fa fa-arrow-circle-down ml-1"></i></span>
+      <span *ngIf="collapse">So geht's<i class="fa fa-arrow-circle-up ml-1"></i></span>
     </button>
   </div>
   <div class="collapse {{collapse ? 'show' : ''}}" aria-labelledby="headingOne" data-parent="#accordion">
