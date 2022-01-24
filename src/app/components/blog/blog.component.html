@@ -1,13 +1,20 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-  <ng-container *ngIf="selectedBlog.id; else showAllBlogs">
+  
+  <div *ngIf="loading$|async">
+    <div class="d-flex align-items-center">
+      <strong>Lädt...</strong>
+      <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+    </div>
+  </div>
+  
+  <ng-container *ngIf="selectedBlog$|async as selectedBlog; else showAllBlogs">
     <div class="text-center mb-4">
       <h1 class="h3 mb-0 text-gray-800">{{selectedBlog.name}}</h1>
       <div class="small">
         Vom {{selectedBlog.date | date:'dd.MM.YYYY'}}
       </div>
     </div>
-    
     <div *ngFor="let blogDataItem of selectedBlog.data">
       <h5 class="mb-3" *ngIf="blogDataItem.header">
         {{blogDataItem.header}}
@@ -38,7 +45,7 @@
       <h1 class="h3 mb-0 text-gray-800">Unsere Blogposts</h1>
     </div>
   
-    <div>
+    <div *ngIf="blogPosts$|async as blogPosts">
       <div class="card-body" *ngFor="let blog of blogPosts">
         <div class="card-title">
           <h5>

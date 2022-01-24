@@ -10,6 +10,13 @@
     <a [routerLink]="'/start/eth/alle-risiken'">ETH</a> eine Rendite zu erzielen.
   </div>
   
+  <div *ngIf="loading$|async">
+    <div class="d-flex align-items-center">
+      <strong>Lädt...</strong>
+      <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+    </div>
+  </div>
+  
   <div class="carousel slide mt-4 mb-4" data-ride="carousel" *ngIf="(offers$ | async) as offers">
     <div *ngIf="offers.length > 0" class="text-center mt-2 mb-2">
       Die neuesten <a routerLink="['/strategie/sparprodukte']">Zinsen</a>:

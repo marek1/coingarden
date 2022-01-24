@@ -15,7 +15,6 @@ import { PageviewService } from './services/pageview.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'Kryptozinsen: Mit Coins eine Rendite erzielen';
-  providers$ = this.providerService.providers;
   constructor(private coinService: CoinService,
               private offersService: OffersService,
               private providerService: ProviderService,
@@ -44,10 +43,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Show loading indicator
-        console.log('url : ' ,event.url);
         this.pageviewService.setPageview(event.url);
       }
-
     });
   }
 

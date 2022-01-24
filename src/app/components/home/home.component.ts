@@ -6,6 +6,7 @@ import { map, tap } from 'rxjs/operators';
 import { ProviderService } from '../../services/provider.service';
 import { Provider } from '../../interfaces/provider';
 import { Offer } from '../../interfaces/offer';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -13,12 +14,14 @@ import { Offer } from '../../interfaces/offer';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  loading$: Observable<string> = new Observable<string>();
   provider$: Observable<any> = new  Observable();
   offers$: Observable<LatestOffer[]> = new Observable();
   featuredProvider = ['Binance', 'Crypto.com', 'Nexo'];
   featuredCoins = ['BTC', 'ETH', 'DOT', 'SOL', 'ADA'];
   currentOffer: number = 0;
-  constructor(private offersService: OffersService,
+  constructor(private loadingService: LoadingService,
+              private offersService: OffersService,
               private providerService: ProviderService) {
     this.provider$ = this.providerService.providers
       .pipe(
@@ -26,17 +29,22 @@ export class HomeComponent implements OnInit {
       );
     this.offers$ = this.offersService.offers
     .pipe(
-      map((x: LatestOffer[]) => x
-        .filter(x => {
-          return x.latestOffer.avgAnnualInterestRate > 0 &&
-            x.latestOffer.coins.filter(el => this.featuredCoins.includes(el)).length > 0
-        })
-        .sort(((a, b) => a.latestOffer.updated < b.latestOffer.updated ? -1 : 1))
+      map((x: LatestOffer[]) => {
+        this.loadingService.toggle('');
+        return x
+            .filter(x => {
+              return x.latestOffer.avgAnnualInterestRate > 0 &&
+                x.latestOffer.coins.filter(el => this.featuredCoins.includes(el)).length > 0
+            })
+            .sort(((a, b) => a.latestOffer.updated < b.latestOffer.updated ? -1 : 1))
+        }
       )
     );
   }
 
   ngOnInit(): void {
+    this.loading$ = this.loadingService.loading;
+    this.loadingService.toggle('Lädt');
   }
 
   filteredOffer(offers: any, provider: Provider, featuredCoin: string) {
