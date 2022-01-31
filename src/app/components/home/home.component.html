@@ -19,7 +19,7 @@
   
   <div class="carousel slide mt-4 mb-4" data-ride="carousel" *ngIf="(offers$ | async) as offers">
     <div *ngIf="offers.length > 0" class="text-center mt-2 mb-2">
-      Die neuesten <a routerLink="['/strategie/sparprodukte']">Zinsen</a>:
+      Die neuesten <a [routerLink]="'/strategie/sparprodukte'">Zinsen</a>:
     </div>
   
     <div class="table-responsive">
