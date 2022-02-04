@@ -62,7 +62,7 @@ export const Strategies: Strategy[] = [
         'Coins zur Verfügung und wirst dafür an den Erträgen beteiligt. ',
       image: '',
       video: 'https://www.youtube.com/watch?v=l1uu9rbf-xw&ab_channel=Kryptokanal',
-      blog: 'https://blockchainwelt.de/coin-staking/'
+      blog: 'https://coingarden.de/krypto-wissen/was-ist-staking'
     },
     blackListCoins: ['BTC']
   },
