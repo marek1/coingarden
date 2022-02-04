@@ -42,10 +42,18 @@ const routes: Routes = [
   },
   {
     path: 'blog',
-    component: BlogComponent
+    redirectTo: 'krypto-wissen'
   },
   {
     path: 'blog/:id',
+    redirectTo: 'krypto-wissen/:id'
+  },
+  {
+    path: 'krypto-wissen',
+    component: BlogComponent
+  },
+  {
+    path: 'krypto-wissen/:id',
     component: BlogComponent
   },
   {
