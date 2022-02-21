@@ -42,7 +42,12 @@
   
   <ng-template #showAllBlogs>
     <div class="text-center mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Unsere Blogposts</h1>
+      <h1 class="h3 mb-0 text-gray-800">Unsere Beiträge</h1>
+      <div>
+        Hier schreiben wir Artikel rund um das Thema Blockchain,
+        in denen wir versuchen das jeweilige Thema so einfach
+        wie möglich zu beschreiben.
+      </div>
     </div>
   
     <div *ngIf="blogPosts$|async as blogPosts">
