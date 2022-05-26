@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { LatestOffer } from '../../interfaces/latestOffer';
 import { Product } from '../../interfaces/product';
 import { Provider } from '../../interfaces/provider';
@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
 import { EtherscanService } from '../../services/etherscan.service';
 import { BitcoinService } from '../../services/bitcoin.service';
 import { Strategies } from '../../data/strategies';
+import { InterestsService } from '../../services/interests.service';
+import { ChartData, ChartDataset, ChartOptions } from 'chart.js';
+import { Offer } from '../../interfaces/offer';
 
 @Component({
   selector: 'app-provider-product',
@@ -19,14 +22,33 @@ export class ProviderProductComponent implements OnInit {
   networkFee = 0; // to be calculated
   strategieName = '';
   strategieUrl = '';
+  _chartNumber: string = '';
+
+  @Input() set chartNumber(value: string) {
+    this._chartNumber = value;
+  }
+
+  @Output() newChartNumber = new EventEmitter<string>();
+
+  get chartNumber(): string {
+    return this._chartNumber;
+  }
+
+  lineChartData: ChartData = {
+    datasets: [],
+    labels: []
+  };
+
+  lineChartDatasets: ChartDataset[] = [];
+  lineChartLabels: string[] = [];
+
 
   sortOffers(offers: LatestOffer[]) {
-      console.log('...', offers);
-
       return offers.sort((a: LatestOffer, b) => {
         return a.latestOffer.avgAnnualInterestRate > b.latestOffer.avgAnnualInterestRate ? 1 : -1;
       });
   }
+
   calculateYield(offer: LatestOffer) {
     // console.log('offer : ', offer);
     // console.log('amountOfCoins : ', this.amountOfCoins);
@@ -93,6 +115,7 @@ export class ProviderProductComponent implements OnInit {
     this._provider = value;
   }
 
+
   @Input() set product(value: Product) {
     this._product = value;
     this.strategieUrl = Strategies.find((x) => x.id === this._product?.belongs_to_strategy_id)?.int_url || '';
@@ -132,13 +155,34 @@ export class ProviderProductComponent implements OnInit {
 
 
   constructor(private etherscanService: EtherscanService,
-              private bitcoinService: BitcoinService) { }
+              private bitcoinService: BitcoinService,
+              private interestsService: InterestsService) { }
 
   ngOnInit(): void {
   }
 
   getHtml(x: string) {
     return x.replace(/(?:\r\n|\r|\n)/g, '<br>');
+  }
+
+  getCoins(offer: LatestOffer) {
+    return offer.latestOffer.coins.toString().replace(',', '/');
+  }
+
+  getChart(offer: LatestOffer) {
+    this.newChartNumber.emit(offer.latestOffer._id);
+    this.lineChartDatasets = [];
+    this.lineChartLabels = [];
+    this.interestsService.getAll(offer.latestOffer.coins.toString(), offer.latestOffer.type, offer.latestOffer.provider, offer.latestOffer.duration);
+    this.interestsService.allOffers.subscribe((x) => {
+      this.lineChartDatasets = [{ data: [], label: this.getCoins(offer) }];
+      this.lineChartLabels = [];
+      x.map((y => {
+        this.lineChartDatasets[0].data.push(y.avgAnnualInterestRate * 100);
+        let d = new Date(y.updated);
+        this.lineChartLabels.push(d.getDay() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear().toString().substr(2,4));
+      }));
+    })
   }
 
 }

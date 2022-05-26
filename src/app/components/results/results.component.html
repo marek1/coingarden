@@ -53,7 +53,9 @@
               [provider]="provider"
               [product]="product"
               [amountOfCoins]="amountOfCoins"
-              [coin]="coin">
+              [coin]="coin"
+              [chartNumber]="chartNumber"
+              (newChartNumber)="setChartNumber($event)">
               </app-provider-product>
             </ng-container>
           </ng-container>

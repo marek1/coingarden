@@ -27,6 +27,7 @@
       <ng-container *ngFor="let provider of providerProducts$ | async">
       
         <div id="accordion">
+          Chartnu: {{chartNumber}}
           <ng-container *ngFor="let product of provider.products">
             <ng-container *ngIf="(product.offers | async) as offers">
               <app-provider-product
@@ -34,7 +35,9 @@
               [provider]="provider"
               [product]="product"
               [amountOfCoins]="''"
-              [coin]="''"></app-provider-product>
+              [coin]="''"
+              [chartNumber]="chartNumber"
+              (newChartNumber)="setChartNumber($event)"></app-provider-product>
             </ng-container>
           </ng-container>
         </div>

@@ -24,6 +24,7 @@ import { OffersComponent } from './components/offers/offers.component';
 import { YoutubeComponent } from './components/youtube/youtube.component';
 import { NgxY2PlayerModule } from 'ngx-y2-player';
 import { AllOffersComponent } from './components/all-offers/all-offers.component';
+import { NgChartsModule } from 'ng2-charts';
 
 registerLocaleData(localeDe);
 
@@ -54,7 +55,8 @@ registerLocaleData(localeDe);
     RouterModule,
     NgxSliderModule,
     FormsModule,
-    NgxY2PlayerModule
+    NgxY2PlayerModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

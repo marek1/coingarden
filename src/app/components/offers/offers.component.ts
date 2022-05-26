@@ -22,6 +22,8 @@ export class OffersComponent implements OnInit {
   foundStrategies = Strategies;
   selectedProvider: string|null = null;
   title = 'Neueste Angebote im Kryptobereich';
+  chartNumber = '';
+
   constructor(public route: ActivatedRoute,
               public router: Router,
               public location: Location,
@@ -50,6 +52,10 @@ export class OffersComponent implements OnInit {
         }
       }
     });
+  }
+
+  setChartNumber(chartNumber: string) {
+    this.chartNumber = chartNumber;
   }
 
   setProviderProduct() {

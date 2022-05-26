@@ -28,8 +28,10 @@ export class ResultsComponent implements OnInit {
   amountOfCoins: string = '1';
   showInput = false;
   showCalculationResult = false;
+  chartNumber = '';
   private _coin: string = '';
   private _risk: number = -1;
+
 
   @Input() set coin(value: string) {
     this._coin = value;
@@ -85,6 +87,10 @@ export class ResultsComponent implements OnInit {
           })
         )
       );
+  }
+
+  setChartNumber(chartNumber: string) {
+    this.chartNumber = chartNumber;
   }
 
   updateStrategies() {

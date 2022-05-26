@@ -25,23 +25,36 @@
         && offers[0].latestOffer.avgAnnualInterestRate > 0">
           Aktuelle Angebote :
           <ng-container *ngFor="let offer of sortOffers(offers)">
-            <div class="font-weight-bold" *ngIf="offer.latestOffer.avgAnnualInterestRate > 0">
+  
+            <div *ngIf="offer.latestOffer.avgAnnualInterestRate > 0">
               <span *ngIf="provider.name.toString().toLowerCase() === 'nexo'">
                 bis zu
               </span>
               <span *ngIf="offer.latestOffer.slippageFee">
                 Pool {{offer.latestOffer.name}} :
               </span>
-              <span>
+              <span class="font-weight-bold">
                 {{offer.latestOffer.avgAnnualInterestRate * 100 | number:'1.2-8':'de'}} % Zinsen
               </span>
               <span>
-                auf {{offer.latestOffer.coins}}
+                auf {{getCoins(offer)}}
               </span>
+              <a class="btn-link cursor-pointer" (click)="getChart(offer)">
+                <i class="fa fa-line-chart"></i> Zinsverlauf ansehen
+              </a>
               <span *ngIf="offer.latestOffer.url">
                 &nbsp;<a href="{{offer.latestOffer.url}}" target="_blank"><i class="fa fa-arrow-circle-o-right"></i> Direkt zum Angebot</a>
               </span>
             </div>
+            
+            <div *ngIf="chartNumber == offer.latestOffer._id">
+              <canvas baseChart
+                      [datasets]="lineChartDatasets"
+                      [labels]="lineChartLabels"
+                      [type]="'line'">
+              </canvas>
+            </div>
+            
             <div class="small  mb-4">
               <div>
                 Kosten:
@@ -78,7 +91,7 @@
                  (Stand: {{offer.latestOffer.updated | date:'dd.MM.YYYY'}})
                 </span>
               </div>
-              <div class="overflow-auto font-weight-bold" *ngIf="amountOfCoins">
+              <div class="overflow-auto" *ngIf="amountOfCoins">
                 <div class="float-right text-right">
                   <div class="font-text-underline">
                     Berechnete jährliche Rendite für {{amountOfCoins}} {{coin.toString().toUpperCase()}} (abzgl. Gebühren):
