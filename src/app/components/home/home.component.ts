@@ -17,8 +17,8 @@ export class HomeComponent implements OnInit {
   loading$: Observable<string> = new Observable<string>();
   provider$: Observable<any> = new  Observable();
   offers$: Observable<LatestOffer[]> = new Observable();
-  featuredProvider = ['Binance', 'Crypto.com', 'Nexo'];
-  featuredCoins = ['BTC', 'ETH', 'DOT', 'SOL', 'ADA'];
+  featuredProvider = ['Binance', 'Crypto.com'];
+  featuredCoins = ['BTC', 'ETH', 'ADA', 'SOL'];
   currentOffer: number = 0;
   constructor(private loadingService: LoadingService,
               private offersService: OffersService,
