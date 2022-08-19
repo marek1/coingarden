@@ -6,9 +6,11 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CoinService } from '../../services/coin.service';
 import { Risks } from '../../data/risks';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { Meta, Title } from '@angular/platform-browser';
 import { PageviewService } from '../../services/pageview.service';
+import { select, Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers/';
 
 @Component({
   selector: 'app-start',
@@ -31,7 +33,8 @@ export class StartComponent implements OnInit {
               public route: ActivatedRoute,
               public location: Location,
               private titleService: Title,
-              private metaTagService: Meta) {
+              private metaTagService: Meta,
+              private store: Store<any>) {
     this.coinForm = new UntypedFormGroup({
       selectedCoin: new UntypedFormControl(''),
     });
@@ -42,7 +45,9 @@ export class StartComponent implements OnInit {
     this.metaTagService.updateTag(
       { name: 'description', content: 'Siehe Möglichkeiten Rendite mit deinen Coins zu erzielen.' }
     );
-    this.selectedCoins$ = this.coinService.coins;
+    this.selectedCoins$ = this.store.pipe(
+      select(fromRoot.getCoins)
+    );
     // connect
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.get('id')) {
@@ -71,12 +76,12 @@ export class StartComponent implements OnInit {
   }
 
   searchCoin(ev: any) {
-    this.selectedCoins$ = this.coinService.coins
-    .pipe(
+    this.selectedCoins$ = this.store.pipe(
+      select(fromRoot.getCoins),
       map(x => x.filter(coin => {
         return coin.toLowerCase().indexOf(ev.target.value.toString().toLowerCase()) > -1;
       }))
-    );
+    )
   }
 
   selectCoin(coin: string) {

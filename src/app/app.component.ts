@@ -7,6 +7,9 @@ import { Meta, Title } from '@angular/platform-browser';
 import { BitcoinService } from './services/bitcoin.service';
 import { Event, NavigationStart, Router } from '@angular/router';
 import { PageviewService } from './services/pageview.service';
+import { Store } from '@ngrx/store';
+import * as AppActions from './actions/';
+import { AppEffects } from './effects/app.effects';
 
 @Component({
   selector: 'app-root',
@@ -23,12 +26,14 @@ export class AppComponent implements OnInit, OnDestroy {
               private pageviewService: PageviewService,
               private metaTagService: Meta,
               private titleService: Title,
-              private router: Router) {
+              private router: Router,
+              private store: Store<any>) {
   }
 
   ngOnInit() {
     this.titleService.setTitle(this.title);
-    this.coinService.getAll();
+    // this.coinService.getAll();
+    this.store.dispatch(AppActions.getCoins());
     this.offersService.getAll();
     this.providerService.getAll();
     this.etherscanService.getGasFee();

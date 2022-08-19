@@ -25,6 +25,11 @@ import { YoutubeComponent } from './components/youtube/youtube.component';
 import { NgxY2PlayerModule } from 'ngx-y2-player';
 import { AllOffersComponent } from './components/all-offers/all-offers.component';
 import { NgChartsModule } from 'ng2-charts';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './effects/app.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ROOT_REDUCERS, metaReducers } from './reducers';
 
 registerLocaleData(localeDe);
 
@@ -56,7 +61,21 @@ registerLocaleData(localeDe);
     NgxSliderModule,
     FormsModule,
     NgxY2PlayerModule,
-    NgChartsModule
+    NgChartsModule,
+    StoreModule.forRoot(ROOT_REDUCERS, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictStateSerializability: true,
+        strictActionSerializability: true
+      }
+    }),
+    // StoreModule.forFeature(from.)
+    EffectsModule.forRoot([AppEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
