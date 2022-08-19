@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -18,7 +18,7 @@ import { PageviewService } from '../../services/pageview.service';
 export class StartComponent implements OnInit {
   title = 'Strategien für deine';
   public selectedCoins$: Observable<string[]> = new Observable();
-  public coinForm: FormGroup;
+  public coinForm: UntypedFormGroup;
   public currentStep = 1;
   public selectedCoin = '';
   public selectedRisk = -1;
@@ -32,8 +32,8 @@ export class StartComponent implements OnInit {
               public location: Location,
               private titleService: Title,
               private metaTagService: Meta) {
-    this.coinForm = new FormGroup({
-      selectedCoin: new FormControl(''),
+    this.coinForm = new UntypedFormGroup({
+      selectedCoin: new UntypedFormControl(''),
     });
   }
 
