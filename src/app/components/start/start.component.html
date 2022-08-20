@@ -1,6 +1,14 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
   
+  <div class="spinner-border" role="status" *ngIf="!(selectedCoins$|async)?.length && !(coinLoadingError$|async)">
+    <span class="sr-only">Loading...</span>
+  </div>
+  
+  <div class="alert alert-danger" *ngIf="(coinLoadingError$|async)">
+    {{coinLoadingError$|async}}
+  </div>
+  
   <!-- Page Heading -->
   <div class="mb-4">
     <h1 class="h3 mb-0 text-gray-800">Deine Auswahl</h1>

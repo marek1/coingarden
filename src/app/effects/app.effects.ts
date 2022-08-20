@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import * as AppActions from '../actions/';
 import { CoinService } from '../services/coin.service';
@@ -13,7 +13,7 @@ export class AppEffects {
       mergeMap(() => this.coinService.getAll()
         .pipe(
           map(coins => AppActions.saveCoins({ coins })),
-          catchError(() => EMPTY)
+          catchError(() => of(AppActions.saveCoinsError({errorMessage: 'Ein Fehler beim Laden der Coins ist aufgetreten'})))
         ))
     )
   );

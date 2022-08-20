@@ -20,6 +20,7 @@ import * as fromRoot from '../../reducers/';
 export class StartComponent implements OnInit {
   title = 'Strategien für deine';
   public selectedCoins$: Observable<string[]> = new Observable();
+  public coinLoadingError$: Observable<string|null> = new Observable();
   public coinForm: UntypedFormGroup;
   public currentStep = 1;
   public selectedCoin = '';
@@ -47,6 +48,9 @@ export class StartComponent implements OnInit {
     );
     this.selectedCoins$ = this.store.pipe(
       select(fromRoot.getCoins)
+    );
+    this.coinLoadingError$ = this.store.pipe(
+      select(fromRoot.getCoinsError)
     );
     // connect
     this.route.paramMap.subscribe((params: ParamMap) => {

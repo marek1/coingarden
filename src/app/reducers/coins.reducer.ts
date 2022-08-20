@@ -1,23 +1,23 @@
 import { createReducer, on } from '@ngrx/store';
-import { saveCoins } from '../actions';
+import { saveCoins, saveCoinsError } from '../actions';
 
 export const featureKey = 'coins';
 
 export interface State {
-  isLoading: boolean;
   errorMessage: string | null;
   coins: string[]
 }
 
 const initialState: State = {
-  isLoading: false,
   errorMessage: '',
   coins: []
 };
 
 export const reducer = createReducer(
   initialState,
-  on(saveCoins, (state, {coins}) => ({ ...state, coins })),
+  on(saveCoins, (state, {coins}) => ({ errorMessage: '', coins })),
+  on(saveCoinsError, (state, {errorMessage}) => ({ ...state, errorMessage })),
 );
 
 export const getCoins = (state: State) => state.coins;
+export const getCoinsError = (state: State) => state.errorMessage;

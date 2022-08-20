@@ -7,10 +7,8 @@ import {
   MetaReducer
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-
-import * as fromCoins from './coins';
 import { InjectionToken } from '@angular/core';
-import { from } from 'rxjs';
+import * as fromCoins from './coins.reducer';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -65,6 +63,11 @@ export const selectCoinsState = createFeatureSelector<AppState, fromCoins.State>
 export const getCoins = createSelector(
   selectCoinsState,
   fromCoins.getCoins
+);
+
+export const getCoinsError = createSelector(
+  selectCoinsState,
+  fromCoins.getCoinsError
 );
 
 
