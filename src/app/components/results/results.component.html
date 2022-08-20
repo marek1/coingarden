@@ -46,12 +46,13 @@
 
         <div id="accordion">
           <ng-container *ngFor="let product of provider.products">
-            <ng-container *ngIf="(product.offers | async) as offers">
+            <ng-container *ngIf="(getProductOffers(product.name, provider.id))|async as offers">
               <app-provider-product
               *ngIf="product.belongs_to_strategy_id === foundStrategy.id &&
               (offers.length > 0 || product.name.toLowerCase().indexOf('trading'))> -1"
               [provider]="provider"
               [product]="product"
+              [offers]="offers"
               [amountOfCoins]="amountOfCoins"
               [coin]="coin"
               [chartNumber]="chartNumber"

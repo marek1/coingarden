@@ -1,13 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { combineAll, concatAll, filter, map, mergeAll } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Strategies } from '../../data/strategies';
 import { Provider } from '../../interfaces/provider';
-import { ProviderService } from '../../services/provider.service';
-import { OffersService } from '../../services/offers.service';
 import { Strategy } from '../../interfaces/strategy';
 import * as fromRoot from '../../reducers';
 import { select, Store } from '@ngrx/store';
+import { Product } from '../../interfaces/product';
 
 @Component({
   selector: 'app-results',
@@ -33,13 +32,11 @@ export class ResultsComponent implements OnInit {
   private _coin: string = '';
   private _risk: number = -1;
 
-
   @Input() set coin(value: string) {
     this._coin = value;
   }
 
   get coin(): string {
-    // other logic
     return this._coin;
   }
 
@@ -49,7 +46,6 @@ export class ResultsComponent implements OnInit {
   }
 
   get risk(): number {
-    // other logic
     return this._risk;
   }
 
@@ -57,37 +53,48 @@ export class ResultsComponent implements OnInit {
   foundStrategyIds: number[] = [];
   providerProducts$: Observable<Provider[]> = new Observable();
 
-  constructor(private store: Store<any>,
-              private providerService: ProviderService) {
+  constructor(private store: Store<any>) {
   }
 
   ngOnInit(): void {
-    this.providerProducts$ = this.providerService.providers
+    this.providerProducts$ = this.store
       .pipe(
-        map(provider => provider.map(prov => {
-            // only use those products which are in question fo the found strategies:
-            // prov.products = prov.products.filter(prod => foundStrategies.indexOf(prod.belongs_to_strategy_id) > -1);
-            prov.products.map((product) => {
-              product.offers = this.store
-                .pipe(
-                  select(fromRoot.getOffers),
-                  map(latestOffers => {
-                    return latestOffers.filter((offer) => {
-                      // console.log('type : ', offer.latestOffer.type.toString().toLowerCase(), product.name.toString().toLowerCase());
-                      // console.log('provider : ', offer.latestOffer.provider.toString().toLowerCase(), prov.id.toString().toLowerCase());
-                      return offer.latestOffer.type.toString().toLowerCase() === product.name.toString().toLowerCase()
-                        && offer.latestOffer.provider.toString().toLowerCase() === prov.id.toString().toLowerCase()
-                        && offer.latestOffer.coins.map(x => x.toString().toLowerCase()).indexOf(this.coin.toString().toLowerCase()) > -1
-                    })
-                  })
-                );
-            })
-            return prov;
-          })
-        )
+        select(fromRoot.getProdivers),
+        // map(provider => provider.map(prov => {
+        //     // only use those products which are in question fo the found strategies:
+        //     // prov.products = prov.products.filter(prod => foundStrategies.indexOf(prod.belongs_to_strategy_id) > -1);
+        //     prov.products.map((product) => {
+        //       product.offers = this.store
+        //         .pipe(
+        //           select(fromRoot.getOffers),
+        //           map(latestOffers => {
+        //             return latestOffers.filter((offer) => {
+        //               return offer.latestOffer.type.toString().toLowerCase() === product.name.toString().toLowerCase()
+        //                 && offer.latestOffer.provider.toString().toLowerCase() === prov.id.toString().toLowerCase()
+        //                 && offer.latestOffer.coins.map(x => x.toString().toLowerCase()).indexOf(this.coin.toString().toLowerCase()) > -1
+        //             })
+        //           })
+        //         );
+        //     })
+        //     return prov;
+        //   })
+        // )
       );
   }
 
+  getProductOffers(productName: string, providerId: string) {
+    return this.store
+      .pipe(
+        select(fromRoot.getOffers),
+        map(latestOffers => {
+          return latestOffers.filter((offer) => {
+            return offer.latestOffer.type.toString().toLowerCase() === productName.toString().toLowerCase()
+              && offer.latestOffer.provider.toString().toLowerCase() === providerId.toString().toLowerCase()
+              && offer.latestOffer.coins.map(x => x.toString().toLowerCase()).indexOf(this.coin.toString().toLowerCase()) > -1
+          })
+        })
+      );
+  }
   setChartNumber(chartNumber: string) {
     this.chartNumber = chartNumber;
   }
@@ -107,8 +114,6 @@ export class ResultsComponent implements OnInit {
   }
 
   setAmount() {
-    // console.log('amountOfCoins : ', this.amountOfCoins);
-    // calculate!
     this.showCalculationResult = true;
     setTimeout(() => {
         this.showCalculationResult = false;
@@ -116,12 +121,9 @@ export class ResultsComponent implements OnInit {
   }
 
   changeSort(ev: any) {
-    // console.log('sort ;: ', this.selectedSortOption)
-    // console.log('sort ;: ', ev.target.value);
     if (ev.target.value) {
       this.selectedSortOption = this.sortOptions.find(x => x.id.toString() === ev.target.value) || this.sortOptions[0];
     }
-    // console.log('sort ;: ', this.selectedSortOption)
     this.sortStrategies();
   }
 

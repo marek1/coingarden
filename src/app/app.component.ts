@@ -35,10 +35,11 @@ export class AppComponent implements OnInit, OnDestroy {
     // this.coinService.getAll();
     this.store.dispatch(AppActions.getCoins());
     this.store.dispatch(AppActions.getOffers());
+    this.store.dispatch(AppActions.getProviders());
 
-    this.providerService.getAll();
     this.etherscanService.getGasFee();
     this.bitcoinService.getTxFee();
+
     this.metaTagService.addTags([
       { name: 'keywords', content: 'Staking, Zinsen, BTC, ETH, Kryptowährungen, Coins, Kryptozinsen, Pools, Liquidity Mining' },
       { name: 'robots', content: 'index, follow' },

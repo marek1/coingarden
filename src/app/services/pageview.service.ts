@@ -13,7 +13,7 @@ export class PageviewService {
   setPageview(page: string) {
     this.http.get<any>('/api/v1/pageview?page='+encodeURIComponent(page)+'&id='+this.sessionId)
       .subscribe((data) => {
-        console.log('data: ', data);
+        console.log('ok');
       });
   }
 }

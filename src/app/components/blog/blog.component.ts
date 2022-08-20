@@ -4,8 +4,9 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BlogPost } from '../../interfaces/blogPost';
 import { map } from 'rxjs/operators';
-import { BlogsService } from '../../services/blogs.service';
-import { LoadingService } from '../../services/loading.service';
+import { select, Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
+import * as AppActions from '../../actions';
 
 @Component({
   selector: 'app-blog',
@@ -16,37 +17,31 @@ export class BlogComponent implements OnInit {
   title = 'Unsere Blog Posts';
   loading$: Observable<string> = new Observable<string>();
   blogPosts$: Observable<BlogPost[]> = new Observable<BlogPost[]>();
+  blogPostsError$: Observable<string|null> = new Observable();
   selectedBlog$: Observable<BlogPost|undefined> = new Observable<BlogPost>();
   constructor(public route: ActivatedRoute,
-              private loadingService: LoadingService,
-              private blogsService: BlogsService,
+              private store: Store<any>,
               private titleService: Title,
               private metaTagService: Meta) {
   }
 
   ngOnInit(): void {
-    this.loading$ = this.loadingService.loading;
-    this.loadingService.toggle('Lädt');
     this.titleService.setTitle(this.title);
     this.metaTagService.updateTag(
       {name: 'description', content: 'Eine Übersicht über die Blog-Beiträge'}
     );
-    this.blogsService.getAll();
-    this.blogPosts$ = this.blogsService
-      .blogs
+    this.store.dispatch(AppActions.getBlogs());
+    this.blogPosts$ = this.store
       .pipe(
-        map((blogPosts: BlogPost[]) => {
-          this.loadingService.toggle('');
-          return blogPosts.sort((a, b) => a.date > b.date ? -1 : 1)
-        })
+        select(fromRoot.getBlogs)
       );
+    this.blogPostsError$ = this.store.pipe(select(fromRoot.getBlogsError));
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.get('id')) {
-        this.selectedBlog$ = this.blogsService
-          .blogs
+        this.selectedBlog$ = this.store
           .pipe(
+            select(fromRoot.getBlogs),
             map((blogPosts: BlogPost[]) => {
-              this.loadingService.toggle('');
               return blogPosts.find(blog => blog.url === params.get('id')?.toString())
             })
           )

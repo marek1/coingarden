@@ -3,10 +3,8 @@ import { Observable } from 'rxjs';
 import { Provider } from '../../interfaces/provider';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
-import { OffersService } from '../../services/offers.service';
 import { Strategies } from '../../data/strategies';
 import { map } from 'rxjs/operators';
-import { ProviderService } from '../../services/provider.service';
 import { Location } from '@angular/common';
 import { PageviewService } from '../../services/pageview.service';
 import { select, Store } from '@ngrx/store';
@@ -20,6 +18,7 @@ import * as fromRoot from '../../reducers';
 export class OffersComponent implements OnInit {
 
   provider$: Observable<Provider[]> = new Observable();
+  providerLoadingError$: Observable<string|null> = new Observable();
   providerProducts$: Observable<Provider[]> = new Observable();
   foundStrategies = Strategies;
   selectedProvider: string|null = null;
@@ -30,7 +29,6 @@ export class OffersComponent implements OnInit {
               public router: Router,
               public location: Location,
               private store: Store<any>,
-              private providerService: ProviderService,
               private pageviewService: PageviewService,
               private titleService: Title,
               private metaTagService: Meta) {
@@ -41,7 +39,9 @@ export class OffersComponent implements OnInit {
     this.metaTagService.updateTag(
       {name: 'description', content: 'Eine Übersicht der Anbieter und ihrer Angebote'}
     );
-    this.provider$ = this.providerService.providers;
+    this.provider$ = this.store.pipe(select(fromRoot.getProdivers));
+    this.providerLoadingError$ = this.store.pipe(select(fromRoot.getProvidersError));
+    this.setProviderProduct();
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.get('id')) {
         this.selectedProvider = params.get('id')?.toString().toLowerCase()||null;
@@ -65,26 +65,20 @@ export class OffersComponent implements OnInit {
       .pipe(
         map(provider => provider
           .filter(provider => provider.name.toString().toLowerCase() === this.selectedProvider)
-          .map(prov => {
-            // only use those products which are in question fo the found strategies:
-            // prov.products = prov.products.filter(prod => foundStrategies.indexOf(prod.belongs_to_strategy_id) > -1);
-            prov.products.map((product) => {
-              product.offers = this.store
-                .pipe(
-                  select(fromRoot.getOffers),
-                  map(latestOffers => {
-                    return latestOffers.filter((offer) => {
-                      // console.log('type : ', offer.latestOffer.type.toString().toLowerCase(), product.name.toString().toLowerCase());
-                      // console.log('provider : ', offer.latestOffer.provider.toString().toLowerCase(), prov.id.toString().toLowerCase());
-                      return offer.latestOffer.type.toString().toLowerCase() === product.name.toString().toLowerCase()
-                        && offer.latestOffer.provider.toString().toLowerCase() === prov.id.toString().toLowerCase();
-                    })
-                  })
-                );
-            })
-            return prov;
-          })
         )
+      );
+  }
+
+  getProductOffers(productName: string, providerId: string) {
+    return this.store
+      .pipe(
+        select(fromRoot.getOffers),
+        map(latestOffers => {
+          return latestOffers.filter((offer) => {
+            return offer.latestOffer.type.toString().toLowerCase() === productName.toString().toLowerCase()
+              && offer.latestOffer.provider.toString().toLowerCase() === providerId.toString().toLowerCase();
+          })
+        })
       );
   }
 

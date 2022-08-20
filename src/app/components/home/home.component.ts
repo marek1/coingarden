@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LatestOffer } from '../../interfaces/latestOffer';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { ProviderService } from '../../services/provider.service';
+import { map } from 'rxjs/operators';
 import { Provider } from '../../interfaces/provider';
-import { LoadingService } from '../../services/loading.service';
 import { select, Store } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 
@@ -16,23 +14,23 @@ import * as fromRoot from '../../reducers';
 export class HomeComponent implements OnInit {
   loading$: Observable<string> = new Observable<string>();
   provider$: Observable<any> = new  Observable();
+  providerLoadingError$: Observable<string|null> = new Observable();
   offers$: Observable<LatestOffer[]> = new Observable();
   offersLoadingError$: Observable<string|null> = new Observable();
   featuredProvider = ['Binance', 'Crypto.com'];
   featuredCoins = ['BTC', 'ETH', 'ADA', 'SOL'];
   currentOffer: number = 0;
-  constructor(private loadingService: LoadingService,
-              private store: Store<any>,
-              private providerService: ProviderService) {
-    this.provider$ = this.providerService.providers
+  constructor(private store: Store<any>) {
+    this.provider$ = this.store
       .pipe(
+        select(fromRoot.getProdivers),
         map((x: Provider[]) => x.filter(x => this.featuredProvider.indexOf(x.name) > -1))
       );
+    this.providerLoadingError$ = this.store.pipe(select(fromRoot.getProvidersError));
     this.offers$ = this.store
     .pipe(
       select(fromRoot.getOffers),
       map((x: LatestOffer[]) => {
-        this.loadingService.toggle('');
         return x
             .filter(x => {
               return x.latestOffer.avgAnnualInterestRate > 0 &&
@@ -46,8 +44,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loading$ = this.loadingService.loading;
-    this.loadingService.toggle('Lädt');
+
   }
 
   filteredOffer(offers: any, provider: Provider, featuredCoin: string) {

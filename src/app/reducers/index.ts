@@ -10,6 +10,8 @@ import { environment } from '../../environments/environment';
 import { InjectionToken } from '@angular/core';
 import * as fromCoins from './coins.reducer';
 import * as fromOffers from './offers.reducer';
+import * as fromProviders from './providers.reducer';
+import * as fromBlogs from './blogs.reducer';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -18,6 +20,8 @@ import * as fromOffers from './offers.reducer';
 export interface AppState {
   [fromCoins.featureKey]: fromCoins.State;
   [fromOffers.featureKey]: fromOffers.State;
+  [fromProviders.featureKey]: fromProviders.State;
+  [fromBlogs.featureKey]: fromBlogs.State;
 }
 
 /**
@@ -29,6 +33,8 @@ export const ROOT_REDUCERS = new InjectionToken<ActionReducerMap<AppState, Actio
   factory: () => ({
     [fromCoins.featureKey]: fromCoins.reducer,
     [fromOffers.featureKey]: fromOffers.reducer,
+    [fromProviders.featureKey]: fromProviders.reducer,
+    [fromBlogs.featureKey]: fromBlogs.reducer,
   })
 });
 
@@ -86,6 +92,35 @@ export const getOffers = createSelector(
 export const getOffersError = createSelector(
   selectOffersState,
   fromOffers.getOffersError
+);
+
+
+export const selectProvidersState = createFeatureSelector<AppState, fromProviders.State>(
+  fromProviders.featureKey
+);
+
+export const getProdivers = createSelector(
+  selectProvidersState,
+  fromProviders.getProviders
+);
+
+export const getProvidersError = createSelector(
+  selectProvidersState,
+  fromProviders.getProvidersError
+);
+
+export const selectBlogsState = createFeatureSelector<AppState, fromBlogs.State>(
+  fromBlogs.featureKey
+);
+
+export const getBlogs = createSelector(
+  selectBlogsState,
+  fromBlogs.getBlogs
+);
+
+export const getBlogsError = createSelector(
+  selectBlogsState,
+  fromBlogs.getBlogsError
 );
 
 

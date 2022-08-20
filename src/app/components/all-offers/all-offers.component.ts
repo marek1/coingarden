@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LatestOffer } from '../../interfaces/latestOffer';
-import { OffersService } from '../../services/offers.service';
-import { ProviderService } from '../../services/provider.service';
 import { map } from 'rxjs/operators';
 import { Provider } from '../../interfaces/provider';
 import { Meta, Title } from '@angular/platform-browser';
@@ -17,19 +15,22 @@ import * as fromRoot from '../../reducers';
 export class AllOffersComponent implements OnInit {
   title = 'Alle Renditemöglichkeiten';
   provider$: Observable<any> = new  Observable();
+  providerLoadingError$: Observable<string|null> = new Observable();
   offers$: Observable<LatestOffer[]> = new Observable();
+  offersLoadingError$: Observable<string|null> = new Observable();
   excludedProviders = ['MetaMask', 'Trezor'];
   coins: string[] = ['BTC', 'ADA', 'USDC', 'USDT', 'ETH', 'DOT', 'XRP', 'DOT', 'MATIC'];
   sortDirection: string|null = null;
 
   constructor(private store: Store<any>,
-              private providerService: ProviderService,
               private titleService: Title,
               private metaTagService: Meta) {
-    this.provider$ = this.providerService.providers
+    this.provider$ = this.store
       .pipe(
+        select(fromRoot.getProdivers),
         map((x: Provider[]) => x.filter(x => this.excludedProviders.indexOf(x.name) === -1))
       );
+    this.providerLoadingError$ = this.store.pipe(select(fromRoot.getProvidersError));
     this.offers$ = this.store
       .pipe(
         select(fromRoot.getOffers),
@@ -52,6 +53,7 @@ export class AllOffersComponent implements OnInit {
           .sort(((a, b) => a.latestOffer.updated < b.latestOffer.updated ? -1 : 1))
         )
       );
+    this.offersLoadingError$ = this.store.pipe(select(fromRoot.getOffersError));
   }
 
   ngOnInit(): void {

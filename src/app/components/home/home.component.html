@@ -1,12 +1,16 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
   
-  <div class="spinner-border" role="status" *ngIf="!(offers$|async)?.length && !(offersLoadingError$|async)">
+  <div class="spinner-border" role="status" *ngIf="(!(provider$|async)?.length || !(offers$|async)?.length) && !(offersLoadingError$|async) && !(providerLoadingError$|async)">
     <span class="sr-only">Loading...</span>
   </div>
   
   <div class="alert alert-danger" *ngIf="(offersLoadingError$|async)">
     {{offersLoadingError$|async}}
+  </div>
+  
+  <div class="alert alert-danger" *ngIf="(providerLoadingError$|async)">
+    {{providerLoadingError$|async}}
   </div>
   
   <div class="text-center mb-4">

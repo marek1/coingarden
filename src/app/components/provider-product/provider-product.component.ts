@@ -103,9 +103,10 @@ export class ProviderProductComponent implements OnInit {
       blog: ''
     },
     feesInPercentMin: 0,
-    feesInPercentMax: 0,
-    offers: new Observable()
+    feesInPercentMax: 0
   };
+
+  private _offers: LatestOffer[] = [];
 
   private _amountOfCoins: string = '';
 
@@ -115,11 +116,14 @@ export class ProviderProductComponent implements OnInit {
     this._provider = value;
   }
 
-
   @Input() set product(value: Product) {
     this._product = value;
     this.strategieUrl = Strategies.find((x) => x.id === this._product?.belongs_to_strategy_id)?.int_url || '';
     this.strategieName = Strategies.find((x) => x.id === this._product?.belongs_to_strategy_id)?.name || '';
+  }
+
+  @Input() set offers(value: LatestOffer[]) {
+    this._offers = value;
   }
 
   @Input() set amountOfCoins(value: string) {
@@ -131,16 +135,15 @@ export class ProviderProductComponent implements OnInit {
   }
 
   get provider(): Provider {
-    // other logic
     return this._provider;
   }
 
   get product(): Product {
-
-    // other logic
-
     return this._product;
+  }
 
+  get offers(): LatestOffer[] {
+    return this._offers;
   }
 
   get amountOfCoins(): string {

@@ -1,5 +1,14 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
+  
+  <div class="spinner-border" role="status" *ngIf="!(provider$|async)?.length && !(providerLoadingError$|async)">
+    <span class="sr-only">Loading...</span>
+  </div>
+  
+  <div class="alert alert-danger" *ngIf="(providerLoadingError$|async)">
+    {{providerLoadingError$|async}}
+  </div>
+  
   <div class="text-center mb-4">
     <h1 class="h3 mb-0 text-gray-800">Ausgewählte Angebote</h1>
   </div>
@@ -23,16 +32,15 @@
   </div>
   
   <div class="mt-4" *ngIf="selectedProvider">
-     
       <ng-container *ngFor="let provider of providerProducts$ | async">
-      
         <div id="accordion">
           <ng-container *ngFor="let product of provider.products">
-            <ng-container *ngIf="(product.offers | async) as offers">
+            <ng-container *ngIf="(getProductOffers(product.name, provider.id)|async) as offers">
               <app-provider-product
               *ngIf="(offers.length > 0 || product.name.toLowerCase().indexOf('trading'))> -1"
               [provider]="provider"
               [product]="product"
+              [offers]="offers"
               [amountOfCoins]="''"
               [coin]="''"
               [chartNumber]="chartNumber"

@@ -7,17 +7,12 @@ import { Provider } from '../interfaces/provider';
   providedIn: 'root'
 })
 export class ProviderService {
-  private _providers = new BehaviorSubject<Provider[]>([]);
-  private dataStore: { providers: Provider[] } = { providers: [] };
-  readonly providers = this._providers.asObservable();
+
   constructor(public http: HttpClient) {
   }
 
   getAll() {
-    this.http.get<Provider[]>('/api/v1/providers').subscribe((data) => {
-      this.dataStore.providers = data;
-      this._providers.next(Object.assign({}, this.dataStore).providers);
-    });
+    return this.http.get<Provider[]>('/api/v1/providers');
   }
 
 }

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CoinService } from '../../services/coin.service';
 import { Risks } from '../../data/risks';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Meta, Title } from '@angular/platform-browser';
 import { PageviewService } from '../../services/pageview.service';
 import { select, Store } from '@ngrx/store';
@@ -94,13 +93,11 @@ export class StartComponent implements OnInit {
   }
 
   setRisk(x: number) {
-    console.log('got risk ; ', x);
     this.selectedRisk = x;
     this.setUrl();
   }
 
   goToStep(x: number) {
-    console.log('go to step : ', x);
     if (!this.selectedCoin && x > 1) {
       return;
     }

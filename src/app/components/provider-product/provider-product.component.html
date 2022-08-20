@@ -18,8 +18,7 @@
       <div *ngIf="product.name.indexOf('Wallet') > -1">
         <b>0 % Zinsen, aber hohe Sicherheit <i class="fa fa-exclamation-triangle"></i> </b>
       </div>
-      <div *ngIf="(product.offers|async) as offers">
-  
+      <div *ngIf="offers">
         <div class="alert alert-primary" *ngIf="offers.length > 0
         && offers[0].latestOffer
         && offers[0].latestOffer.avgAnnualInterestRate > 0">
