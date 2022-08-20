@@ -9,6 +9,8 @@ import { map } from 'rxjs/operators';
 import { ProviderService } from '../../services/provider.service';
 import { Location } from '@angular/common';
 import { PageviewService } from '../../services/pageview.service';
+import { select, Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
 
 @Component({
   selector: 'app-offers',
@@ -27,7 +29,7 @@ export class OffersComponent implements OnInit {
   constructor(public route: ActivatedRoute,
               public router: Router,
               public location: Location,
-              private offersService: OffersService,
+              private store: Store<any>,
               private providerService: ProviderService,
               private pageviewService: PageviewService,
               private titleService: Title,
@@ -67,8 +69,9 @@ export class OffersComponent implements OnInit {
             // only use those products which are in question fo the found strategies:
             // prov.products = prov.products.filter(prod => foundStrategies.indexOf(prod.belongs_to_strategy_id) > -1);
             prov.products.map((product) => {
-              product.offers = this.offersService.offers
+              product.offers = this.store
                 .pipe(
+                  select(fromRoot.getOffers),
                   map(latestOffers => {
                     return latestOffers.filter((offer) => {
                       // console.log('type : ', offer.latestOffer.type.toString().toLowerCase(), product.name.toString().toLowerCase());

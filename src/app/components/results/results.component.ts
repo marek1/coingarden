@@ -6,7 +6,8 @@ import { Provider } from '../../interfaces/provider';
 import { ProviderService } from '../../services/provider.service';
 import { OffersService } from '../../services/offers.service';
 import { Strategy } from '../../interfaces/strategy';
-import { FormControl } from '@angular/forms';
+import * as fromRoot from '../../reducers';
+import { select, Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-results',
@@ -35,8 +36,6 @@ export class ResultsComponent implements OnInit {
 
   @Input() set coin(value: string) {
     this._coin = value;
-    console.log('this.coin : ', value);
-    // this.updateProducts();
   }
 
   get coin(): string {
@@ -46,7 +45,6 @@ export class ResultsComponent implements OnInit {
 
   @Input() set risk(value: number) {
     this._risk = value;
-    // this.updateProducts();
     this.updateStrategies();
   }
 
@@ -59,7 +57,7 @@ export class ResultsComponent implements OnInit {
   foundStrategyIds: number[] = [];
   providerProducts$: Observable<Provider[]> = new Observable();
 
-  constructor(private offersService: OffersService,
+  constructor(private store: Store<any>,
               private providerService: ProviderService) {
   }
 
@@ -70,8 +68,9 @@ export class ResultsComponent implements OnInit {
             // only use those products which are in question fo the found strategies:
             // prov.products = prov.products.filter(prod => foundStrategies.indexOf(prod.belongs_to_strategy_id) > -1);
             prov.products.map((product) => {
-              product.offers = this.offersService.offers
+              product.offers = this.store
                 .pipe(
+                  select(fromRoot.getOffers),
                   map(latestOffers => {
                     return latestOffers.filter((offer) => {
                       // console.log('type : ', offer.latestOffer.type.toString().toLowerCase(), product.name.toString().toLowerCase());

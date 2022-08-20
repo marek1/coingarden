@@ -6,6 +6,8 @@ import { ProviderService } from '../../services/provider.service';
 import { map } from 'rxjs/operators';
 import { Provider } from '../../interfaces/provider';
 import { Meta, Title } from '@angular/platform-browser';
+import { select, Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
 
 @Component({
   selector: 'app-all-offers',
@@ -17,10 +19,10 @@ export class AllOffersComponent implements OnInit {
   provider$: Observable<any> = new  Observable();
   offers$: Observable<LatestOffer[]> = new Observable();
   excludedProviders = ['MetaMask', 'Trezor'];
-  coins: string[] = [];
+  coins: string[] = ['BTC', 'ADA', 'USDC', 'USDT', 'ETH', 'DOT', 'XRP', 'DOT', 'MATIC'];
   sortDirection: string|null = null;
 
-  constructor(private offersService: OffersService,
+  constructor(private store: Store<any>,
               private providerService: ProviderService,
               private titleService: Title,
               private metaTagService: Meta) {
@@ -28,17 +30,21 @@ export class AllOffersComponent implements OnInit {
       .pipe(
         map((x: Provider[]) => x.filter(x => this.excludedProviders.indexOf(x.name) === -1))
       );
-    this.offers$ = this.offersService.offers
+    this.offers$ = this.store
       .pipe(
+        select(fromRoot.getOffers),
         map((x: LatestOffer[]) => x
           .filter(x => {
+            // only those coins that are whitelistet
+            if (x.latestOffer.coins.filter(element => this.coins.includes(element)).length < 1) {
+              return;
+            }
+            // only certain types
+            if (x.latestOffer.type === 'Liquid Swap' || x.latestOffer.type === 'INVALID!') {
+              return;
+            }
             let apy = x.latestOffer.avgAnnualInterestRate;
             if (apy > 0) {
-              x.latestOffer.coins.map(coin => {
-                if (this.coins.indexOf(coin) < 0) {
-                  this.coins.push(coin);
-                }
-              });
               return true;
             }
             return false;

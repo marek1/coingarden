@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { OffersService } from '../../services/offers.service';
 import { LatestOffer } from '../../interfaces/latestOffer';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { ProviderService } from '../../services/provider.service';
 import { Provider } from '../../interfaces/provider';
-import { Offer } from '../../interfaces/offer';
 import { LoadingService } from '../../services/loading.service';
+import { select, Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
 
 @Component({
   selector: 'app-home',
@@ -17,18 +17,20 @@ export class HomeComponent implements OnInit {
   loading$: Observable<string> = new Observable<string>();
   provider$: Observable<any> = new  Observable();
   offers$: Observable<LatestOffer[]> = new Observable();
+  offersLoadingError$: Observable<string|null> = new Observable();
   featuredProvider = ['Binance', 'Crypto.com'];
   featuredCoins = ['BTC', 'ETH', 'ADA', 'SOL'];
   currentOffer: number = 0;
   constructor(private loadingService: LoadingService,
-              private offersService: OffersService,
+              private store: Store<any>,
               private providerService: ProviderService) {
     this.provider$ = this.providerService.providers
       .pipe(
         map((x: Provider[]) => x.filter(x => this.featuredProvider.indexOf(x.name) > -1))
       );
-    this.offers$ = this.offersService.offers
+    this.offers$ = this.store
     .pipe(
+      select(fromRoot.getOffers),
       map((x: LatestOffer[]) => {
         this.loadingService.toggle('');
         return x
@@ -40,6 +42,7 @@ export class HomeComponent implements OnInit {
         }
       )
     );
+    this.offersLoadingError$ = this.store.pipe(select(fromRoot.getOffersError));
   }
 
   ngOnInit(): void {

@@ -9,6 +9,7 @@ import {
 import { environment } from '../../environments/environment';
 import { InjectionToken } from '@angular/core';
 import * as fromCoins from './coins.reducer';
+import * as fromOffers from './offers.reducer';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -16,6 +17,7 @@ import * as fromCoins from './coins.reducer';
  */
 export interface AppState {
   [fromCoins.featureKey]: fromCoins.State;
+  [fromOffers.featureKey]: fromOffers.State;
 }
 
 /**
@@ -26,6 +28,7 @@ export interface AppState {
 export const ROOT_REDUCERS = new InjectionToken<ActionReducerMap<AppState, Action>>('Root reducers token', {
   factory: () => ({
     [fromCoins.featureKey]: fromCoins.reducer,
+    [fromOffers.featureKey]: fromOffers.reducer,
   })
 });
 
@@ -68,6 +71,21 @@ export const getCoins = createSelector(
 export const getCoinsError = createSelector(
   selectCoinsState,
   fromCoins.getCoinsError
+);
+
+
+export const selectOffersState = createFeatureSelector<AppState, fromOffers.State>(
+  fromOffers.featureKey
+);
+
+export const getOffers = createSelector(
+  selectOffersState,
+  fromOffers.getOffers
+);
+
+export const getOffersError = createSelector(
+  selectOffersState,
+  fromOffers.getOffersError
 );
 
 

@@ -34,7 +34,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.titleService.setTitle(this.title);
     // this.coinService.getAll();
     this.store.dispatch(AppActions.getCoins());
-    this.offersService.getAll();
+    this.store.dispatch(AppActions.getOffers());
+
     this.providerService.getAll();
     this.etherscanService.getGasFee();
     this.bitcoinService.getTxFee();

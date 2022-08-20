@@ -1,13 +1,22 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
   
+  <div class="spinner-border" role="status" *ngIf="!(offers$|async)?.length && !(offersLoadingError$|async)">
+    <span class="sr-only">Loading...</span>
+  </div>
+  
+  <div class="alert alert-danger" *ngIf="(offersLoadingError$|async)">
+    {{offersLoadingError$|async}}
+  </div>
+  
   <div class="text-center mb-4">
     <h1 class="h3 mb-0 text-gray-800">Verdienst du schon mit deinen Coins?</h1>
   </div>
   
   <div class="text-center">
-    Siehe alle Möglichkeiten, mit deinen <a [routerLink]="'/start/btc/alle-risiken'">BTC</a> oder
-    <a [routerLink]="'/start/eth/alle-risiken'">ETH</a> eine Rendite zu erzielen.
+    Auf Coingarden findest du aktuelle Zinsen für die meisten Coins. Finde heraus, wie du
+    mit <a [routerLink]="'/start/btc/alle-risiken'">BTC</a> und
+    <a [routerLink]="'/start/eth/alle-risiken'">ETH</a> eine Rendite erzielen kannst.
   </div>
   
   <div *ngIf="loading$|async">
@@ -19,7 +28,7 @@
   
   <div class="carousel slide mt-4 mb-4" data-ride="carousel" *ngIf="(offers$ | async) as offers">
     <div *ngIf="offers.length > 0" class="text-center mt-2 mb-2">
-      Die neuesten <a [routerLink]="'/strategie/sparprodukte'">Zinsen</a>:
+      Ein paar aktuelle <a [routerLink]="'/strategie/sparprodukte'">Sparprodukte</a>:
     </div>
   
     <div class="table-responsive">
@@ -68,7 +77,7 @@
         </thead>
       </table>
       <div class="float-right">
-        <a [routerLink]="['/alle-angebote']">Alle Angebote <i class="fa fa-arrow-circle-right"></i></a>
+        <a [routerLink]="['/start']">Suche weitere Angebote <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
   </div>
