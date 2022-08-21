@@ -71,9 +71,9 @@ registerLocaleData(localeDe);
       }
     }),
     EffectsModule.forRoot([AppEffects]),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-    }),
+    // StoreDevtoolsModule.instrument({
+    //   maxAge: 25, // Retains last 25 states
+    // }),
   ],
   providers: [],
   bootstrap: [AppComponent]
