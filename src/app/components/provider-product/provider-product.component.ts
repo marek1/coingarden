@@ -2,13 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { LatestOffer } from '../../interfaces/latestOffer';
 import { Product } from '../../interfaces/product';
 import { Provider } from '../../interfaces/provider';
-import { Observable } from 'rxjs';
-import { EtherscanService } from '../../services/etherscan.service';
-import { BitcoinService } from '../../services/bitcoin.service';
 import { Strategies } from '../../data/strategies';
 import { InterestsService } from '../../services/interests.service';
-import { ChartData, ChartDataset, ChartOptions } from 'chart.js';
-import { Offer } from '../../interfaces/offer';
+import { ChartData, ChartDataset } from 'chart.js';
+import { select, Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
 
 @Component({
   selector: 'app-provider-product',
@@ -50,8 +48,6 @@ export class ProviderProductComponent implements OnInit {
   }
 
   calculateYield(offer: LatestOffer) {
-    // console.log('offer : ', offer);
-    // console.log('amountOfCoins : ', this.amountOfCoins);
     // make calculation:
     // amountOfCoins * apr %
     let x  = (parseFloat(this.amountOfCoins.replace(',', '.')) * offer.latestOffer.avgAnnualInterestRate)
@@ -59,12 +55,12 @@ export class ProviderProductComponent implements OnInit {
     x = x - (x * this.product.feesInPercentMax);
     // if it is ETH, reduce network fees (=== etherscanService.gasfee)
     if ( this.coin.toString().toLowerCase() === 'eth' ) {
-      this.etherscanService.gasfee.subscribe((x) => {
-        this.networkFee = x * 21000 * 0.000000001;
+      this.store.pipe(select(fromRoot.getEthereumFees)).subscribe((x) => {
+        this.networkFee = x;
       })
     }
     if ( this.coin.toString().toLowerCase() === 'btc' ) {
-      this.bitcoinService.txfee.subscribe((x) => {
+      this.store.pipe(select(fromRoot.getBitcoinFees)).subscribe((x) => {
         this.networkFee = x;
       })
     }
@@ -147,18 +143,14 @@ export class ProviderProductComponent implements OnInit {
   }
 
   get amountOfCoins(): string {
-    // other logic
     return this._amountOfCoins;
   }
 
   get coin(): string {
-    // other logic
     return this._coin;
   }
 
-
-  constructor(private etherscanService: EtherscanService,
-              private bitcoinService: BitcoinService,
+  constructor(private store: Store<any>,
               private interestsService: InterestsService) { }
 
   ngOnInit(): void {

@@ -34,3 +34,13 @@ export const saveBlogs = createAction('[App] Saving blogs SUCCESS',
 export const saveBlogsError = createAction('[App] Saving blogs ERROR',
   props<{ errorMessage: string }>()
 );
+
+export const getBitcoinFees = createAction('[App] Retrieving BitcoinFees');
+export const saveBitcoinFees = createAction('[App] Saving BitcoinFees SUCCESS',
+  props<{ bitcoinFees: number }>()
+);
+
+export const getEthereumFees = createAction('[App] Retrieving EthereumFees');
+export const saveEthereumFees = createAction('[App] Saving EthereumFees SUCCESS',
+  props<{ ethereumFees: number }>()
+);

@@ -12,6 +12,7 @@ import * as fromCoins from './coins.reducer';
 import * as fromOffers from './offers.reducer';
 import * as fromProviders from './providers.reducer';
 import * as fromBlogs from './blogs.reducer';
+import * as fromFees from './fees.reducer';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -22,6 +23,7 @@ export interface AppState {
   [fromOffers.featureKey]: fromOffers.State;
   [fromProviders.featureKey]: fromProviders.State;
   [fromBlogs.featureKey]: fromBlogs.State;
+  [fromFees.featureKey]: fromFees.State;
 }
 
 /**
@@ -35,6 +37,7 @@ export const ROOT_REDUCERS = new InjectionToken<ActionReducerMap<AppState, Actio
     [fromOffers.featureKey]: fromOffers.reducer,
     [fromProviders.featureKey]: fromProviders.reducer,
     [fromBlogs.featureKey]: fromBlogs.reducer,
+    [fromFees.featureKey]: fromFees.reducer,
   })
 });
 
@@ -123,5 +126,18 @@ export const getBlogsError = createSelector(
   fromBlogs.getBlogsError
 );
 
+export const selectFeesState = createFeatureSelector<AppState, fromFees.State>(
+  fromFees.featureKey
+);
+
+export const getBitcoinFees = createSelector(
+  selectFeesState,
+  fromFees.getBitcoinFees
+);
+
+export const getEthereumFees = createSelector(
+  selectFeesState,
+  fromFees.getEthereumFees
+);
 
 

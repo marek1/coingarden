@@ -13,7 +13,7 @@ import * as fromRoot from '../../reducers';
   styleUrls: ['./all-offers.component.scss']
 })
 export class AllOffersComponent implements OnInit {
-  title = 'Alle Renditemöglichkeiten';
+  title = 'Eine Übersicht aller Zinsprodukte';
   provider$: Observable<any> = new  Observable();
   providerLoadingError$: Observable<string|null> = new Observable();
   offers$: Observable<LatestOffer[]> = new Observable();

@@ -13,7 +13,6 @@ import { SliderComponent } from './components/slider/slider.component';
 import { ResultsComponent } from './components/results/results.component';
 import { StrategieComponent } from './components/strategie/strategie.component';
 import { ProviderProductComponent } from './components/provider-product/provider-product.component';
-
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { ImpressumComponent } from './components/impressum/impressum.component';
@@ -71,7 +70,6 @@ registerLocaleData(localeDe);
         strictActionSerializability: true
       }
     }),
-    // StoreModule.forFeature(from.)
     EffectsModule.forRoot([AppEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

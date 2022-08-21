@@ -9,7 +9,6 @@ import { Event, NavigationStart, Router } from '@angular/router';
 import { PageviewService } from './services/pageview.service';
 import { Store } from '@ngrx/store';
 import * as AppActions from './actions/';
-import { AppEffects } from './effects/app.effects';
 
 @Component({
   selector: 'app-root',
@@ -32,14 +31,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.titleService.setTitle(this.title);
-    // this.coinService.getAll();
     this.store.dispatch(AppActions.getCoins());
     this.store.dispatch(AppActions.getOffers());
     this.store.dispatch(AppActions.getProviders());
-
-    this.etherscanService.getGasFee();
-    this.bitcoinService.getTxFee();
-
+    this.store.dispatch(AppActions.getBitcoinFees());
+    this.store.dispatch(AppActions.getEthereumFees());
     this.metaTagService.addTags([
       { name: 'keywords', content: 'Staking, Zinsen, BTC, ETH, Kryptowährungen, Coins, Kryptozinsen, Pools, Liquidity Mining' },
       { name: 'robots', content: 'index, follow' },
@@ -49,7 +45,6 @@ export class AppComponent implements OnInit, OnDestroy {
     ]);
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
-        // Show loading indicator
         this.pageviewService.setPageview(event.url);
       }
     });

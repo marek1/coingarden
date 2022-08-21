@@ -6,7 +6,6 @@ import { Provider } from '../../interfaces/provider';
 import { Strategy } from '../../interfaces/strategy';
 import * as fromRoot from '../../reducers';
 import { select, Store } from '@ngrx/store';
-import { Product } from '../../interfaces/product';
 
 @Component({
   selector: 'app-results',
@@ -60,25 +59,6 @@ export class ResultsComponent implements OnInit {
     this.providerProducts$ = this.store
       .pipe(
         select(fromRoot.getProdivers),
-        // map(provider => provider.map(prov => {
-        //     // only use those products which are in question fo the found strategies:
-        //     // prov.products = prov.products.filter(prod => foundStrategies.indexOf(prod.belongs_to_strategy_id) > -1);
-        //     prov.products.map((product) => {
-        //       product.offers = this.store
-        //         .pipe(
-        //           select(fromRoot.getOffers),
-        //           map(latestOffers => {
-        //             return latestOffers.filter((offer) => {
-        //               return offer.latestOffer.type.toString().toLowerCase() === product.name.toString().toLowerCase()
-        //                 && offer.latestOffer.provider.toString().toLowerCase() === prov.id.toString().toLowerCase()
-        //                 && offer.latestOffer.coins.map(x => x.toString().toLowerCase()).indexOf(this.coin.toString().toLowerCase()) > -1
-        //             })
-        //           })
-        //         );
-        //     })
-        //     return prov;
-        //   })
-        // )
       );
   }
 
